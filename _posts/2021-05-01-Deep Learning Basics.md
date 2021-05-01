@@ -1,9 +1,10 @@
 ---
 layout: post
-title: Deep Learning Basics 
-category: Deep Learning
+title: Deep Learning Basics
+date: 2020-05-01
+category: DeepLearning
 ---
-# post-sample
+# Deep Learning Basics
 > Deep Learning 이란?
 
 This is code
