@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MySQL Basics
-date: 2020-05-29
+date: 2021-05-29
 category: MySQL
 ---
 # MySQL 기초 문법
