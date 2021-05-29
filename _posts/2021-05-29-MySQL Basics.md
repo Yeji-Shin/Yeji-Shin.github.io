@@ -32,6 +32,14 @@ category: MySQL
   - SELECT COUNT(DISTINCT NAME): NAME 열에서 중복 데이터 제거한 후 개수 세기
   - SELECT (@HOUR := @HOUR +1) AS HOUR, (SELECT COUNT(*) FROM ANIMAL_OUTS WHERE HOUR(DATETIME) = @HOUR) AS COUNT: HOUR 변수의 값을 1씩 증가시키면서 그에 맞는 개수 세기
   - SELECT IFNULL (NAME, "No Name") AS NAME: NAME열이 NULL인 데이터의 값을 "No Name"으로 변경
+  - CASE ~ WHEN ~ THEN ~ ELSE END: WHEN 조건절이 참이면 THEN 절에 있는 내용 출력 아니면 ELSE 절에 있는 내용 출력, 마지막에는 END로 닫아주기
+    CASE
+      WHEN SEX_UPON_INTAKE LIKE '%Neutered%' OR SEX_UPON_INTAKE LIKE '%Spayed%'
+      THEN 'O'
+      ELSE 'X' 
+    END as '중성화'
+  - DATE_FORMAT(DATE,형식)을 통해 DATE의 형식을 바꾸기
+  - DATE_FORMAT(DATETIME, '%Y-%M-%D)는 2014-December-25th DATE_FORMAT(DATETIME, '%Y-%m-%d)는 2016-04-02 이런 형식으로 나타냄
   
   
 - ORDER BY 
@@ -44,6 +52,8 @@ category: MySQL
   - 특정 조건을 만족하는 자료 찾기 WHERE INTAKE_CONDITION = 'Sick'
   - 특정 조건을 만족하지 않는 자료 찾기 WHERE INTAKE_CONDITION != 'Sick' OR WHERE INTAKE_CONDITION <> 'Sick'
   - WHERE NAME IS NOT NULL: NULL이 아닌 데이터 찾기
+  - WHERE NAME IN ('Lucy', 'Ella', 'Pickle', 'Rogan', 'Sabrina', 'Mitty'): 이름이 다음과 같은 데이터 찾기
+  - WHERE NAME LIKE '%el%' AND ANIMAL_TYPE = 'DOG': 이름에 EL 이 들어가면서 개인 데이터 찾기
   
   
 - LIMIT
