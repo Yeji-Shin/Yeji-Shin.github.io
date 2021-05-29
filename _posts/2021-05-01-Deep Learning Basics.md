@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Deep Learning Basics
-date: 2020-05-01
+date: 2021-05-01
 category: DeepLearning
 ---
 # 딥러닝이란?
