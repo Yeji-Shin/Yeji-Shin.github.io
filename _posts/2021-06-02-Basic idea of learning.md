@@ -30,6 +30,7 @@ use_math: true
 ---
 
 <mark>가장 잘 설명하는?</mark>
+![image](https://user-images.githubusercontent.com/61526722/120601124-8588e300-c484-11eb-92a8-26746059395d.png)
 
 실제값(그림에서 빨간점)과 예측값(함수위의 점) 간의 차이를 최소화
 
