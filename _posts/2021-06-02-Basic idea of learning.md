@@ -17,6 +17,8 @@ use_math: true
 
 여러 종류의 모델 중에서 하나를 선택 $f(x_{1},x_{2},...; w_{1},w_{2},...)$
 
+여기서 여러 종류의 모델이라 하면 logistic regression, support vector machine, random forest, nearest neighbor 등을 말한다.
+
 **step 2: Optimizing parameter**
 
 함수가 주어진 데이터에 가장 잘 부합하도록 w를 조정 (함수 모양은 $w_{1},w_{2},...$가 결정함)
