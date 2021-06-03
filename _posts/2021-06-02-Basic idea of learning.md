@@ -30,11 +30,17 @@ use_math: true
 ---
 
 <mark>가장 잘 설명하는?</mark>
+
 ![image](https://user-images.githubusercontent.com/61526722/120601124-8588e300-c484-11eb-92a8-26746059395d.png)
+
+![image](https://user-images.githubusercontent.com/61526722/120601186-9afe0d00-c484-11eb-9a92-2029a73304b7.png)
 
 실제값(그림에서 빨간점)과 예측값(함수위의 점) 간의 차이를 최소화
 
 = E를 각 $w_{i}$들에 대한 편미분을 0으로 만드는 $w_{i}$값을 찾아라
+
+![image](https://user-images.githubusercontent.com/61526722/120601246-ab15ec80-c484-11eb-822f-7804d04e3230.png)
+
 
 
 * 머신러닝
