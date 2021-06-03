@@ -12,12 +12,15 @@ category: DeepLearning
 ---
 
 **step 1: Choosing a model**
+
 여러 종류의 모델 중에서 하나를 선택
 
 **step 2: Optimizaing parameter**
+
 함수 f가 주어진 데이터에 가장 잘 부합하도록 w를 조정
 
 **step 3: Prediction**
+
 결정된 f를 이용해 새로운 x에 대한 y값을 예측
 
 ---
