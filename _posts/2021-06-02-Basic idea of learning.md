@@ -8,7 +8,7 @@ category: DeepLearning
 ### 1. 머신러닝
 
 
-목표? 주어진 데이터를 <mark>가장 잘 설명하는</mark> 함수 y=f(x)를 <mark>찾는 것</mark>
+목표? 주어진 데이터를 <mark>가장 잘 설명하는</mark> 함수 y=f(x)를 `찾는 것`
 
 ---
 
@@ -18,7 +18,7 @@ category: DeepLearning
 
 **step 2: Optimizaing parameter**
 
-함수 $$f(x_1,x_2,...; w_1,w_2...)$$가 주어진 데이터에 가장 잘 부합하도록 w를 조정
+함수 $$f(x_{1},x_{2},...; w_{1},w_{2},...)$$가 주어진 데이터에 가장 잘 부합하도록 w를 조정
 
 **step 3: Prediction**
 
