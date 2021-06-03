@@ -41,8 +41,11 @@ E를 각 $w_{i}$들에 대한 편미분을 0으로 만드는 $w_{i}$값을 찾�
 
 ![image](https://user-images.githubusercontent.com/61526722/120601246-ab15ec80-c484-11eb-822f-7804d04e3230.png)
 
-하지만 위 식을 만족하는 값을 찾는 것은 어렵다. 우리가 실제로 마주하는 함수들은 형태가 복잡해 미분값을 계산하기 어려운 경우가 많고, 실제 미분값을 구하는 과정을 컴퓨터로 구현하는 것은 어렵기 때문이다. 이를 **optimization problem**이라고 한다. 따라서 E를 최소화스럽게(?) 만드는 $w_{i}$들을 찾는 문제로 바꾸어 문제를 해결한다. 이것이 바로 **Gradient Descent 방법**이다. 
+하지만 위 식을 만족하는 값을 찾는 것은 어렵다. 우리가 실제로 마주하는 함수들은 형태가 복잡해 미분값을 계산하기 어려운 경우가 많고, 실제 미분값을 구하는 과정을 컴퓨터로 구현하는 것은 어렵기 때문이다. 이를 **optimization problem**이라고 한다. 따라서 꿩 대신 닭으로 E를 최소화스럽게(?) 만드는 $w_{i}$들을 찾는 문제로 바꾸어 문제를 해결한다. **즉, global optimum에서 local optimum을 찾는 문제로 바꾸는 것이다**. 이것이 바로 **Gradient Descent 방법**이다. 
 
+![image](https://user-images.githubusercontent.com/61526722/120658787-b424af00-c4c0-11eb-9041-89d93d8f6d7a.png)
+
+파란색 점이 정답(global optimum)이지만 빨간색 점(local optimum)에 해당하는 $x$ 값을 찾아도 정답으로 인정을 해주겠다는 말로 이해하면 쉽습니다. 여기서 local optimum이 진짜 정답이 아닌데 괜찮은가라는 의문을 품을 수 있는데, 다른 방법이 없기 때문에 어쩔 수 없을 뿐더러 퀄리티 관점에서 볼 때 local optimum을 찾아도 크게 문제 없습니다.
 
 
 ### 2. Gradient Descent Method (경사하강법)
