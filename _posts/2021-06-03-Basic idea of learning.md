@@ -32,7 +32,6 @@ use_math: true
 <mark>가장 잘 설명하는?</mark> 실제값(그림에서 빨간점)과 예측값(함수위의 점) 간의 차이를 최소화
 
 ![image](https://user-images.githubusercontent.com/61526722/120601124-8588e300-c484-11eb-92a8-26746059395d.png)
-
 ![image](https://user-images.githubusercontent.com/61526722/120601186-9afe0d00-c484-11eb-9a92-2029a73304b7.png)
 
 E를 각 $w_{i}$들에 대한 편미분을 0으로 만드는 $w_{i}$값을 찾으면 오류를 최소화 할 수 있다.
@@ -73,7 +72,7 @@ Gradient descent는 함수의 기울기를 이용해 $x$를 어디로 옮겼을 
 
 **step 3: Move the reverse direction of the gradient**
 
-<mask>gradient의 반대 방향</mask>으로 매우 조금 이동한다.
+<mark>gradient의 반대 방향</mark>으로 매우 조금 이동한다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120655034-357a4280-c4bd-11eb-92d0-1a35f19b6173.png)
 
