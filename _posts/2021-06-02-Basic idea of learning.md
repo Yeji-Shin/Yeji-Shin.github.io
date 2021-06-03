@@ -15,9 +15,11 @@ category: DeepLearning
 
 여러 종류의 모델 중에서 하나를 선택
 
+
 **step 2: Optimizaing parameter**
 
 함수 f가 주어진 데이터에 가장 잘 부합하도록 w를 조정
+
 
 **step 3: Prediction**
 
