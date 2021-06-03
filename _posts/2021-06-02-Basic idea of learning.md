@@ -45,9 +45,19 @@ E를 각 $w_{i}$들에 대한 편미분을 0으로 만드는 $w_{i}$값을 찾�
 
 ---
 
-### 2. Gradien Descent Method
+### 2. Gradient Descent Method
 
+gradient란?
 
+gradient는 기울기 벡터이다. Gradient vector는 가장 가파른 방향을 가르킨다.
+
+**step 1: random point selection**
+
+임의의 시작점을 랜덤하게 잡는다.
+
+**step 2: compute gradient**
+
+임의의 시작점을 랜덤하게 잡는다.
 
 
 * 머신러닝
