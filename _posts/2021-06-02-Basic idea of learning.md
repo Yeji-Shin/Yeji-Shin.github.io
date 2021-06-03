@@ -4,9 +4,10 @@ title: Basic idea of learning
 date: 2021-06-03
 category: DeepLearning
 ---
-# Basic idea of learning
 
 ### 1. 머신러닝
+
+
 목표? 주어진 데이터를 <mark>가장 잘 설명하는</mark> 함수 y=f(x)를 <mark>찾는 것</mark>
 
 ---
@@ -15,17 +16,18 @@ category: DeepLearning
 
 여러 종류의 모델 중에서 하나를 선택
 
-
 **step 2: Optimizaing parameter**
 
-함수 f가 주어진 데이터에 가장 잘 부합하도록 w를 조정
-
+함수 $$f(x_1,x_2,...; w_1,w_2...)$$가 주어진 데이터에 가장 잘 부합하도록 w를 조정
 
 **step 3: Prediction**
 
 결정된 f를 이용해 새로운 x에 대한 y값을 예측
 
 ---
+
+
+
 
 * 머신러닝
   - 주어진 소재를 인간이 먼저 처리함
