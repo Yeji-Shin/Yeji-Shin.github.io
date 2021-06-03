@@ -3,6 +3,7 @@ layout: post
 title: Basic idea of learning
 date: 2021-06-03
 category: DeepLearning
+use_math: true
 ---
 
 ### 1. 머신러닝
