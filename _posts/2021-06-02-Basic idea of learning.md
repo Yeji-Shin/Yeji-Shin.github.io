@@ -24,7 +24,7 @@ use_math: true
 **step 3: Prediction**
 
 결정된 f를 이용해 새로운 x에 대한 y값을 예측
-
+ㅏ
 ---
 
 
