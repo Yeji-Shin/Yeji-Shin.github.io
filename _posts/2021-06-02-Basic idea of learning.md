@@ -18,7 +18,7 @@ category: DeepLearning
 
 **step 2: Optimizaing parameter**
 
-함수 $$f(x_{1},x_{2},...; w_{1},w_{2},...)$$가 주어진 데이터에 가장 잘 부합하도록 w를 조정
+함수 $f(x_{1},x_{2},...; w_{1},w_{2},...)$가 주어진 데이터에 가장 잘 부합하도록 w를 조정
 
 **step 3: Prediction**
 
