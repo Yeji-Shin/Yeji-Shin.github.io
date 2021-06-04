@@ -52,7 +52,7 @@ Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이�
 
 ### 3. Perceptron vs Neural Network
 
-퍼셉트론(뉴런 한개)이 할 수 있는 일? <mark>linearly seperable한 문제를 푼다</mark>
++ 퍼셉트론(뉴런 한개)이 할 수 있는 일? <mark>linearly seperable한 문제를 푼다</mark>
 
 ![image](https://user-images.githubusercontent.com/61526722/120671007-eb4c8d80-c4cb-11eb-907c-8a38c4ba16b0.png)
 ![image](https://user-images.githubusercontent.com/61526722/120671016-ed165100-c4cb-11eb-8ad4-8e71378c1d57.png)
@@ -69,7 +69,7 @@ OR operation은 아래 한점과 위의 세점을 나누도록 직선을 그어�
 
 이 때 AND와 OR 게이트는 connection weight만 바뀐다. 따라서 뉴런은 하드웨어라고 할 수 있고, 실제로 그 하드웨어의 기능을 정의하는 것은 connection weight이다. Connection weight이 바뀌면 neural network의 기능이 바뀌는 것이다. neural network의 핵심은 connection weight를 어떻게 설정하냐는 것이고 이 connection weight를 자동으로 설정하는 과정을 학습이라고 한다.
 
-neural network가 할 수 있는 일? digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
++ neural network가 할 수 있는 일? digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
 
 ---
 
