@@ -6,13 +6,13 @@ category: DeepLearning
 use_math: true
 ---
 
-### Neural Network
+### 1. Neural Network
 
-Neural network 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공두뇌를 만들기 위해 만들어졌다.
+Neural network 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공두뇌를 만들기 위해 고안되었다.
 
-대충 1950년도까지 인간이 인간의 두뇌에 대해서 알게 된 사실은 다음과 같다.
+대충 1950년도까지 인간의 두뇌에 대해서 알게 된 사실은 다음과 같다.
 
-- 머리 속의 수많은 뇌세포은 서로 연결되어 있다. 
+- 머리 속의 수많은 뇌세포(뉴런)들은 서로 연결되어 있다. 
 
 - 각 연결에는 연결의 강도가 존재하는데 이는 가변적이다.
 
@@ -26,13 +26,15 @@ Neural network 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공
 
 ---
 
-### Perceptron: artificial neuron
+### 2. Perceptron: artificial neuron
 
-퍼셉트론은 인공뉴런 한개를 일컫는다. 뉴런은 받은 <mark>시그널을 흡수</mark>하다가 특정 threshold를 넘으면 <mark>모아놨던 시그널들을 다음 뉴런으로 전달</mark>한다. 아래 그림은 간단한 binary 뉴런 구조이다.
+퍼셉트론은 인공뉴런 한개를 일컫는다. 
+
+뉴런은 받은 <mark>시그널을 흡수</mark>하다가 특정 threshold를 넘으면 <mark>모아놨던 시그널들을 다음 뉴런으로 전달</mark>한다. 아래 그림은 간단한 binary 뉴런 구조이다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120666627-b4747880-c4c7-11eb-9d9c-f36d711ee57a.png)
 
-뉴런이 하는 일은 두 가지이다.
+뉴런이 하는 일은 두 가지이다. 간단하게 신호를 받고, 신호를 출력하는 것이라고 보면 된다.
 
 **step1: Linear combination of inputs**
 
@@ -48,7 +50,7 @@ Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이�
 
 ---
 
-### Perceptron and Neural Network
+### 3. Perceptron vs Neural Network
 
 퍼셉트론(뉴런 한개)이 할 수 있는 일? <mark>linearly seperable한 문제를 푼다</mark>
 
@@ -71,5 +73,5 @@ neural network가 할 수 있는 일? digital circuit(cpu)를 만든다. 이론�
 
 ---
 
-### Multilayer Perceptron (MLP)
+### 4. Multilayer Perceptron (MLP)
 
