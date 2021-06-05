@@ -64,6 +64,8 @@ Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이�
 
 $w_{1},w_{2},w_{3}$는 어떤 경계를 의미하고, 이 경계보다 위쪽에 있는 점이 들어오면 1을 출력하고 아래쪽에 있는 점이 들어오면 0을 출력한다. 즉, linearly seperable한 AND operation이나 OR operation을 만들 수 있다.
 
+여기서 1은 bias로, bias가 없다면 원점을 지나는 직선만을 만들 수 있다. 따라서 bias은 뉴런이 표현할 수 있는 경계에 큰 자유도를 기여하여 반드시 있어야 한다고 생각하면 된다. 
+
 ![image](https://user-images.githubusercontent.com/61526722/120671752-a70dbd00-c4cc-11eb-8b3b-83201f779132.png)
 
 AND operation은 아래 세점과 위의 한점을 나누도록 직선을 그어주는 w를 찾으면 된다.
@@ -83,11 +85,11 @@ OR operation은 아래 한점과 위의 세점을 나누도록 직선을 그어�
 
 사람들은 이를 극복하고 non-linear separable한 문제를 해결하기 위해 퍼셉트론 마구마구 연결한 neural network를 사용하기 시작했다.
 
-+ _(참고) linear machine의 non-separability 문제를 해결할 수 있는 방법은 여러가지가 있다. Support Vector Machine(SVM)을 사용하는 방법, non-linear feautrue를 input으로 사용하는 방법, non-linear kernel들은 hidden layer에 추가하는 방법.
++ _(참고) linear machine의 non-separability 문제를 해결할 수 있는 방법은 여러가지가 있다. Support Vector Machine(SVM)을 사용하는 방법, non-linear feautrue를 input으로 사용하는 방법, non-linear kernel들은 hidden layer에 추가하는 방법._
 
 ---
 
-### 4. Neural Network
+### 4. Neural Network = Multilayer Perceptron (MLP)
 
 + neural network가 할 수 있는 일? <mark>non-linearly seperable한 문제를 푼다</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
  
@@ -95,10 +97,17 @@ Non-linear separable문제에는 대표적으로 exclusive OR (XOR)가 있다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120882984-b0567100-c615-11eb-91bf-19d719addb8c.png)
 
-XOR문제는 퍼셉트론이 해결하지 못한다. 곡선으로 경계를 그려야 하기 때문이다. 
+XOR문제는 곡선으로 경계를 그려야 하기 때문에 퍼셉트론이 해결하지 못한다. 
 
+![image](https://user-images.githubusercontent.com/61526722/120883872-aaaf5a00-c61a-11eb-8f4a-75593e2e01ff.png)
+
+
+![image](https://user-images.githubusercontent.com/61526722/120883848-88b5d780-c61a-11eb-8179-6db66155e46b.png)
+
+
+![image](https://user-images.githubusercontent.com/61526722/120883711-b4848d80-c619-11eb-925c-d2b4c459b62a.png)
 
 ---
 
-### 5. Multilayer Perceptron (MLP)
+
 
