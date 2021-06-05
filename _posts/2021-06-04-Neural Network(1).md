@@ -6,8 +6,6 @@ category: DeepLearning
 use_math: true
 ---
 
-### 1. Neural Network
-
 Neural network 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공두뇌를 만들기 위해 고안되었다.
 
 대충 1950년도까지 인간의 두뇌에 대해서 알게 된 사실은 다음과 같다.
@@ -26,7 +24,7 @@ Neural network 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공
 
 ---
 
-### 2. Perceptron: artificial neuron
+### 1. Perceptron: artificial neuron
 
 퍼셉트론은 인공뉴런 한개를 일컫는다. 
 
@@ -50,7 +48,11 @@ Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이�
 
 ---
 
-### 3. Perceptron vs Neural Network
+### 2. Perceptron Learning Algorithm (PLA)
+
+
+
+### 3. Limitation of Perceptron
 
 + 퍼셉트론(뉴런 한개)이 할 수 있는 일? <mark>linearly seperable한 문제를 푼다</mark>
 
@@ -69,9 +71,31 @@ OR operation은 아래 한점과 위의 세점을 나누도록 직선을 그어�
 
 이 때 AND와 OR 게이트는 connection weight만 바뀐다. 따라서 뉴런은 하드웨어라고 할 수 있고, 실제로 그 하드웨어의 기능을 정의하는 것은 connection weight이다. Connection weight이 바뀌면 neural network의 기능이 바뀌는 것이다. neural network의 핵심은 connection weight를 어떻게 설정하냐는 것이고 이 connection weight를 자동으로 설정하는 과정을 학습이라고 한다.
 
-+ neural network가 할 수 있는 일? digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
++ 퍼셉트론의 한계
+  - 퍼셉트론은 하나의 output을 내기 때문에 binary problem에만 적용가능하다.
+  - 퍼셉트론은 linear machine(직선 하나로 분류해주는 분류기)이기 때문에 linear problem만 해결 가능하다.
+  - 퍼셉트론은 vector만 input으로 사용할 수 있다.
+
+![image](https://user-images.githubusercontent.com/61526722/120883403-eb59a400-c617-11eb-9a1d-23884d9d1a03.png)
+
+사람들은 이를 극복하고 non-linear separable한 문제를 해결하기 위해 퍼셉트론 마구마구 연결한 neural network를 사용하기 시작했다.
+
++ _(참고) linear machine의 non-separability 문제를 해결할 수 있는 방법은 여러가지가 있다. Support Vector Machine(SVM)을 사용하는 방법, non-linear feautrue를 input으로 사용하는 방법, non-linear kernel들은 hidden layer에 추가하는 방법.
 
 ---
 
-### 4. Multilayer Perceptron (MLP)
+### 4. Neural Network
+
++ neural network가 할 수 있는 일? <mark>non-linearly seperable한 문제를 푼다</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
+ 
+Non-linear separable문제에는 대표적으로 exclusive OR (XOR)가 있다.
+
+![image](https://user-images.githubusercontent.com/61526722/120882984-b0567100-c615-11eb-91bf-19d719addb8c.png)
+
+XOR문제는 퍼셉트론이 해결하지 못한다. 곡선으로 경계를 그려야 하기 때문이다. 
+
+
+---
+
+### 5. Multilayer Perceptron (MLP)
 
