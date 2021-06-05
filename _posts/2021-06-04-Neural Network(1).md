@@ -91,23 +91,28 @@ OR operation은 아래 한점과 위의 세점을 나누도록 직선을 그어�
 
 ### 4. Neural Network = Multilayer Perceptron (MLP)
 
-+ neural network가 할 수 있는 일? <mark>non-linearly seperable한 문제를 푼다</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
++ Neural network가 할 수 있는 일? <mark>non-linearly seperable한 문제를 푼다</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
  
 Non-linear separable문제에는 대표적으로 exclusive OR (XOR)가 있다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120882984-b0567100-c615-11eb-91bf-19d719addb8c.png)
 
-XOR문제는 곡선으로 경계를 그려야 하기 때문에 퍼셉트론이 해결하지 못한다. 
+XOR문제는 곡선으로 경계를 그려야 하기 때문에 퍼셉트론이 해결하지 못한다. 하지만 Neural network는 아래와 같은 방법으로 XOR 문제를 해결할 수 있다. 
 
-![image](https://user-images.githubusercontent.com/61526722/120883872-aaaf5a00-c61a-11eb-8f4a-75593e2e01ff.png)
+![image](https://user-images.githubusercontent.com/61526722/120883970-50fb5f80-c61b-11eb-8138-2144d6612add.png)
+
+첫 번째 뉴런은 AND 게이트 처럼 동작하고, 두 번째 뉴런은 OR 게이트 처럼 동작하게 구성한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120883914-f8c45d80-c61a-11eb-8de4-bab892e277b6.png)
+
+이처럼 XOR문제는 세 개의 연결하여 해결할 수 있다. 하지만 이보다 더 복잡한 문제가 나왔을 때, 더 많은 뉴런들을 연결하여 해결해야 하는 문제를 풀 때는 connection weight를 찾는 과정이 너무 복잡해진다. 예상컨대 case by case로 머리 터져라 고민해도 적절한 connection weight를 못찾는 경우가 허다할 것이다. 그럼 과연 neural network의 connection weight를 설정하는 일반적인 알고리즘이 존재하냐? 존재하지 않았다. 내가 특정 neural network를 주면서 이런 일을 하고 싶어요 connection weight를 좀 설정해주세요 했을때 잠깐만 기다려 주세요 하고 바로 설정해줄 수 있는 그런 학습 알고리즘이 존재하지 않았던 것이다. 1969년부터 1985년도까지 neural network가 전혀 사용되지 않았다. 이를 AI winter 시기(NN의 1차 암흑기) 라고 한다.
 
 
-![image](https://user-images.githubusercontent.com/61526722/120883848-88b5d780-c61a-11eb-8179-6db66155e46b.png)
-
+![image](https://user-images.githubusercontent.com/61526722/120883905-e3e7ca00-c61a-11eb-8a36-43387df41bf9.png)
 
 ![image](https://user-images.githubusercontent.com/61526722/120883711-b4848d80-c619-11eb-925c-d2b4c459b62a.png)
 
 ---
 
-
+### 5. Multilayer Perceptron (MLP) with Error Back Propagation
 
