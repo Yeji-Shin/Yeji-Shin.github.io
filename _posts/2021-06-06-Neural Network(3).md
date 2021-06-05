@@ -60,15 +60,64 @@ Binary class이므로 calss값을 0과 1로 바꾸고 학습시키면 된다. �
 
 - Handling nominal value
 
-Binary-class Classification처럼 각 class label(nominal value)을 linear하게 숫자로 바꿔주면 된다. 
+Binary-class Classification처럼 각 class label(nominal value)을 linear하게 숫자로 mapping 하면 된다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/120894521-cdaa3000-c653-11eb-93ca-2a67d8e0368d.png)
 ![image](https://user-images.githubusercontent.com/61526722/120894549-f6cac080-c653-11eb-92a8-6ff9e5bef29a.png)
 
-하지만 이는 문제가 있다. 우리는 Red > Yellow > Blue 라고 할 수도 없을 뿐더러 Red를 Yellow라고 해서 틀리는 경우와 Red를 Blue라고 해서 틀리는 경우 둘다 똑같이 틀린 경우지만 수식으로 계산하면 error 값이 달라지기 때문이다. 
+하지만 이는 문제가 있다. 우리는 Red > Yellow > Blue 라고 할 수도 없을 뿐더러 Red를 Yellow라고 해서 틀리는 경우와 Red를 Blue라고 해서 틀리는 경우 둘다 똑같이 틀린 경우지만 수식으로 계산하면 error 값이 달라지기 때문이다. 차라리 틀릴거면 Yellow라고 해서 틀리는 게 낫다는 암묵적인 지시가 포함된 문제로 바뀌어 본질이 달라진다는 것이다.
 
+이를 해결하기 위해 virtual output을 만들어 준다. 실제로는 출력이 하나밖에 없지만 <mark>one-hot encoding</mark>으로 출력을 세 개로 쪼개준다. 즉, NN의 output의 개수는 class의 개수와 동일하다. 각 output의 cross entropy 값을 더해서 loss로 활용하면 된다.
+
+![image](https://user-images.githubusercontent.com/61526722/120894657-8ec8aa00-c654-11eb-963e-db4b8603325b.png)
+![image](https://user-images.githubusercontent.com/61526722/120894696-c9324700-c654-11eb-8946-4b1bed282ca7.png)
+
+- Binary Class Cross Entropy vs Multi-Class Cross Entropy
+
+여기서 binary-class할 때랑 수식이 다른데 라는 의문을 품을 수 있다. 하지만 표현만 다를 뿐이지 결과 값은 동일하다.
+
+![image](https://user-images.githubusercontent.com/61526722/120894846-7016e300-c655-11eb-81f5-13a561a11aae.png)
+
+- Activation function for traning
+
+Output layer의 activation function 으로는 sigmoid 대신<mark> softmax 함수</mark>를 사용한다. 그 이유는 multi-class classification의 모든 output 값을 더하면 1이 되어야 하는데 sigmoid는 이를 만족하지 못하기 때문이다. 따라서 이를 만족할 수 있는 softmax 함수를 사용한다. Softmax 함수는 사실상 activation function보다 layer로 보면 편하다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120895109-748fcb80-c656-11eb-922f-04feb3141523.png)
+
+Softmax layer는 summation을 한 후 exp를 통과한 결과를 normalize 하여 모든 노드들의 출력값을 1이 되도록 만든다. exp 없이 normalization해도 상관없지만 exp를 쓰면 수학적인 성질이 좋아지기 때문에 exp를 사용한다.
+
+- Error function for traning
+
+<mark>cross entropy</mark> 함수를 사용하면 된다. softmax layer를 거치더라도 output은 0~1 사이의 값이 나오기 때문에 그대로 cross entropy loss를 사용한다. 
+
+---
 
 ### 4. Multi-label Classification
 
+Multi-class Classification는 여러개의 변수들에 대해 하나의 output이 있는 것이고, Multi-label Classification은 여러개의 변수들에 대해 여러개의 output이 있는 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120895324-5b3b4f00-c657-11eb-8f71-859f66d612b6.png)
+
+위에서 했던 것을 생각해보면 Multi-class Classification에서 one-hot encoding을 사용해 output을 여러개로 쪼갰다. 이는 Multi-label Classification과 비슷한 형식이 된다고 생각할 수 있다. 하지만 가장 큰 차이점은 Multi-class Classification은 output 값들의 합이 1이 되었다면, <mark>Multi-label Classification은 output 값들의 합이 1이 되지 않는다</mark>. Label들이 서로 독립이기 때문이다. 따라서 더 풀기 간단한 문제가 되고 output layer에는 sigmoid activation function을 사용한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120895428-dd2b7800-c657-11eb-91e8-33bbfdc58a09.png)
+
+---
+
 ### 5. Nominal Input
+
+지금까지 nominal value가 output에 나오는 경우만 생각했지만, input으로 nominal value가 들어올 수도 있다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120895511-3a272e00-c658-11eb-8141-9882a86c5597.png)
+![image](https://user-images.githubusercontent.com/61526722/120895514-3d221e80-c658-11eb-957d-d7575f991919.png)
+
+같은 방식으로 input을 one-hot encoding해서 바꿔주면 된다. 
+
+---
+
+### 정리 
+
+![image](https://user-images.githubusercontent.com/61526722/120895540-5d51dd80-c658-11eb-88d1-3bd8f7cb4585.png)
+
+---
 
