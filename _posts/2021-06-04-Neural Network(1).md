@@ -6,7 +6,7 @@ category: DeepLearning
 use_math: true
 ---
 
-Neural network 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공두뇌를 만들기 위해 고안되었다.
+Neural network는 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공두뇌를 만들기 위해 고안되었다.
 
 대충 1950년도까지 인간의 두뇌에 대해서 알게 된 사실은 다음과 같다.
 
@@ -26,6 +26,7 @@ Neural network 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공
 
 ### 1. Perceptron: artificial neuron
 
+
 퍼셉트론은 인공뉴런 한개를 일컫는다. 
 
 뉴런은 받은 <mark>시그널을 흡수</mark>하다가 특정 threshold를 넘으면 <mark>모아놨던 시그널들을 다음 뉴런으로 전달</mark>한다. 아래 그림은 간단한 binary 뉴런 구조이다.
@@ -33,6 +34,7 @@ Neural network 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공
 ![image](https://user-images.githubusercontent.com/61526722/120666627-b4747880-c4c7-11eb-9d9c-f36d711ee57a.png)
 
 뉴런이 하는 일은 두 가지이다. 간단하게 신호를 받고, 신호를 출력하는 것이라고 보면 된다.
+
 
 **step1: Linear combination of inputs**
 
@@ -44,13 +46,14 @@ Connection weight는 scale factor로 이해하면 된다. Connection weight이 �
 
 Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이다. s가 어느 정도를 넘으면 시그널을 방출한다. 위의 예에서는 s>0이면 1을 출력, 아니면 -1을 출력한다. $f$는 activation function이라고 한다.
 
+
 이런 뉴런들이 마구마구 연결되어 있는 것이 neural network이다.
 
 ---
 
 ### 2. Perceptron Learning Algorithm (PLA)
 
-
+---
 
 ### 3. Limitation of Perceptron
 
