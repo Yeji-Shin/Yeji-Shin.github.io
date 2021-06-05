@@ -58,7 +58,7 @@ Binary class이므로 calss값을 0과 1로 바꾸고 학습시키면 된다. �
 ![image](https://user-images.githubusercontent.com/61526722/120894497-a2274580-c653-11eb-9e50-c5da2c389859.png)
 
 
-- Handling nominal value
+#### Handling nominal value
 
 Binary-class Classification처럼 각 class label(nominal value)을 linear하게 숫자로 mapping 하면 된다. 
 
