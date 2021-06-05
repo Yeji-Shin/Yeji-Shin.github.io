@@ -8,6 +8,8 @@ use_math: true
 
 이번에는 neural network의 탄생, 어떤 구조를 가지고 있는지, 어떤 기능을 하는지 등 neural network에 대한 전반적이 이야기를 해볼 것이다. 
 
+---
+
 ### 0. Neural Network의 탄생
 
 Neural network는 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공두뇌를 만들기 위해 고안되었다.
@@ -55,11 +57,7 @@ Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이�
 
 ---
 
-### 2. Perceptron Learning Algorithm (PLA)
-
----
-
-### 3. Limitation of Perceptron
+### 2. Limitation of Perceptron
 
 + 퍼셉트론(뉴런 한개)이 할 수 있는 일? <mark>linearly seperable한 문제를 푼다</mark>
 
@@ -90,6 +88,30 @@ OR operation은 아래 한점과 위의 세점을 나누도록 직선을 그어�
 사람들은 이를 극복하고 non-linear separable한 문제를 해결하기 위해 퍼셉트론 마구마구 연결한 neural network를 사용하기 시작했다.
 
 + _(참고) linear machine의 non-separability 문제를 해결할 수 있는 방법은 여러가지가 있다. Support Vector Machine(SVM)을 사용하는 방법, non-linear feautrue를 input으로 사용하는 방법, non-linear kernel들은 hidden layer에 추가하는 방법._
+
+---
+
+### 3. Perceptron Learning Algorithm (PLA)
+
+Neural network에서 connection weight에 따라 NN의 기능이 달라진다고 했다. 이 connection weight를 설정하는 과정 즉, NN을 학습시키는 과정은 다음과 같다. 주입식 교육으로 학습데이터를 주면서 외우라고 시키는게 퍼셉트론 학습 방식이다.
+
+![image](https://user-images.githubusercontent.com/61526722/120885917-5f9b4400-c626-11eb-838f-ab81ad45638b.png)
+
+**step1: Initialize connection wwights**
+
+Input-ouput 쌍을 가진 학습 데이터와 사용할 neural network 구조를 준비한다. 그리고 neural network의 weight를 랜덤하게 intialization 한다.
+
+**step2: Update connection weigths**
+
+이제 모든 학습 데이터에 대해 input을 차례대로 NN에 통과시켜 예측값을 추출한다. 이 예측값과 훈련 데이터의 실제 output 값과 비교한다. 틀린 샘플이 w값을 업데이트 한다.
+
+![image](https://user-images.githubusercontent.com/61526722/120886093-1d263700-c627-11eb-9240-eec9537434f3.png)
+![image](https://user-images.githubusercontent.com/61526722/120886048-e51ef400-c626-11eb-93e8-527509c712ed.png)
+
+**step3: Execute the algorithm until not encountering mistakes**
+
+퍼셉트론은 모든 학습 데이터를 정확히 분류할 때까지 학습이 진행된다.
+
 
 ---
 
