@@ -30,7 +30,7 @@ Error Back Propagation은 gradient descent method를 사용한 NN learning algor
 
 아래는 간단한 2-layer MLP에 대한 역전파 과정을 나타낸다.
 
-![image](https://user-images.githubusercontent.com/61526722/120887867-3f708280-c630-11eb-8c1c-af8c5eb83bb1.png)
+![image](https://user-images.githubusercontent.com/61526722/120888077-611e3980-c631-11eb-87dd-747434770945.png)
 
 다음으로 activation function이 포함된 2-layer MLP에 대한 역전파 과정을 나타낸다. _net_ 은 summation을 나타내고 $sigma$ 는 activation function을 의미한다.
 
@@ -44,7 +44,9 @@ Error Back Propagation은 gradient descent method를 사용한 NN learning algor
 - Mul gate: gradient는 바꿔준다.
 - Max gate: gradient router
 
+지금까지는 NN에 대한 미분까지 구해봤다면 아래 그림은 error값을 미분하는 방법을 나타낸다.  
 
+![image](https://user-images.githubusercontent.com/61526722/120888131-ae9aa680-c631-11eb-9466-05bfb87a53b4.png)
 
 
 
