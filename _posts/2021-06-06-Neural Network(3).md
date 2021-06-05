@@ -29,14 +29,14 @@ Regression의 경우는 output layer를 non-linear transformation의 목적으�
 
 classification에서 우리가 얻고 싶은 정보는 숫자가 아닌 class 값(nominal values:이름값)이다. 여기서 첫 번째 문제는 NN은 real number만 다룰수 있다는 것, 두 번째 문제는 error function으로 MSE를 사용해서 학습시켜도 되는지 이다.
 
-- Handling nominal value
+##### Handling nominal value
 
 Binary class이므로 calss값을 0과 1로 바꾸고 학습시키면 된다. 그리고 output layer의 activation function은 sigmoid를 사용하면 된다. Sigmoid 함수는 한 쪽 극단이 1이고 한쪽 극단이 0의 값을 가지기 때문이다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/120893947-c2a1d080-c650-11eb-9370-f37e1103c485.png)
 
 
-- Error function for traning
+##### Error function for traning
 
 정답부터 말하면 <mark>cross entropy</mark> 함수를 사용하면 된다. Sigmoid 활성화 함수와 MSE error function을 함께 사용하는 것은 사용하지 않는게 좋다. 이론상으로는 학습이 잘 될것 같지만 그렇지 않은 경우가 생기기 때문이다. 
 
@@ -72,13 +72,13 @@ Binary-class Classification처럼 각 class label(nominal value)을 linear하게
 ![image](https://user-images.githubusercontent.com/61526722/120894657-8ec8aa00-c654-11eb-963e-db4b8603325b.png)
 ![image](https://user-images.githubusercontent.com/61526722/120894696-c9324700-c654-11eb-8946-4b1bed282ca7.png)
 
-- Binary Class Cross Entropy vs Multi-Class Cross Entropy
+##### Binary Class Cross Entropy vs Multi-Class Cross Entropy
 
 여기서 binary-class할 때랑 수식이 다른데 라는 의문을 품을 수 있다. 하지만 표현만 다를 뿐이지 결과 값은 동일하다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120894846-7016e300-c655-11eb-81f5-13a561a11aae.png)
 
-- Activation function for traning
+##### Activation function for traning
 
 Output layer의 activation function 으로는 sigmoid 대신<mark> softmax 함수</mark>를 사용한다. 그 이유는 multi-class classification의 모든 output 값을 더하면 1이 되어야 하는데 sigmoid는 이를 만족하지 못하기 때문이다. 따라서 이를 만족할 수 있는 softmax 함수를 사용한다. Softmax 함수는 사실상 activation function보다 layer로 보면 편하다. 
 
@@ -86,7 +86,7 @@ Output layer의 activation function 으로는 sigmoid 대신<mark> softmax 함�
 
 Softmax layer는 summation을 한 후 exp를 통과한 결과를 normalize 하여 모든 노드들의 출력값을 1이 되도록 만든다. exp 없이 normalization해도 상관없지만 exp를 쓰면 수학적인 성질이 좋아지기 때문에 exp를 사용한다.
 
-- Error function for traning
+##### Error function for traning
 
 <mark>cross entropy</mark> 함수를 사용하면 된다. softmax layer를 거치더라도 output은 0~1 사이의 값이 나오기 때문에 그대로 cross entropy loss를 사용한다. 
 
