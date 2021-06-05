@@ -6,6 +6,10 @@ category: DeepLearning
 use_math: true
 ---
 
+이번에는 neural network의 탄생, 어떤 구조를 가지고 있는지, 어떤 기능을 하는지 등 neural network에 대한 전반적이 이야기를 해볼 것이다. 
+
+### 0. Neural Network의 탄생
+
 Neural network는 뉴런들의 네트워크로 인간의 두뇌를 모방한 인공두뇌를 만들기 위해 고안되었다.
 
 대충 1950년도까지 인간의 두뇌에 대해서 알게 된 사실은 다음과 같다.
@@ -20,7 +24,7 @@ Neural network는 뉴런들의 네트워크로 인간의 두뇌를 모방한 인
 
 ![image](https://user-images.githubusercontent.com/61526722/120663405-f4862c00-c4c4-11eb-8a01-c45e00051be1.png)
 
-현재는 많은 neural network 중에 multilayer perceptron이라는 구조를 사용하고 있다.
+현재는 많은 neural network 중에 multilayer perceptron (MLP)이라는 구조를 사용하고 있다.
 
 ---
 
@@ -89,7 +93,7 @@ OR operation은 아래 한점과 위의 세점을 나누도록 직선을 그어�
 
 ---
 
-### 4. Neural Network = Multilayer Perceptron (MLP)
+### 4. Neural Network
 
 + Neural network가 할 수 있는 일? <mark>non-linearly seperable한 문제를 푼다</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
  
@@ -105,14 +109,25 @@ XOR문제는 곡선으로 경계를 그려야 하기 때문에 퍼셉트론이 �
 
 ![image](https://user-images.githubusercontent.com/61526722/120883914-f8c45d80-c61a-11eb-8de4-bab892e277b6.png)
 
-이처럼 XOR문제는 세 개의 연결하여 해결할 수 있다. 하지만 이보다 더 복잡한 문제가 나왔을 때, 더 많은 뉴런들을 연결하여 해결해야 하는 문제를 풀 때는 connection weight를 찾는 과정이 너무 복잡해진다. 예상컨대 case by case로 머리 터져라 고민해도 적절한 connection weight를 못찾는 경우가 허다할 것이다. 그럼 과연 neural network의 connection weight를 설정하는 일반적인 알고리즘이 존재하냐? 존재하지 않았다. 내가 특정 neural network를 주면서 이런 일을 하고 싶어요 connection weight를 좀 설정해주세요 했을때 잠깐만 기다려 주세요 하고 바로 설정해줄 수 있는 그런 학습 알고리즘이 존재하지 않았던 것이다. 1969년부터 1985년도까지 neural network가 전혀 사용되지 않았다. 이를 AI winter 시기(NN의 1차 암흑기) 라고 한다.
-
-
-![image](https://user-images.githubusercontent.com/61526722/120883905-e3e7ca00-c61a-11eb-8a36-43387df41bf9.png)
-
-![image](https://user-images.githubusercontent.com/61526722/120883711-b4848d80-c619-11eb-925c-d2b4c459b62a.png)
+이처럼 XOR문제는 세 개의 연결하여 해결할 수 있다. 하지만 이보다 더 복잡한 문제가 나왔을 때, 더 많은 뉴런들을 연결하여 해결해야 하는 문제를 풀 때는 connection weight를 찾는 과정이 너무 복잡해진다. 예상컨대 case by case로 머리 터져라 고민해도 적절한 connection weight를 못찾는 경우가 허다할 것이다. 그럼 과연 neural network의 connection weight를 설정하는 일반적인 알고리즘이 존재하냐? 1985년 까지는 존재하지 않았다. 내가 특정 neural network를 주면서 이런 일을 하고 싶어요 connection weight를 좀 설정해주세요 했을때 잠깐만 기다려 주세요 하고 바로 설정해줄 수 있는 그런 학습 알고리즘이 존재하지 않았던 것이다. 이 때문에 1969년부터 1985년도까지 neural network가 전혀 사용되지 않았다. 이를 AI winter 시기(NN의 1차 암흑기) 라고 한다. 1985년도에  **Error Back Propagation** 이라는 connection weight 설정방법이 등장하면서 AI는 다시 부흥기를 맞게 되는데 Error Back Propagation을 설명하기 이전에 neural network의 구조를 한번 살펴보기로 한다. 
 
 ---
 
-### 5. Multilayer Perceptron (MLP) with Error Back Propagation
+### 5. Multilayer Perceptron (MLP)
+
+Neural network는 퍼셉트론을 여러개 연결한 것이라고 했다. Neural network의 한가지 종류인 **Multilayer Perceptron (MLP)** 는 feed-forward neutral network라고도 불리며 현재 딥러닝에서 사용되는 구조이다. 여기서 feed forward라는 것을 앞에서 뒤로만 신호를 전달한다는 뜻이다. MLP가 feed forward 구조를 가지고 있는 이유는 만약 backward loop가 중간에 존재하면 학습이 불안정해지기 때문이다. 아래는 2-layer MLP의 구조를 도식화한 그림이다. (입력은 layer로 안침)
+
+![image](https://user-images.githubusercontent.com/61526722/120883711-b4848d80-c619-11eb-925c-d2b4c459b62a.png)
+
+MLP는 전체적으로 layer 구조를 가지며 input layer, hidden layer, output layer로 구성된다. 
+
+Input layer의 뉴런(노드) 개수와 output layer의 뉴런(노드) 개수는 우리가 풀어야하는 문제가 결정한다. 예를 들어 256x256 사이즈의 이미지를 보고 개와 고양이를 구분하는 NN을 만든다면 input의 개수는 65536개, 그리고 output의 개수는 1개(0 또는 1)가 된다.
+
+이에 반해 Hidden layer의 노드 개수는 우리가 마음대로 결정하는 것이다. 간단하게 생각하면 문제가 어렵다고 생각되면 노드를 많이 사용하면 되고, 쉬운 문제에는 노드를 적게 사용하면 된다. 그렇다고 너무 많은 노드를 쓰면 문제를 더 못풀게 되니 적당히 잘 설정해야 한다. (MIT 공대 졸업한 사람을 데려다가 산수 풀게 하면 이렇게 해볼까 저렇게 해볼까 하다가 시간만 더 오래 걸리고 망하는 경우라고 보면 됨..) 같은 맥락으로 hidden layer의 개수도 우리가 재량으로 정할 수 있는데 어려운 문제에는 hidden layer를 많이 사용하면 되고, 쉬운 문제에는 hidden layer를 적게 사용하면 된다. 이 때 layer를 많이 까는게 노드를 많이 까는 것 보다 좋다고 한다.
+
+재밌는 것은 이론적 관점에서 2-layer MLP는 어떤 연속 함수 문제를 풀 수 있고, 3-layer MLP는 어떠한 함수 문제를 풀 수 있다고 한다.
+
+---
+
+다음 에는 neural network의 학습 알고리즘인 Error Back Propagation에 대해서 살펴볼 것이다.
 
