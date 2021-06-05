@@ -80,16 +80,61 @@ iteration : 0 은 random intialization 후의 weight를 나타낸다.
 
 ### 4. Overfitting and Generalization
 
-방금 전 예제에서 우리가 고른 첫번째 모델은 generalization이 잘 되었다고 하고 아래쪽에 있는 세번째 모델은 overfitting 됐다고 한다. 훈련을 진행할 때 모델을 어떻게 만들어라 직접적으로 강제할 수는 없다고 했지만 하지만 간접적으로 overfitting이 일어나지 않도록 모델을 달래는 방법이 있다.
-
 Overfitting이란?
 
 주어진 데이터에 대해서는 예측을 잘 하고 새로운 데이터에 대해서는 예측 성능이 좋지 않은 상태를 말한다.
 
+Generalization이란?
+
+새로운 데이터가 들어와도 출력에 대한 성능 차이가 나지 않게 하는 것을 말한다. 
+
+방금 전 예제에서 우리가 고른 첫번째 모델은 generalization이 잘 되었다고 하고 아래쪽에 있는 세번째 모델은 overfitting 됐다고 한다. 훈련을 진행할 때 모델을 어떻게 만들어라 직접적으로 강제할 수는 없다고 했지만 간접적으로 overfitting이 일어나지 않도록 모델을 달래는 방법이 있다.
 
 + <mark>Overfitting을 방지하는 방법</mark>
+  - 적당한 학습횟수를 선택한다. 
   - feature의 개수를 줄인다.
-  - 데이터의 개수를 늘인다.
+  - 데이터의 개수를 늘린다.
+  - Regularization 기법을 사용한다.
   - validation set을 만들어 모델을 훈련시킨다.
-  - Regularization을 사용한다.
+
+아래와 같은 non-linear function에 대해 모델을 학습시킨다고 가정하자. 이 때 $M(차수의 수)$ 를 결정하는 것을 model selection 그리고 $W(connection weight)$를 결정하는 것을 parameter selection 이라고 한다.
+
+![image](https://user-images.githubusercontent.com/61526722/120891412-7dc36d00-c643-11eb-8f8e-10179013d61a.png)
+
+![image](https://user-images.githubusercontent.com/61526722/120891604-72247600-c644-11eb-8fbd-35760cd46ed4.png)
+
+위 그림처럼 $M$ 이 증가할 수록 모델의 복잡도는 증가하고, 모델의 복잡도가 증가하면 주어진 데이터를 정확히 맞추는 모델이 되며 새로운 데이터에 대한 예측 성능이 감소한다. 또한, 특정 가중치의 값이 너무 커질 수 있다. 따라서 feature의 개수를 줄이는 것이 overfitting을 방지하는 방법이 될 수 있다.
+
+
+또한, 데이터를 많이 사용하면 overfitting을 방지할 수 있다. 하지만 현실적으로 학습에 존재하는 문제를 해결할 정도로 데이터를 많이 모을 수는 없다. 따라서 모을 수 있는대로 많이 모으되 우리가 overfitting을 원천적으로 차단하기는 불가능하다.
+
+![image](https://user-images.githubusercontent.com/61526722/120891628-92543500-c644-11eb-86bc-b587c5fdf725.png)
+
+다음으로 regularization을 활용해 overfitting을 방지하는 방법이 있다. 이게 가장 현실적이고 직접적인 방법인데 아래처럼 error function에서 penalty term을 더하면 된다. $w$의 값이 커지는 것을 막기 위해 error function에 parameter들의 제곱의 합을 더해준다. 이를 'weight decay' 또는 'ridge regression (L2-reg)' 방법이라고 한다.
+
+![image](https://user-images.githubusercontent.com/61526722/120891870-ddbb1300-c645-11eb-9eb6-e559ad4a2223.png)
+
+![image](https://user-images.githubusercontent.com/61526722/120892029-0394e780-c647-11eb-8295-a27864258cf9.png)
+
+ Loss function에 parameter들의 절댓값의 합을 더해주는 'Lasso regression (L1-reg)'와 L1-reg와 L2-reg를 혼합한 방법도 있다. 상황에 맞게 골라서 사용하면 된다.
+ 
+![image](https://user-images.githubusercontent.com/61526722/120892147-a8172980-c647-11eb-8530-091124e1cd04.png)
+
+
+또 하나의 방법은 validation set을 활용하는 것이다. validation set은 가짜 test data라고 생각하면 되는데 이를 활용해 overfitting이 일어나는지 확인하는 것이다. 가장 대표적으로 k-fold cross validation 방법을 설명하겠다.
+
+
+K-fold validation은 데이터를 k개의 그룹으로 분할하여 (k-1)개를 training set으로 사용하고 나머지 1개를 validation set으로 사용하는 것이다. 분할된 데이터를 한번씩 validation set으로 설정할 수 있는데, 마지막에 모든 결과들을 평균내어 connection weight를 설정한다. 모델을 아래는 4-fold cross validation을 보여준다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120892197-0e9c4780-c648-11eb-8782-03937dfb6191.png)
+
+![image](https://user-images.githubusercontent.com/61526722/120892261-5c18b480-c648-11eb-8977-2f2cfe8a9b1e.png)
+![image](https://user-images.githubusercontent.com/61526722/120892276-76eb2900-c648-11eb-80ec-357db5837f3d.png)
+
+데이터가 어떻게 나누어졌는지에 크게 의존하지 않으며 분할된 set은 (k-1)번 학습된다는 장점이 있지만 시간이 오래걸린다는 단점이 있는 방법이다.
+
+---
+
+다음 문서에는 
+
 
