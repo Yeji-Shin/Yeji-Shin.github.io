@@ -92,10 +92,13 @@ Generalization이란?
 
 + <mark>Overfitting을 방지하는 방법</mark>
   - 적당한 학습횟수를 선택한다. 
-  - feature의 개수를 줄인다.
+  - Feature의 개수를 줄인다.
   - 데이터의 개수를 늘린다.
-  - Regularization 기법을 사용한다.
-  - validation set을 만들어 모델을 훈련시킨다.
+  - Regularization 기법 (L1-Reg, L2-Reg, Dropout, Eaaly stopping, weigth decay, data augmentation, stochastic pooling)을 사용한다.
+  - Validation set을 만들어 모델을 훈련시킨다.
+
+
+##### Feature의 개수를 줄인다.
 
 아래와 같은 non-linear function에 대해 모델을 학습시킨다고 가정하자. 이 때 $M(차수의 수)$ 를 결정하는 것을 model selection 그리고 $W(connection weight)$를 결정하는 것을 parameter selection 이라고 한다.
 
@@ -105,10 +108,13 @@ Generalization이란?
 
 위 그림처럼 $M$ 이 증가할 수록 모델의 복잡도는 증가하고, 모델의 복잡도가 증가하면 주어진 데이터를 정확히 맞추는 모델이 되며 새로운 데이터에 대한 예측 성능이 감소한다. 또한, 특정 가중치의 값이 너무 커질 수 있다. 따라서 feature의 개수를 줄이는 것이 overfitting을 방지하는 방법이 될 수 있다.
 
+##### 데이터의 개수를 늘린다.
 
 또한, 데이터를 많이 사용하면 overfitting을 방지할 수 있다. 하지만 현실적으로 학습에 존재하는 문제를 해결할 정도로 데이터를 많이 모을 수는 없다. 따라서 모을 수 있는대로 많이 모으되 우리가 overfitting을 원천적으로 차단하기는 불가능하다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120891628-92543500-c644-11eb-86bc-b587c5fdf725.png)
+
+##### Regularization 기법 (L1-Reg, L2-Reg, Dropout, Early stopping, weigth decay, data augmentation, stochastic pooling)을 사용한다.
 
 다음으로 regularization을 활용해 overfitting을 방지하는 방법이 있다. 이게 가장 현실적이고 직접적인 방법인데 아래처럼 error function에서 penalty term을 더하면 된다. $w$의 값이 커지는 것을 막기 위해 error function에 parameter들의 제곱의 합을 더해준다. 이를 'weight decay' 또는 'ridge regression (L2-reg)' 방법이라고 한다.
 
@@ -120,6 +126,9 @@ Generalization이란?
  
 ![image](https://user-images.githubusercontent.com/61526722/120892147-a8172980-c647-11eb-8530-091124e1cd04.png)
 
+나머지 regluarization 기법들은 추후에 살펴볼 것이다.
+
+##### Validation set을 만들어 모델을 훈련시킨다.
 
 또 하나의 방법은 validation set을 활용하는 것이다. validation set은 가짜 test data라고 생각하면 되는데 이를 활용해 overfitting이 일어나는지 확인하는 것이다. 가장 대표적으로 k-fold cross validation 방법을 설명하겠다.
 
@@ -135,6 +144,6 @@ K-fold validation은 데이터를 k개의 그룹으로 분할하여 (k-1)개를 
 
 ---
 
-다음 문서에는 
+다음 문서에는 상황에 따라 어떻게 NN을 설계해야 하는지 살펴볼 것이다. 
 
 
