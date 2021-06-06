@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Gradient Descent Optimizer
-date: 2021-06-06
+date: 2021-06-07
 category: DeepLearning
 use_math: true
 ---
@@ -93,8 +93,10 @@ SGD가 training data 하나만 보고 NN을 업데이틀 하는 것은 좀 심�
 알다시피 GD는 local optimum을 찾아가는 방법이다. 이제 사람들은 두 가지 고민을 하게 된다.
 
 - 더 좋은 local optimum으로 가는 방법은 없을까? Momentum
+  
   이는 곡선을 따라 공을 굴렸을 때 관성으로 조금 더 앞으로 나아가는 개념을 적용한 Momentum으로 해결한다.
 - Learning rate를 어떻게 설정하는 것이 좋을까? Adagrad, RMSProp, AdatDelta...
+  
   학습초기에는 learning rate이 큰것이 좋지만 학습이 거의 다 이루어진 막판에는 learning rate이 작은것이 좋다.
   또한, NN의 수많은 connection weight에 대해 learning rate를 다 다르게 해보자는 방법이 등장했다.
 
