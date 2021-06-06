@@ -152,7 +152,9 @@ Training을 할때는 2개의 노드만 사용했고, test할 때는 모든 노�
 
 ![image](https://user-images.githubusercontent.com/61526722/120916079-612a4200-c6e2-11eb-9ef8-7ea532bd918f.png)
 
-![image](https://user-images.githubusercontent.com/61526722/120916121-a51d4700-c6e2-11eb-90ed-89da6504118a.png)
+![image](https://user-images.githubusercontent.com/61526722/120916381-4527a000-c6e4-11eb-9c34-060d455605ee.png)
+
+아래 그림에서 볼 수 있듯이 dropout이 없을때는 overfitting이 일어난다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/120916183-0d6c2880-c6e3-11eb-9e9a-0679b153c9a1.png)
 
@@ -166,4 +168,24 @@ Training을 할때는 2개의 노드만 사용했고, test할 때는 모든 노�
 
 #### Covariate Shift 
 
+Covariate는 input data의 특징이다. Covariate shift는 입력의 분포가 바뀌는 것으로 training data와 test data가 너무 다를 때를 말할 수 있다. 
 
+![image](https://user-images.githubusercontent.com/61526722/120916480-d0089a80-c6e4-11eb-861d-252ff5f1fcda.png)
+
+#### Internal Covariate Shift 
+
+학습을 하면 connection weight값이 바뀌고, 출력값도 바뀐다. 이는 그 다음 layer의 input distribution이 바뀐다는 말이다. 즉, forward로 출력값을 계산할 수록 distribution이 더 심하게 바뀐다. Internal Covariate Shift는 NN에서 각 layer의 net값의 분포가 학습할 때마다 바뀌는 것이다. Training 중에 NN 내부에서 생기는 covariate shift라고 생각하면 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120916917-6f2e9180-c6e7-11eb-8ffe-07cb16522ab9.png)
+
+예를 들어 i번째에서 [0,1]의 값을 받아서 열심히 학습했는데 갑자기 (i+1)번째 학습에서 [2,3] 범위의 값이 들어오면 input data의 범위가 급격히 변하면서 아까의 학습이 유효하지 않게 되고 학습이 굉장히 느려지게 된다. 이 문제를 해결하는 것이 batch normalization이다. 
+
+
+#### Batch Normalization
+
+정말 쉽게 생각해서 shift 된 distribution을 다시 제자리로 돌려 놓는 연산을 하나 추가하면 모든 것은 해결된다. 이것이 바로 normalization 연산이다. 이렇게 normalization 된 값을 activation function에 넣어서 학습을 시키면 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120917256-2bd52280-c6e9-11eb-85ca-16f1bf9fb248.png)
+
+
+![image](https://user-images.githubusercontent.com/61526722/120917230-00523800-c6e9-11eb-93aa-ccccd067182f.png)
