@@ -22,7 +22,7 @@ Shallow Network과 Deep Network의 차이는 없다. 기본적으로 shallow net
 - deep한 구조에서 나오는 엄청난 파워
 
 #### DNN의 단점
-- optimization(학습)이 어렵다.
+- Vanishing gradient문제 optimization(학습)이 어렵다.
 - 파워가 너무 크기 때문에 overfitting 되는 문제
 - internal covariate shift
 
