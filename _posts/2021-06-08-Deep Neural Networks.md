@@ -118,7 +118,7 @@ NN은 일반적으로 수천개 수만개의 파라미터를 가지고 있으며
 
 L1 Regularization과 L2 Regularization는 우리가 알고있는 MSE loss나 cross entropy loss에 regularization term을 더한 것을 새로운 error function으로 정의하고 그것을 gradient descent method로 최소화한다. Error function이 최소화된다는 것은 $E(w)$ 뿐만 아니라 regularization term도 최소화되어야 한다는 것인데 과연 이게 무슨 의미일까.
 
-먼저 $E(w)$인 MSE나 CE를 최소화하라는 것은 정확한 NN을 만들라는 뜻이다. 정확한 NN을 만들기 위해서는 복잡한 NN이 필요하다. 그리고 regularization term인 $\frac{\lambda}{2}|w|$과 $\frac{\lambda}{2}|w|^2$을 최소화하라는 것은 connection을 최대한 끊어내라는 것이다. 다시말하면 NN을 단순히하라는 뜻이 된다. NN 구조의 complexity를 줄여서 overfitting을 방지하는 것이다. 
+먼저 $E(w)$인 MSE나 CE를 최소화하라는 것은 정확한 NN을 만들라는 뜻이다. 정확한 NN을 만들기 위해서는 복잡한 NN이 필요하다. 그리고 regularization term인 $\frac{\lambda}{2}|w|$ 과 $\frac{\lambda}{2}|w|^2$ 을 최소화하라는 것은 connection을 최대한 끊어내라는 것이다. 다시말하면 NN을 단순히하라는 뜻이 된다. NN 구조의 complexity를 줄여서 overfitting을 방지하는 것이다. 
 
 정리하면 $E(w)$는 NN을 복잡하게 하려고 하고, regularization term은 NN을 단순화하려고 하기 때문에 서로 상반된 요구사항을 주고 이를 동시에 minimize하는 $w$를 찾으라고 하는 것이다. 즉, 적당한 구조를 가져서 error가 크지도 않고 작지도 않는 그런 NN을 찾는 것이다. 
 
