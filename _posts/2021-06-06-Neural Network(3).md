@@ -224,7 +224,7 @@ Softmax layer는 summation을 한 후 exp를 통과한 결과를 normalize 하�
 
 ![image](https://user-images.githubusercontent.com/61526722/120926109-89cc2f00-c716-11eb-8e47-48ecf77ced56.png)
 
-정리하면 softmax 함수로 output으로 나온 값들의 합이 1이 되도록 변경해준 후에 실제 label과 비교하여 cross entropy loss를 계산한다. 
+정리하면 softmax 함수로 output으로 나온 값들의 합이 1이 되도록 변경해준 후에 one-hot vector로 변경실제 label과 비교하여 cross entropy loss를 계산한다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/120925986-fa268080-c715-11eb-9667-a25b9a45e684.png)
 
