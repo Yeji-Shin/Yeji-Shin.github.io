@@ -6,13 +6,107 @@ category: DeepLearning
 use_math: true
 ---
 
-이번에는 문제 상황에 따라 어떻게 neural network 구조를 설계해야 하는지 살펴본다. 그 이전에 activation function에는 어떤 것들이 있는지 살펴본다.
+이번에는 문제 상황에 따라 어떻게 neural network 구조를 설계해야 하는지 살펴본다. 그 이전에 activation function에는 어떤 것들이 있는지 알아본다.
 
 ---
 
 ### 0. Various Activation Funtions
 
-Activation function
+활성화 함수를 사용하면 입력값에 대한 출력값이 non-linear하게 나오므로 선형 시스템을 비선형 시스템으로 만들 수 있다. 따라서 MLP(Multiple layer perceptron)는 단지 linear layer를 여러개 쌓는 개념이 아니고 활성화 함수를 이용한 non-linear 시스템을 여러 layer로 쌓는 개념이다. 다양한 활성화 함수가 존재하는데 하나씩 설명한다.
+
+![image](https://user-images.githubusercontent.com/61526722/120920880-04d41c00-c6fc-11eb-96cb-001757f76ab9.png)
+
+#### Sigmoid
+
+Activation: $a = \sigma (x) =\frac{1}{1+e^{-x}}$
+
+Gradient: $\frac{\partial a}{\partial x} = \sigma (x) (1- \sigma (x))$
+
+![image](https://user-images.githubusercontent.com/61526722/120921474-cd1aa380-c6fe-11eb-8351-eb05616ddf98.png)
+
+Sigmoid 문제점
+
+- 미분함수는 y값의 범위가 너무 작다.
+- 미분함수의 양극단이 0에 수렴하여 미분해도 업데이트가 잘 되지 않는다.
+- 미분값이 모두 양수이며 zero-centered 되어 있지 한다.
+- 미분값이 항상 양수라서 강도만 있을뿐 방향을 바꾸지 못한다.
+- 미분값이 1보다 작아서 gradient가 너무 작다.
+
+#### Tanh
+
+Activation: $a = tnah(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}} $
+
+Gradient: $\frac{\partial a}{\partial x} = 1- tanh^2(x)$
+
+![image](https://user-images.githubusercontent.com/61526722/120921485-e28fcd80-c6fe-11eb-835a-91b888be7633.png)
+
+Tanh 장점
+
+- tanh는 [-1,+1] 사이의 값을 가지므로 zero-centered 되어 있다.
+- 음수값도 가져 방향성을 바꾸기가 가능하다. 
+
+Tanh 단점
+
+- 미분함수의 양극단이 0에 수렴한다. 
+- 미분값이 0 근처에서 포화상태이다.
+- 미분값이 1보다 작아서 gradient가 너무 작다.
+
+
+#### Linear
+
+Activation: $a = \theta (x)$
+
+Gradient: $\frac{\partial a}{\partial \theta} = x$
+
+![image](https://user-images.githubusercontent.com/61526722/120921674-cfc9c880-c6ff-11eb-8844-1f2dfd71a331.png)
+
+
+Linear 장점
+
+- 미분값이 0에 가깝지는 않다.
+- 안정적인 gradient를 가진다.
+- 포화되는 구간이 없다.
+
+Linear 단점
+
+- 양수와 음수인 경우를 구분하지 못한다. 
+
+#### Softmax
+
+Activation: $a^{(k)} = softmax(x^{(k)}) = \frac{e^x^{(k)}}{\sum_{j}^{}e^x^{(j)}} , \sum_{k=1}^{K} a^{k} = 1 for K classes$
+
+![image](https://user-images.githubusercontent.com/61526722/120921758-22a38000-c700-11eb-9616-7c93b55dbbd7.png)
+
+
+#### ReLU
+
+Activation: $a = h(x) = max(0,x)$
+
+Gradient: $\frac{\partial a}{\partial x} = \left\{\begin{matrix}
+ & 1, if (x >= 0) \\ 
+ & 0, otherwise
+\end{matrix}\right.$
+
+![image](https://user-images.githubusercontent.com/61526722/120921701-d8220380-c6ff-11eb-9a15-0972dd358378.png)
+
+ReLU 장점
+
+- 양극단이 포화되지 안는다.
+- 계산이 효율적이다.
+- 수렴속도가 빠르다.
+- 구분적 선형함수이기 때문에 안정적이다.
+
+ReLU 단점
+
+- 중심값이 0이 아니다.
+- 입력값이 음수인 경우 미분값이 0이라서 업데이트되지 않는다. (dead neuron이 생긴다.) -> Leaky ReLU로 극복
+- 비연속함수라서 미분불가능한 검이 생긴다. -> softplus
+
+
+#### ELU
+
+![image](https://user-images.githubusercontent.com/61526722/120921691-d5271300-c6ff-11eb-95b6-a6643e4812d2.png)
+
 
 ---
 
