@@ -73,7 +73,7 @@ Linear 단점
 
 #### Softmax
 
-Activation: $a^{(k)} = softmax(x^{(k)}) = \frac{e^x^{(k)}}{\sum_{j}^{}e^x^{(j)}}$ 
+Activation: $a^{(k)} = softmax(x^{(k)}) = \frac{e^x^{(k)}}{\sum_{j}e^x^{(j)}}$ 
 
 $\sum_{k=1}^{K} a^{k} = 1$ for K classes
 
