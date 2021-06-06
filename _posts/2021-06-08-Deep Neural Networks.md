@@ -30,7 +30,9 @@ Shallow Network과 Deep Network의 차이는 없다. 기본적으로 shallow net
 
 ---
 
-### 2. Vanishing Gradient and Exploding Problem
+### 2. Rectified Linear Unit (ReLU) for vanishing gradient problem
+
+#### Vanishing Gradient and Exploding Problem
 
 분명히 shallow network와 deep network는 이론적으로 차이가 없다고 했다. 그러면 shallow network에서 사용하던 error back propagation method를 DNN에 적용하면 당연히 학습이 될 것이라고 생각했지만 현실은 아니었다. Back propagation은 gradient를 사용하기 때문에 graidient 관점에서 두 가지의 문제가 생긴다. 하나는 gradient vanishing이라고 해서  gradient가 너무 작아서 학습이 안되는 문제, 다른 하나는 gradient가 너무 커져서 학습이 안되는 문제이다. 
 
@@ -42,11 +44,9 @@ Exploding Gradient는 간단하게 특정 값을 넘어가면 1로 해줘라와 
 
 ![image](https://user-images.githubusercontent.com/61526722/120913802-d2fb8f00-c6d4-11eb-988b-ad57f9ef7450.png)
 
-Vanishing Gradient를 해결하는 방법은 **activation function**에 있다. 우리는 지금까지 sigmoid를 activation function으로 사용해 왔는데 위 그림에서 볼 수 있듯이 gradient를 구하는데 처음에는 4개 중에 2개(노란색)가 sigmoid를 미분해서 나온것이고, 그 다음 layer에서는 7개의 term 중에 4개가 sigmoid를 미분해서 나온것이다. 곱해지는 term 중에 50% 이상을 activation fucntion이 차지하고 있다. 이렇게 activation function을 미분했더니 너무 많은 term 들이 생겨서 vanishing gradient 문제가 생겼다는 것이다. 그래서 이제 sigmoid 대신 다른 activation function을 사용하기 시작했다. 
+Vanishing Gradient를 해결하는 방법은 **activation function**에 있다. 우리는 지금까지 sigmoid를 activation function으로 사용해 왔는데 위 그림에서 볼 수 있듯이 gradient를 구하는데 처음에는 4개 중에 2개(노란색)가 sigmoid를 미분해서 나온것이고, 그 다음 layer에서는 7개의 term 중에 4개가 sigmoid를 미분해서 나온것이다. 곱해지는 term 중에 50% 이상을 activation fucntion이 차지하고 있다. 이렇게 activation function을 미분했더니 너무 많은 term 들이 생겨서 vanishing gradient 문제가 생겼다는 것이다. 그래서 이제 sigmoid 대신 다른 activation function을 사용하기 시작했다.
 
----
-
-### 3. Rectified Linear Unit (ReLU) for vanishing gradient problem
+#### Rectified Linear Unit (ReLU)
 
 ![image](https://user-images.githubusercontent.com/61526722/120914025-46ea6700-c6d6-11eb-95a2-a168ef870275.png)
 
@@ -67,7 +67,7 @@ ReLU의 미분값은 1 아니면 0 값이 나온다. 따라서 gradient를 계�
 
 ---
 
-### 4. Regularization Methods for Overfitting Problem
+### 3. Regularization Methods for Overfitting Problem
 
 Overfitting은 error가 작지만 예측성능이 좋지 않은 상태를 말한다.
 
