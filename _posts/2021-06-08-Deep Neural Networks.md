@@ -105,7 +105,6 @@ Data augmentation은 데이터를 Rotate, Flip, Crop, Equalize, Solarize, and Po
 NN은 일반적으로 수천개 수만개의 파라미터를 가지고 있으며 dataset의 개수가 파라미터의 개수보다 작은 경우도 존재한다. 파라미터의 개수가 너무 많으면 특정 파라미터의 가중치가 너무 커지는 문제가 있는데 이를 방지하기 위해 사용하는 방법이 weight decay 이다. Weight decay에는 두가지 방법이 있다. 
 
 + L1 Regularization
-
 ![image](https://user-images.githubusercontent.com/61526722/120914628-73a07d80-c6da-11eb-83a6-0a08723d4a4f.png)
 
   - 대부분의 weight들을 0에 가깝게 만들어준다.
@@ -113,8 +112,7 @@ NN은 일반적으로 수천개 수만개의 파라미터를 가지고 있으며
   - 중요한 input을 고르는 것에 초점을 맞춘다.
 
 + L2 Regularization
-
-![image](https://user-images.githubusercontent.com/61526722/120914680-a5194900-c6da-11eb-9512-ff1fc0ffb3cf.png)
++ ![image](https://user-images.githubusercontent.com/61526722/120914680-a5194900-c6da-11eb-9512-ff1fc0ffb3cf.png)
 
   - 되도록 모든 training data를 사용하도록 권장하는 방법이다. 
 
