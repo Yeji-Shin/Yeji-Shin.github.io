@@ -112,7 +112,7 @@ NN은 일반적으로 수천개 수만개의 파라미터를 가지고 있으며
   - 중요한 input을 고르는 것에 초점을 맞춘다.
 
 + L2 Regularization
-+ ![image](https://user-images.githubusercontent.com/61526722/120914680-a5194900-c6da-11eb-9512-ff1fc0ffb3cf.png)
+![image](https://user-images.githubusercontent.com/61526722/120914680-a5194900-c6da-11eb-9512-ff1fc0ffb3cf.png)
 
   - 되도록 모든 training data를 사용하도록 권장하는 방법이다. 
 
@@ -133,6 +133,33 @@ L1과 L2를 비교하자면 L2는 모든 변수를 다 쓰면서 특별히 튀�
 
 #### Dropout
 
-Dropout의 목적은 단순한 NN 구조를 찾는 것이다.  
+Dropout의 목적은 단순한 NN 구조를 찾는 것이다. 복잡한 NN을 살펴보면 어떤 connection weight은 학습이 잘되고 어떤 connection weight은 학습이 잘 안되고 불균등 학습이 일어난다고 했다. 즉, 많은 노드 중에서 학습을 열심히 하는 노드가 있는가 하면 학습을 게을리 하는 노드가 있는 것이다. 우리는 모든 노드가 균등하게 학습되는 것을 원한다. 왜냐면 학습이 잘 안된 노드가 어떤 input이 들어왔을 때 이상하게 작동할 수도 있기 때문이다. 여기서 고안된 방법이 model complexity를 낮추면서 모든 노드들이 균등하게 학습해보자라는 아이디어를 내게 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120915815-d4cb4f80-c6e0-11eb-9290-ca6f2dabc2f8.png)
+
+이런 식으로 돌아가면서 몇 개의 노드를 빼고 학습을 여러번 시키면 모든 노드가 골고루 책임을 지고 학습된다는 것이다. 쉽게 말하면 특정 노드가 빠지면 그 노드가 하던 일을 다른 노드들이 하게 되는 것이다. 노드를 뺄 때는 $p$ 확률로 뺀다. 학습하는 시간은 좀 더 오래 걸리겠지만 complexity가 낮은 모델들이 계속 학습되어 중첩되는 효과를 내어 학습이 잘 된다.
 
 
+![image](https://user-images.githubusercontent.com/61526722/120915870-1cea7200-c6e1-11eb-9092-cbe60a06d456.png)
+
+<mark>Test할 때는 전체 노드를 다 사용한다.</mark> 하지만 이렇게 하면 문제가 발생하는데 아래 그림을 살펴보면서 이해해보자.
+
+![image](https://user-images.githubusercontent.com/61526722/120915961-b44fc500-c6e1-11eb-8908-47b36f102b0c.png)
+
+Training을 할때는 2개의 노드만 사용했고, test할 때는 모든 노드를 다 사용한다면 평균적으로 test output의 값이 training output 값의 2배가 될 것이다. 원래는 training 할 때나 test할 때나 동일한 output 값이 나와야 하기 때문에 test를 시행할 때는 노드드의 weight 값에 $(1-p)%$를 곱해준다. 여기서 $p$는 dropout probability이다.
+
+그리고 dropout은 일종의 앙상블 모델이라고 할 수 있다. M개의 뉴런이 있다면 그것이 선택될 때, 안 될때를 계산하면 총 $2^M$ 개의 case가 나온다. 이렇게 complexity가 낮은 모델들을 학습시키면 underfitting이 일어날 수 있는데 이 모델들을 평균 내면 underfitting을 해결할 수 있다.
+
+![image](https://user-images.githubusercontent.com/61526722/120916079-612a4200-c6e2-11eb-9ef8-7ea532bd918f.png)
+
+![image](https://user-images.githubusercontent.com/61526722/120916121-a51d4700-c6e2-11eb-90ed-89da6504118a.png)
+
+![image](https://user-images.githubusercontent.com/61526722/120916183-0d6c2880-c6e3-11eb-9e9a-0679b153c9a1.png)
+
+데이터가 클 때는 dropout을 굳이 쓰지 않아도 되는데 데이터가 많음으로써 regularization 효과가 이미 충분하기 때문이다.  
+
+![image](https://user-images.githubusercontent.com/61526722/120916241-689e1b00-c6e3-11eb-8593-f295acbb60bb.png)
+
+---
+
+### 4. Batch Normalization for Internal Covariate Shift Problem
