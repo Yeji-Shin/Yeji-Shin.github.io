@@ -50,7 +50,7 @@ Connection weight는 scale factor로 이해하면 된다. Connection weight이 �
 
 #### step2: Nonlinear transformation of s
 
-Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이다. s가 어느 정도를 넘으면 시그널을 방출한다. 위의 예에서는 s>0이면 1을 출력, 아니면 -1을 출력한다. $f$는 activation function이라고 한다.
+Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이다. s가 어느 정도를 넘으면 시그널을 방출한다. 위의 예에서는 s>0이면 1을 출력, 아니면 -1을 출력한다. $f$는 <mark>activation function</mark>이라고 한다.
 
 
 이런 뉴런들이 마구마구 연결되어 있는 것이 neural network이다.
@@ -121,13 +121,13 @@ Input-ouput 쌍을 가진 학습 데이터와 사용할 neural network 구조를
 
 #### Neural network가 할 수 있는 일? 
 
-<mark>non-linearly seperable한 문제를 푼다</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
+<mark>non-linearly seperable한 문제를 푼다.</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
  
-Non-linear separable문제에는 대표적으로 exclusive OR (XOR)가 있다.
+Non-linear separable 문제에는 대표적으로 exclusive OR (XOR)가 있다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120882984-b0567100-c615-11eb-91bf-19d719addb8c.png)
 
-XOR문제는 곡선으로 경계를 그려야 하기 때문에 퍼셉트론이 해결하지 못한다. 하지만 Neural network는 아래와 같은 방법으로 XOR 문제를 해결할 수 있다. 
+XOR 문제는 곡선으로 경계를 그려야 하기 때문에 퍼셉트론이 해결하지 못한다. 하지만 Neural network는 아래와 같은 방법으로 XOR 문제를 해결할 수 있다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/120883970-50fb5f80-c61b-11eb-8138-2144d6612add.png)
 
