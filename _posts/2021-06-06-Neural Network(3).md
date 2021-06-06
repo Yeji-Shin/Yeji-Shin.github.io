@@ -22,7 +22,7 @@ Activation: $a = \sigma (x) =\frac{1}{1+e^{-x}}$
 
 Gradient: $\frac{\partial a}{\partial x} = \sigma (x) (1- \sigma (x))$
 
-![image](https://user-images.githubusercontent.com/61526722/120921474-cd1aa380-c6fe-11eb-8351-eb05616ddf98.png)
+![image](https://user-images.githubusercontent.com/61526722/120925021-871b0b00-c711-11eb-9b4e-4d66595ef188.png)
 
 Sigmoid 문제점
 
