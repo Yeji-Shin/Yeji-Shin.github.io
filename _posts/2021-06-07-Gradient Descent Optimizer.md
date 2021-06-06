@@ -205,5 +205,6 @@ $\hat G_{i}^{t}$ 과 $\hat m_{i}^{t}$ 통계에서 나오는 불편향 추정량
 ---
 
 
+![image](https://user-images.githubusercontent.com/61526722/120920348-4911ed00-c6f9-11eb-9a84-7d3c781d3f30.png)
 
 
