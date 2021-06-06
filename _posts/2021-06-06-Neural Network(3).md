@@ -183,6 +183,10 @@ Binary class이므로 calss값을 0과 1로 바꾸고 학습시키면 된다. �
 
 ### 3. Multi-class Classification
 
+![image](https://user-images.githubusercontent.com/61526722/120926176-d152bb00-c716-11eb-8f8f-43dcf7d636c1.png)
+
+출처: https://towardsdatascience.com/derivative-of-the-softmax-function-and-the-categorical-cross-entropy-loss-ffceefc081d1
+
 ![image](https://user-images.githubusercontent.com/61526722/120894497-a2274580-c653-11eb-9e50-c5da2c389859.png)
 
 
@@ -218,7 +222,7 @@ Softmax layer는 summation을 한 후 exp를 통과한 결과를 normalize 하�
 
 <mark>cross entropy</mark> 함수를 사용하면 된다. softmax layer를 거치더라도 output은 0~1 사이의 값이 나오기 때문에 그대로 cross entropy loss를 사용한다. 
 
-![image](https://user-images.githubusercontent.com/61526722/120925726-d1ea5200-c714-11eb-80ed-51077ce86553.png)
+![image](https://user-images.githubusercontent.com/61526722/120926109-89cc2f00-c716-11eb-8e47-48ecf77ced56.png)
 
 정리하면 softmax 함수로 output으로 나온 값들의 합이 1이 되도록 변경해준 후에 실제 label과 비교하여 cross entropy loss를 계산한다. 
 
