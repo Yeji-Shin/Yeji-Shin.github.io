@@ -74,7 +74,6 @@ Linear 단점
 #### Softmax
 
 Activation: ![image](https://user-images.githubusercontent.com/61526722/120924850-b54c1b00-c710-11eb-97dd-e2138bfb0599.png) 
-
 $\sum_{k=1}^{K} a^{k} = 1$ for K classes
 
 ![image](https://user-images.githubusercontent.com/61526722/120921758-22a38000-c700-11eb-9616-7c93b55dbbd7.png)
