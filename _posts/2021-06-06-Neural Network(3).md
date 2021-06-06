@@ -6,7 +6,11 @@ category: DeepLearning
 use_math: true
 ---
 
-이번에는 문제 상황에 따라 어떻게 neural network 구조를 설계해야 하는지 살펴본다. 
+이번에는 문제 상황에 따라 어떻게 neural network 구조를 설계해야 하는지 살펴본다. 그 이전에 activation function에는 어떤 것들이 있는지 살펴본다.
+
+---
+
+### 0. Various Activation Funtions
 
 ---
 
