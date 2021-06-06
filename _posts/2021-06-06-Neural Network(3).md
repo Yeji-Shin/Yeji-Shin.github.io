@@ -176,7 +176,7 @@ Binary class이므로 calss값을 0과 1로 바꾸고 학습시키면 된다. �
 
 ![image](https://user-images.githubusercontent.com/61526722/120894321-c33b6680-c652-11eb-9299-13eac882386c.png)
 
-같은 상황에서 cross entropy activation function을 사용하면 gradient가 0이 되지 않아 학습이 가능하다.
+같은 상황에서 cross entropy activation function을 사용하면 gradient가 0이 되지 않아 학습이 가능하다. Cross entropy loss는 가장 유명한 classification을 위해 사용되는 loss로 softmax와 sigmoid activation 함수와 주로 같이 사용된다. 그 이유는 CE는 softmax와 sigmoid의 exp을 없애준다. 
 
 
 ---
@@ -212,11 +212,18 @@ Output layer의 activation function 으로는 sigmoid 대신<mark> softmax 함�
 
 ![image](https://user-images.githubusercontent.com/61526722/120895109-748fcb80-c656-11eb-922f-04feb3141523.png)
 
-Softmax layer는 summation을 한 후 exp를 통과한 결과를 normalize 하여 모든 노드들의 출력값을 1이 되도록 만든다. exp 없이 normalization해도 상관없지만 exp를 쓰면 수학적인 성질이 좋아지기 때문에 exp를 사용한다.
+Softmax layer는 summation을 한 후 exp를 통과한 결과를 normalize 하여 모든 노드들의 출력값의 합을 1이 되도록 만든다. exp 없이 normalization해도 상관없지만 exp를 쓰면 수학적인 성질이 좋아지기 때문에 exp를 사용한다.
 
 #### Error function for traning
 
 <mark>cross entropy</mark> 함수를 사용하면 된다. softmax layer를 거치더라도 output은 0~1 사이의 값이 나오기 때문에 그대로 cross entropy loss를 사용한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120925726-d1ea5200-c714-11eb-80ed-51077ce86553.png)
+
+정리하면 softmax 함수로 output으로 나온 값들의 합이 1이 되도록 변경해준 후에 실제 label과 비교하여 cross entropy loss를 계산한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120925986-fa268080-c715-11eb-9667-a25b9a45e684.png)
+
 
 ---
 
