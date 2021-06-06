@@ -153,6 +153,12 @@ Momentum과 큰 차이는 없지만 NAG는 momentum만 이용해서 먼저 점�
 
 ![image](https://user-images.githubusercontent.com/61526722/120912018-c2dcb300-c6c6-11eb-90ae-cdccddd6ba2b.png)
 
+#### 장점
+- Momentum이 minimum 값을 찾아갈 때 너무 돌아간는 것을 완화한다. 
+
+#### 단점
+- 하지만 여전히 minimum 값을 찾아갈 때 조금 돌아간다. 
+
 ---
 
 다음으로 Adaptive Learning Rates를 적용하는 방법이다. 앞에서 말했듯이 learning rate은 고정된 값을 사용하는 것이 좋지 않다. 그리고 모든 connection weight이 동일한 learning rate를 사용하는 것이 적절하지 않다.
@@ -198,6 +204,6 @@ $\hat G_{i}^{t}$ 과 $\hat m_{i}^{t}$ 통계에서 나오는 불편향 추정량
 
 ---
 
-![image](https://user-images.githubusercontent.com/61526722/120912820-6fba2e80-c6cd-11eb-8726-bc8dcf923b61.png)
+
 
 
