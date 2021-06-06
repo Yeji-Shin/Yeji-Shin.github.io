@@ -73,7 +73,7 @@ Linear 단점
 
 #### Softmax
 
-Activation: $a^{(k)} = softmax(x^{(k)}) = \frac{e^x^{(k)}}{\sum_{j}^{}e^x^{(j)}} , \sum_{k=1}^{K} a^{k} = 1 for K classes$
+Activation: $a^{(k)} = softmax(x^{(k)}) = \frac{e^x^{(k)}}{\sum_{j}^{}e^x^{(j)}}$ $\sum_{k=1}^{K} a^{k} = 1$ for K classes$
 
 ![image](https://user-images.githubusercontent.com/61526722/120921758-22a38000-c700-11eb-9616-7c93b55dbbd7.png)
 
@@ -83,8 +83,8 @@ Activation: $a^{(k)} = softmax(x^{(k)}) = \frac{e^x^{(k)}}{\sum_{j}^{}e^x^{(j)}}
 Activation: $a = h(x) = max(0,x)$
 
 Gradient: $\frac{\partial a}{\partial x} = \left\{\begin{matrix}
- & 1, if (x >= 0) \\ 
- & 0, otherwise
+ & 1 if (x >= 0) \\ 
+ & 0 otherwise
 \end{matrix}\right.$
 
 ![image](https://user-images.githubusercontent.com/61526722/120921701-d8220380-c6ff-11eb-9a15-0972dd358378.png)
@@ -104,6 +104,10 @@ ReLU 단점
 
 
 #### ELU
+
+Activation: $a = h(x) =\frac{1}{1+e^{-x}}$
+
+Gradient: $\frac{\partial a}{\partial x} = \sigma (x) (1- \sigma (x))$
 
 ![image](https://user-images.githubusercontent.com/61526722/120921691-d5271300-c6ff-11eb-95b6-a6643e4812d2.png)
 
