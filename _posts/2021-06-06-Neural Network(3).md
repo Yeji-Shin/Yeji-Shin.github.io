@@ -73,7 +73,7 @@ Linear 단점
 
 #### Softmax
 
-Activation: $a^{(k)} = softmax(x^{(k)}) = \frac{e^x^{(k)}}{\sum_{j}e^x^{(j)}}$ 
+Activation: ![image](https://user-images.githubusercontent.com/61526722/120924850-b54c1b00-c710-11eb-97dd-e2138bfb0599.png) 
 
 $\sum_{k=1}^{K} a^{k} = 1$ for K classes
 
@@ -84,10 +84,7 @@ $\sum_{k=1}^{K} a^{k} = 1$ for K classes
 
 Activation: $a = h(x) = max(0,x)$
 
-Gradient: $\frac{\partial a}{\partial x} = \left\{\begin{matrix}
- & 1 if (x >= 0) \\ 
- & 0 otherwise
-\end{matrix}\right.$
+Gradient: ![image](https://user-images.githubusercontent.com/61526722/120924889-ea586d80-c710-11eb-91c0-a67a82b3f327.png)
 
 ![image](https://user-images.githubusercontent.com/61526722/120921701-d8220380-c6ff-11eb-9a15-0972dd358378.png)
 
@@ -107,12 +104,21 @@ ReLU 단점
 
 #### ELU
 
-Activation: $a = h(x) =\frac{1}{1+e^{-x}}$
+Activation: ![image](https://user-images.githubusercontent.com/61526722/120924951-3d322500-c711-11eb-9fee-609ad2ac4592.png)
 
-Gradient: $\frac{\partial a}{\partial x} = \sigma (x) (1- \sigma (x))$
+Gradient: ![image](https://user-images.githubusercontent.com/61526722/120924938-22f84700-c711-11eb-90e5-a5e073902ddb.png)
 
 ![image](https://user-images.githubusercontent.com/61526722/120921691-d5271300-c6ff-11eb-95b6-a6643e4812d2.png)
 
+
+ELU 장점
+
+- ReLU의 모든 장점을 포함한다.
+- zero-centered에 가깝다.
+
+ELU 단점
+
+- exp 계산이 힘들다.
 
 ---
 
