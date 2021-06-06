@@ -42,13 +42,13 @@ Neural network는 뉴런들의 네트워크로 인간의 두뇌를 모방한 인
 뉴런이 하는 일은 두 가지이다. 간단하게 신호를 받고, 신호를 출력하는 것이라고 보면 된다.
 
 
-**step1: Linear combination of inputs**
+#### step1: Linear combination of inputs
 
 받은 각 시그널들에 해당되는 연결의 강도(connection weight)를 곱해서 weighted summation을 구한다.
 
 Connection weight는 scale factor로 이해하면 된다. Connection weight이 크다는 것은 시그널이 잘 전달된다는 것이고, 작으면 시그널이 잘 전달되지 않는다고 할 수 있기 때문이다.
 
-**step2: Nonlinear transformation of s**
+#### step2: Nonlinear transformation of s
 
 Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이다. s가 어느 정도를 넘으면 시그널을 방출한다. 위의 예에서는 s>0이면 1을 출력, 아니면 -1을 출력한다. $f$는 activation function이라고 한다.
 
@@ -59,7 +59,9 @@ Weighted summation(s)을 보고 출력을 낼지 말지 결정하는 단계이�
 
 ### 2. Limitation of Perceptron
 
-+ 퍼셉트론(뉴런 한개)이 할 수 있는 일? <mark>linearly seperable한 문제를 푼다</mark>
+#### 퍼셉트론(뉴런 한개)이 할 수 있는 일? 
+
+<mark>linearly seperable한 문제를 푼다</mark>
 
 ![image](https://user-images.githubusercontent.com/61526722/120671007-eb4c8d80-c4cb-11eb-907c-8a38c4ba16b0.png)
 ![image](https://user-images.githubusercontent.com/61526722/120671016-ed165100-c4cb-11eb-8ad4-8e71378c1d57.png)
@@ -78,16 +80,16 @@ OR operation은 아래 한점과 위의 세점을 나누도록 직선을 그어�
 
 이 때 AND와 OR 게이트는 connection weight만 바뀐다. 따라서 뉴런은 하드웨어라고 할 수 있고, 실제로 그 하드웨어의 기능을 정의하는 것은 connection weight이다. Connection weight이 바뀌면 neural network의 기능이 바뀌는 것이다. neural network의 핵심은 connection weight를 어떻게 설정하냐는 것이고 이 connection weight를 자동으로 설정하는 과정을 학습이라고 한다.
 
-+ 퍼셉트론의 한계
-  - 퍼셉트론은 하나의 output을 내기 때문에 binary problem에만 적용가능하다.
-  - 퍼셉트론은 linear machine(직선 하나로 분류해주는 분류기)이기 때문에 linear problem만 해결 가능하다.
-  - 퍼셉트론은 vector만 input으로 사용할 수 있다.
+#### 퍼셉트론의 한계
+ - 퍼셉트론은 하나의 output을 내기 때문에 binary problem에만 적용가능하다.
+ - 퍼셉트론은 linear machine(직선 하나로 분류해주는 분류기)이기 때문에 linear problem만 해결 가능하다.
+ - 퍼셉트론은 vector만 input으로 사용할 수 있다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120883403-eb59a400-c617-11eb-9a1d-23884d9d1a03.png)
 
 사람들은 이를 극복하고 non-linear separable한 문제를 해결하기 위해 퍼셉트론 마구마구 연결한 neural network를 사용하기 시작했다.
 
-+ _(참고) linear machine의 non-separability 문제를 해결할 수 있는 방법은 여러가지가 있다. Support Vector Machine(SVM)을 사용하는 방법, non-linear feautrue를 input으로 사용하는 방법, non-linear kernel들은 hidden layer에 추가하는 방법._
+_(참고) linear machine의 non-separability 문제를 해결할 수 있는 방법은 여러가지가 있다. Support Vector Machine(SVM)을 사용하는 방법, non-linear feautrue를 input으로 사용하는 방법, non-linear kernel들은 hidden layer에 추가하는 방법._
 
 ---
 
@@ -97,18 +99,18 @@ Neural network에서 connection weight에 따라 NN의 기능이 달라진다고
 
 ![image](https://user-images.githubusercontent.com/61526722/120885917-5f9b4400-c626-11eb-838f-ab81ad45638b.png)
 
-**step1: Initialize connection wwights**
+#### step1: Initialize connection wwights
 
 Input-ouput 쌍을 가진 학습 데이터와 사용할 neural network 구조를 준비한다. 그리고 neural network의 weight를 랜덤하게 intialization 한다.
 
-**step2: Update connection weigths**
+#### step2: Update connection weigths
 
 이제 모든 학습 데이터에 대해 input을 차례대로 NN에 통과시켜 예측값을 추출한다. 이 예측값과 훈련 데이터의 실제 output 값과 비교한다. 틀린 샘플이 w값을 업데이트 한다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120886093-1d263700-c627-11eb-9240-eec9537434f3.png)
 ![image](https://user-images.githubusercontent.com/61526722/120886048-e51ef400-c626-11eb-93e8-527509c712ed.png)
 
-**step3: Execute the algorithm until not encountering mistakes**
+#### step3: Execute the algorithm until not encountering mistakes
 
 퍼셉트론은 모든 학습 데이터를 정확히 분류할 때까지 학습이 진행된다.
 
@@ -117,7 +119,9 @@ Input-ouput 쌍을 가진 학습 데이터와 사용할 neural network 구조를
 
 ### 4. Neural Network
 
-+ Neural network가 할 수 있는 일? <mark>non-linearly seperable한 문제를 푼다</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
+#### Neural network가 할 수 있는 일? 
+
+<mark>non-linearly seperable한 문제를 푼다</mark> digital circuit(cpu)를 만든다. 이론적으로 digital computer가 하는 모든 일을 할 수 있다.
  
 Non-linear separable문제에는 대표적으로 exclusive OR (XOR)가 있다.
 
