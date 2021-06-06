@@ -187,5 +187,38 @@ Covariate는 input data의 특징이다. Covariate shift는 입력의 분포가 
 
 ![image](https://user-images.githubusercontent.com/61526722/120917256-2bd52280-c6e9-11eb-85ca-16f1bf9fb248.png)
 
+Normalization은  mini-batch 단위로 net값의 평균 분산을 구하고 z-transformation을 하면 된다. normalization을 하면 어떤 net 값이 들어와도 $\hat{net}$ 값은 표준정규분포를 따르니깐 다음 layer의 입장에서는 항상 똑같은 입력 분포가 들어온다. 
+
+하지만 z-transformation을 진행하면 net에는 bias가 있었지만 $\hat{net}$ 에서는 bias가 사라진다. Bias는 NN의 파워를 결정하는 중요한 변수이기 때문에 bias를 다시 더해주는 과정을 거쳐야 한다. bias $\beta$를 더해서 $\widetilde{net}$을 만들 후에 이를 activation function에 집어넣는다.
 
 ![image](https://user-images.githubusercontent.com/61526722/120917230-00523800-c6e9-11eb-93aa-ccccd067182f.png)
+
+따라서 아래와 같이 summation과 activation function 사이에 BN를 삽입하여 훈련을 진행한다.
+
+![image](https://user-images.githubusercontent.com/61526722/120917717-ac951e00-c6eb-11eb-97f2-1a92645240b3.png)
+
+여러 개의 노드에서 작동하는 것으로 바꿔보면 아래와 같다. 여기서 주목해야 할 것은 batch normalization을 하려면 각 노드에서의 net값들을 다 알아야하기 때문에 모든 net값들을 기억하고 있어야 한다. 저장할 공간이 필요하다는 것이므로 사용하는 메모리가 늘어나고 계산량이 많아진다는 단점이 있다. 이런 것을 생각하면 BN이 결코 학습을 빠르게 해주는 것이 아니라고 생각할 수 있다. 하지만 한번 학습하는데 메모리와 계산량이 많아지는 것이지 학습 자체는 더 적게 해도 되기 때문에 전체적 관점에서 학습이 더 빨라진다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120919617-7f4d6d80-c6f5-11eb-82fd-95474e998166.png)
+
+여기서 하나 더, training 할 때는 data가 많아서 mini-batch로 나누어 학습을 진행했지만 test 할때는 배치가 없다. z-transformaion을 할 때 batch의 평균 분산을 사용하는데 test는 하나씩 진행하므로 평균과 분산이 존재하지 않는다. 그래서 training data와 test data의 분포가 같다는 가정하에 training set의 평균과 분산을 기억해두었다가 test 할 때 사용한다. 아래 그림의 수식처럼 training set에서 각 batch들에 대해 평균의 평균과 분산의 평균을 구해 test할 때 BN을 시행한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120919881-e7508380-c6f6-11eb-9800-c0ae8eaa5144.png)
+
+#### Batch Normalization의 장점
+
+![image](https://user-images.githubusercontent.com/61526722/120920149-61353c80-c6f8-11eb-9883-d9d10ef96a33.png)
+
+- internal covariant shift를 없애서 학습을 더 빠르게 한다.
+- 큰 learning rate 값을 사용할 수 있어 학습을 더 빠르게 한다. 
+BN을 사용하면 E의 w에 대한 민감도가 감소한다. E(w) = E(2w). w가 바뀌어도 E값이 크게 바뀌지 않으므로 smooth한 loss function을 만든다. 들쑥날쑥한 loss function에서는 learning rate을 작게하여 콩콩콩 내려가야 한다면 smooth 한 loss function에서는 큰 learning rate를 사용하여 크게크게 내려갈 수 있는 것이다. 
+
+#### Batch Normalization의 단점
+
+- 메모리와 시간이 더 많이 걸린다.
+- batch size가 작을 때는 net 값의 평균과 분산이 unstable하게 나오게 되고 batch마다 너무 큰 편차가 생겨 문제가 생긴다.
+- RNN에 적용하기 곤란하다. RNN의 구조가 가지고 있는 semantic이 BN이 가지고 있는 semantic과 달라서 학습이 잘 되지 않는다.
+- (미리 말을 하면 위 문제점들을 해결하기 위해 layer normalization 기법을 사용한다.) 
+
+---
+
