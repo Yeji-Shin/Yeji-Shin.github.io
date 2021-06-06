@@ -12,6 +12,8 @@ use_math: true
 
 ### 0. Various Activation Funtions
 
+Activation function
+
 ---
 
 ### 1. Regression
