@@ -101,6 +101,23 @@ ReLU 단점
 - 입력값이 음수인 경우 미분값이 0이라서 업데이트되지 않는다. (dead neuron이 생긴다.) -> Leaky ReLU로 극복
 - 비연속함수라서 미분불가능한 검이 생긴다. -> softplus
 
+#### Leaky ReLU
+
+Activation: $a = h(x) = \left\{\begin{matrix} & x,  if (x \geq 0) \\  & 0.001x,  otherwise \end{matrix}\right.$
+
+![image](https://user-images.githubusercontent.com/61526722/120925080-c5b0c580-c711-11eb-83d8-5fb1c58ddc33.png)
+
+Leaky ReLU 장점
+
+- 음수값에 대한 미분값이 0이 되지 않는다. 
+
+#### Parametric ReLU
+
+Activation: $a = h(x) = \left\{\begin{matrix} & x,  if (x \geq 0) \\  & \beta x,  otherwise \end{matrix}\right.$
+
+Parametric 장점
+
+- x < 0 에서 기울기를 학습할 수 있게 한다. 
 
 #### ELU
 
