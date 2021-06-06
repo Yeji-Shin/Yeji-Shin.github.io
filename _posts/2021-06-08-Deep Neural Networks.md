@@ -46,9 +46,7 @@ Vanishing Gradient를 해결하는 방법은 **activation function**에 있다. 
 
 ---
 
-### 3. Various Activation Functions
-
-#### Rectified Linear Unit (ReLU)
+### 3. Rectified Linear Unit (ReLU) for vanishing gradient problem
 
 ![image](https://user-images.githubusercontent.com/61526722/120914025-46ea6700-c6d6-11eb-95a2-a168ef870275.png)
 
@@ -57,22 +55,86 @@ ReLU의 미분값은 1 아니면 0 값이 나온다. 따라서 gradient를 계�
 #### ReLU의 장점
 
 - vanishing gradient 문제를 해결한다.
-- sparse activation 
-
-gradient가 0 또는 1 이기 때문에 확률적으로 절반의 노드만 살아남는다. (이따가 설명할 dropout과 유사한 효과)
+- sparse activation : gradient가 0 또는 1 이기 때문에 확률적으로 절반의 노드만 살아남는다. (이따가 설명할 dropout과 유사한 효과)
 - 계산 속도가 exp을 계산해야 하는 sigmoid 보다 6배 빠르다.
 
 #### ReLU의 장점
 
-- Knockout problem
-
-재수가 없어서 어떤 layer의 gradient가 모두 0이 되면 더이상 학습이 이루어지지 않는다. 
+- Knockout problem : 재수가 없어서 어떤 layer의 gradient가 모두 0이 되면 더이상 학습이 이루어지지 않는다. 
 
 
 일반적으로 hidden layer에서는 ReLU를 많이 사용하고, classification을 위한 NN의 output layer에서는 sigmoid나 tanh를 사용한다. 
 
 ---
 
+### 4. Regularization Methods for Overfitting Problem
 
+Overfitting은 error가 작지만 예측성능이 좋지 않은 상태를 말한다.
+
+![image](https://user-images.githubusercontent.com/61526722/120914306-55d21900-c6d8-11eb-87d0-79013c143f35.png)
+
+Overfitting을 방지하는 방법은 여러가지가 있다. 
+
+- 적당한 학습횟수를 선택한다.
+- Feature의 개수를 줄인다.
+- 데이터의 개수를 늘린다.
+- <mark>Regularization 기법 (L1-Reg, L2-Reg, dropout, dropconnection, early stopping, data augmentaition, weigth decay, stochastic pooling)</mark>을 사용한다.
+- Validation set을 만들어 모델을 훈련시킨다.
+
+![image](https://user-images.githubusercontent.com/61526722/120914466-5ae39800-c6d9-11eb-8dbf-f27442ce54ef.png)
+
+
+여기서는 Neural Network(2)에서 미처 설명하지 못한 regularization 방법들을 살펴보려고 한다. 
+
+#### Early Stopping 
+
+Early Stopping은 error가 0으로 너무 많이 수렴하기 전에 학습을 중단시키는 기법이다. 하지만 우리는 어디서 멈추는 것이 최선인지 모르기 때문에 보통 validation set을 이용하여 몇 번째 epoch에서 멈출지를 경정한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120914495-849cbf00-c6d9-11eb-9d73-93a9cb39a5e3.png)
+
+#### Data Augmentation
+
+Data augmentation은 데이터를 Rotate, Flip, Crop, Equalize, Solarize, and Posterize 하여 데이터 개수를 늘리는 방법이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120915531-2541ad80-c6df-11eb-84ad-35d9ace7fadd.png)
+
+
+
+#### Weight Decay (L1-Reg, L2-Reg)
+
+NN은 일반적으로 수천개 수만개의 파라미터를 가지고 있으며 dataset의 개수가 파라미터의 개수보다 작은 경우도 존재한다. 파라미터의 개수가 너무 많으면 특정 파라미터의 가중치가 너무 커지는 문제가 있는데 이를 방지하기 위해 사용하는 방법이 weight decay 이다. Weight decay에는 두가지 방법이 있다. 
+
++ L1 Regularization
+
+![image](https://user-images.githubusercontent.com/61526722/120914628-73a07d80-c6da-11eb-83a6-0a08723d4a4f.png)
+
+  - 대부분의 weight들을 0에 가깝게 만들어준다.
+  - input data의 noise에 강하다. 
+  - 중요한 input을 고르는 것에 초점을 맞춘다.
+
++ L2 Regularization
+
+![image](https://user-images.githubusercontent.com/61526722/120914680-a5194900-c6da-11eb-9512-ff1fc0ffb3cf.png)
+
+  - 되도록 모든 training data를 사용하도록 권장하는 방법이다. 
+
+L1 Regularization과 L2 Regularization는 우리가 알고있는 MSE loss나 cross entropy loss에 regularization term을 더한 것을 새로운 error function으로 정의하고 그것을 gradient descent method로 최소화한다. Error function이 최소화된다는 것은 $E(w)$ 뿐만 아니라 regularization term도 최소화되어야 한다는 것인데 과연 이게 무슨 의미일까.
+
+먼저 $E(w)$인 MSE나 CE를 최소화하라는 것은 정확한 NN을 만들라는 뜻이다. 정확한 NN을 만들기 위해서는 복잡한 NN이 필요하다. 그리고 regularization term인 $ \frac{\lambda}{2}|w|$과 $ \frac{\lambda}{2}|w|^2$을 최소화하라는 것은 connection을 최대한 끊어내라는 것이다. 다시말하면 NN을 단순히하라는 뜻이 된다. NN 구조의 complexity를 줄여서 overfitting을 방지하는 것이다. 
+
+정리하면 $E(w)$는 NN을 복잡하게 하려고 하고, regularization term은 NN을 단순화하려고 하기 때문에 서로 상반된 요구사항을 주고 이를 동시에 minimize하는 $w$를 찾으라고 하는 것이다. 즉, 적당한 구조를 가져서 error가 크지도 않고 작지도 않는 그런 NN을 찾는 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120915352-19092080-c6de-11eb-8728-cfde1d008d73.png)
+
+L1과 L2를 비교하자면 L2는 모든 변수를 다 쓰면서 특별히 튀는 connection weight을 가진 변수가 없어야 loss를 최소화 할 수 있고, L1은 error 값만 작게 만들 수 있다면 튀는 애가 있어도 상관없다. 다시말해 L1은 중요한 변수와 중요하지 않은 변수를 찾아낼수 있다. 따라서 input selection 문제를 풀때는 보통 L1-Reg를 사용하고 성능을 높이기 위해서는 L2-Reg를 사용한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/120915470-ca0fbb00-c6de-11eb-860e-26803a5edcc9.png)
+
+람다값이 커지면 단순한 모델을 만들고, 작아지면 복잡한 모델을 만들게 된다. 
+
+
+#### Dropout
+
+Dropout의 목적은 단순한 NN 구조를 찾는 것이다.  
 
 
