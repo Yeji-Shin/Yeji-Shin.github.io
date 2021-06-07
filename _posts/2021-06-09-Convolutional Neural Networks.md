@@ -108,7 +108,7 @@ zero-padding을 한 후에 전체 이미지에 대해 convolution을 진행한 �
 
 #### Pooling (Sub-sampling)
 
-Pooling은 해상도를 변경하는 연산이다. 아래는 2x2 max-pooling을 진행한 결과이다. 보통은 2x2 max pooling을 많이 사용한다. average pooling 보다 max pooling을 더 많이 사용하는 이유는 feature map의 값들은 그 부분에 local feature가 있다 없다의 값이기 때문에 average pooling을 하면 feature가 0.25만큼 있다라고 바뀌는 것이기 때문이다. 따라서 시그널을 더 잘 유지하기 위해 max pooling을 많이 사용한다.
+Pooling은 해상도를 변경하는 연산이다(channel 수는 바뀌지 않음). 아래는 2x2 max-pooling을 진행한 결과이다. 보통은 2x2 max pooling을 많이 사용한다. average pooling 보다 max pooling을 더 많이 사용하는 이유는 feature map의 값들은 그 부분에 local feature가 있다 없다의 값이기 때문에 average pooling을 하면 feature가 0.25만큼 있다라고 바뀌는 것이기 때문이다. 따라서 시그널을 더 잘 유지하기 위해 max pooling을 많이 사용한다.
 
 ![image](https://user-images.githubusercontent.com/61526722/121037078-20b5eb80-c7ea-11eb-82ac-e8a77b161729.png)
 
@@ -138,7 +138,71 @@ filter를 잘 정의하면 주어진 이미지를 구분하는 데 도움이 되
 
 여기서 좀더 나아가서 channel 1개 짜리인 feature map이 n개를 합해서 channel n개 짜리 feature map이 1개가 있다고 생각해도 된다. 다시말해 하나의 input 이미지가 들어가서 하나의 이미지(feature map)이 나온다고 할 수 있다. n개의 서로 다른 convolution을 진행하면 n개의 channel을 가진 feature map이 생성된다고 이해하면 된다.
 
+![image](https://user-images.githubusercontent.com/61526722/121043686-d0da2300-c7ef-11eb-92be-f13183b00e5a.png)
+
+그럼 다시 n개의 channel 을 가지는 1개의 feature map은 이미지로 생각할 수 있다. 형식은 이미지이지만 내용은 feature map인 것이다. 어쨋든 feature map을 다시 이미지로 생각해서 local feature들을 다시 뽑아낼 수 있다. 이는 feature들이 가지고 있는 local feature라고 할 수 있다. 
+
 ![image](https://user-images.githubusercontent.com/61526722/121042897-16e2b700-c7ef-11eb-9ccf-158098c2aa0c.png)
 
-그럼 다시 n개의 channel 을 가지는 1개의 feature map은 이미지로 생각할 수 있다. 형식은 이미지이지만 내용은 feature map인 것이다. 어쨋든 feature map을 다시 이미지로 생각해서 local feature들을 다시 뽑아낼 수 있다.  
+또 다시 feature들을 이미지로 생각해본다. 이를 계속 반복한다. 이렇게 convolution을 반복하면 좋은 feature를 만들어 낼 수 있다. 
 
+![image](https://user-images.githubusercontent.com/61526722/121044144-40e8a900-c7f0-11eb-9bc4-378aeaa73193.png)
+
+하지만 input 이미지의 channel 수와 filter channel 수가 같아야 하기 때문에 계속 파라미터의 개수가 급격히 늘어난다. 따라서 NN의 학습 대상이 connection weight 이었다면 CNN의 학습대상은 filter안에 들어가는 숫자들이다. 
+
+---
+
+### 4. CNN - Graphical Representation
+
+![image](https://user-images.githubusercontent.com/61526722/121047862-4f839000-c7f1-11eb-9999-c5037657483b.png)
+
+이를 해석해보면 conv1은 64개의 filter(3x3크기, channel 3)를 사용한 것이다. 그러면 이때는 3x3x3x64개의 숫자를 결정해야 한다. 그 다음 pooling은 이미지 사이즈를 줄이는 과정이며 channel수는 그대로 유지한다. 
+
+마지막에는 식빵모양으로 되어 있는 feature들을 한줄로 세운 후에 shallow NN의 입력으로 준다.  
+
+![image](https://user-images.githubusercontent.com/61526722/121049442-a6d63000-c7f2-11eb-8d86-7ce63ae97e09.png)
+
+그러면 3x3x128x1000개의 connection weight를 설정해 줘야한다. 
+
+
+---
+
+### 5. CNN - Neural Network Representation (Filter Training) 
+
+CNN을 계속 NN이라고 하는데 이제 filter를 어떻게 학습하는지 생각해보자. NN과 똑같이 gradient descent method를 사용하여 학습한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121050170-514e5300-c7f3-11eb-939c-e74e9fa9451e.png)
+![image](https://user-images.githubusercontent.com/61526722/121050178-53181680-c7f3-11eb-905a-dc8fa16e3fce.png)
+
+일단 input이미지를 세로로 잘라서 한줄로 이어 붙인다. 이렇게 하면 input 이미지의 각 픽셀들이 input layer의 노드 한개로 바뀐다. output도 마찬가지로 세로로 잘라서 한줄로 이어 붙여 노드가 16개인 output layer로 변환한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121050703-c3bf3300-c7f3-11eb-96ca-69372d7c1b0c.png)
+![image](https://user-images.githubusercontent.com/61526722/121050719-c883e700-c7f3-11eb-9e83-8e0be626d7a9.png)
+
+입력을 filter와 convolution 연산을 하여 summation을 구한 것이 output(net값)이 된다. 이것을 모든 픽셀에 대해 진행하면 아래와 같이 된다.
+
+![image](https://user-images.githubusercontent.com/61526722/121051061-1993db00-c7f4-11eb-8032-729917bebc03.png)
+![image](https://user-images.githubusercontent.com/61526722/121051075-1bf63500-c7f4-11eb-9ad8-89d00388488d.png) 
+
+즉, partially connected 된 share weight를 가지는 하나의 NN으로 해석된다. 사실은 partially connected가 아닌 대부분의 connection weigth가 0인 NN 으로 이해할 수 있는 것이다.
+
+다음으로 pooling도 하나의 partially connected 된 layer로 해석된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121051569-83ac8000-c7f4-11eb-9306-05cb1e2d44b2.png)
+![image](https://user-images.githubusercontent.com/61526722/121051586-86a77080-c7f4-11eb-894f-93edfc2172c1.png)
+
+그래서 궁극적으로 CNN은 하나의 NN으로 변환될 수 있다.
+
+![image](https://user-images.githubusercontent.com/61526722/121051673-9b840400-c7f4-11eb-81e0-007a94ee0b11.png)
+
+여기서 convolution filter 개수를 추가하면 feature map의 개수가 늘어나고, feature map을 일렬로 늘리니깐 hidden layer의 노드개수를 늘어나게 하는 효과가 있다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121051838-c8d0b200-c7f4-11eb-8fe4-99bc5707dcdb.png)
+
+궁극적으로 CNN 구조를 하나의 fully connected NN으로 해석될 수 있고, connection weight는 gradient method로 학습할 수 있다. filter가 connection weight로 변환되니깐 filter를 자동으로 학습하는 효과를 내는 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121052249-282ec200-c7f5-11eb-96eb-0f706f192adb.png)
+
+---
+
+지금까지 CNN에 대해서 공부했다. 다음 문서에서는 대표적인 CNN 구조들을 살펴볼 것이다. 
