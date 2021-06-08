@@ -116,7 +116,6 @@ GoogleNet에서는 inception module을 사용하는데 inception module은 exten
 채널 수를 먼저 줄어놓고 3x3을 적용하면 학습 파라미터를 절약할 수 있다. 학습 파라미터를 줄이면 연산량도 줄일 수 있음을 아래 그림에서 볼 수 있다.
 
 ![image](https://user-images.githubusercontent.com/61526722/121210193-6e982580-c8b6-11eb-9826-bbcc742ed9ca.png)
-
 ![image](https://user-images.githubusercontent.com/61526722/121210245-7b1c7e00-c8b6-11eb-891e-38833550a1b4.png)
 
 다음으로 3x3 max pooling (stride=1)은 뭘까. input과 output의 크기는 같지만 feature map에 존재하는 강한 시그널의 영역을 확장시키는 역할을 한다. pooling은 채널수를 그대로 유지하니깐 1x1을 사용해 채널수를 조정한다. 
