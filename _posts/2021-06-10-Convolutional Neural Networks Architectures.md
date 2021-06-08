@@ -29,23 +29,24 @@ AlexNet은 ImageNet에서 최초로 우승한 모델이다.
 ![image](https://user-images.githubusercontent.com/61526722/121185480-14d93080-c8a1-11eb-8c93-91d5f1ec37b6.png)
 ![image](https://user-images.githubusercontent.com/61526722/121186007-9cbf3a80-c8a1-11eb-87a9-f5a82dc4abb2.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187117-af863f00-c8a2-11eb-9637-4b61b575c57b.png)
+![image](https://user-images.githubusercontent.com/61526722/121194710-f4fa3a80-c8a9-11eb-991d-7ac7bca849bf.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187126-b1e89900-c8a2-11eb-966c-19a25240e828.png)
+![image](https://user-images.githubusercontent.com/61526722/121194723-f6c3fe00-c8a9-11eb-9151-6a68a9fa2ce2.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187136-b44af300-c8a2-11eb-8716-51e99d2dfae0.png)
+![image](https://user-images.githubusercontent.com/61526722/121194738-f9265800-c8a9-11eb-8da2-26c1480d7ebc.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187143-b57c2000-c8a2-11eb-821a-08b4d5aff0f8.png)
+![image](https://user-images.githubusercontent.com/61526722/121194742-faf01b80-c8a9-11eb-87c8-48a54610ffac.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187153-b7de7a00-c8a2-11eb-990e-28bd02a85faa.png)
+![image](https://user-images.githubusercontent.com/61526722/121194750-fd527580-c8a9-11eb-938d-cedb33bf52ce.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187158-b90fa700-c8a2-11eb-8ed9-791d53c12e7b.png)
+![image](https://user-images.githubusercontent.com/61526722/121194756-ff1c3900-c8a9-11eb-9115-bda67dc6b20f.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187168-bc0a9780-c8a2-11eb-9c0c-f999106523dd.png)
+![image](https://user-images.githubusercontent.com/61526722/121194761-004d6600-c8aa-11eb-9a0a-611c2a119b55.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187173-bf058800-c8a2-11eb-809e-7265385200eb.png)
+![image](https://user-images.githubusercontent.com/61526722/121194797-093e3780-c8aa-11eb-9a5c-00d239a11994.png)
 
-![image](https://user-images.githubusercontent.com/61526722/121187176-c0cf4b80-c8a2-11eb-9888-2d281ecb7e37.png)
+![image](https://user-images.githubusercontent.com/61526722/121194764-02172980-c8aa-11eb-9b59-676fe4640d82.png)
+
 
 - ReLU를 처음 사용한 모델
 - 이제는 쓰지 않는 normalization layer를 사용
