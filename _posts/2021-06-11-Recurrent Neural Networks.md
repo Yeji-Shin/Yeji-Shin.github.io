@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Recurrent Neural Networks 
-date: 2021-06-10
+date: 2021-06-11
 category: DeepLearning
 use_math: true
 ---
