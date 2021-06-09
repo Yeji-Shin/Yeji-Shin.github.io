@@ -63,7 +63,6 @@ RNN은 long term dependency를 잘 반영하는 구조가 아니었다.
 
 ![image](https://user-images.githubusercontent.com/61526722/121358543-ac0bba00-c96d-11eb-90b0-bf57111bd700.png)
 ![image](https://user-images.githubusercontent.com/61526722/121364847-1d01a080-c973-11eb-8220-69a9dae0876b.png)
-
 ![image](https://user-images.githubusercontent.com/61526722/121359339-58e63700-c96e-11eb-8008-837cb57acaae.png)
 
 먼저 $h_{t}$로 들어오는 입력부터 살펴보자. LSTM에는 RNN에 없는 $c_{t-1}$ 구조가 한가지 더 있다. $c_{t-1}$와 $h_{t-1}$은 모두 과거로부터 온 정보이다. $c_{t-1}$는 고속도로를 타고 온 정보, $h_{t-1}$은 지방도를 타고 온 정보라고 이해하면 쉽다. $c_{t-1}$는 고속도로를 타고 손실 없이 달려온 느낌이니깐 먼 과거의 정보가 실려 있을 가능성이 크고, $h_{t-1}$은 다양한 정보를 담고 있지만 과거의 정보를 많이 포함하지는 않는다.
