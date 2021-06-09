@@ -59,22 +59,68 @@ RNN은 long term dependency를 잘 반영하는 구조가 아니었다.
 
 ![image](https://user-images.githubusercontent.com/61526722/121359614-a1055980-c96e-11eb-806b-489634d19927.png)
 
-이를 해결하기 위해 LSTM 모델이 제안되었다. LSTM은 1000 step 전 과거까지도 잘 잡아낸다고 알려져있다. LSTM의 구조는 아래와 같다. 
+이를 해결하기 위해 LSTM 모델이 제안되었다. LSTM은 1000 step 전 과거까지도 잘 잡아낸다고 알려져있다. LSTM의 구조는 아래와 같다. 큰 회색 네모 박스는 $h_{t}$를 크게 확대한 것이다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/121358543-ac0bba00-c96d-11eb-90b0-bf57111bd700.png)
+![image](https://user-images.githubusercontent.com/61526722/121364847-1d01a080-c973-11eb-8220-69a9dae0876b.png)
+
 ![image](https://user-images.githubusercontent.com/61526722/121359339-58e63700-c96e-11eb-8008-837cb57acaae.png)
-
-큰 회색 네모 박스는 $h_{t}$를 크게 확대한 것이다. 
-
-![image](https://user-images.githubusercontent.com/61526722/121361249-13c30480-c970-11eb-8cc7-892bb68a78fb.png)
 
 먼저 $h_{t}$로 들어오는 입력부터 살펴보자. LSTM에는 RNN에 없는 $c_{t-1}$ 구조가 한가지 더 있다. $c_{t-1}$와 $h_{t-1}$은 모두 과거로부터 온 정보이다. $c_{t-1}$는 고속도로를 타고 온 정보, $h_{t-1}$은 지방도를 타고 온 정보라고 이해하면 쉽다. $c_{t-1}$는 고속도로를 타고 손실 없이 달려온 느낌이니깐 먼 과거의 정보가 실려 있을 가능성이 크고, $h_{t-1}$은 다양한 정보를 담고 있지만 과거의 정보를 많이 포함하지는 않는다.
 
+![image](https://user-images.githubusercontent.com/61526722/121361249-13c30480-c970-11eb-8cc7-892bb68a78fb.png)
+
+이렇게 두 가지의 과거 정보를 가지고 그 다음으로 일어나는 일은 $h_{t-1}$와 현재의 입력 $x_{t}$를 섞는다. 노란색 선과 빨간색 선은 NN으로 fully connected 되어 있다. 그 후에 $c_{t-1}$와 vector summaztion을 하여 $c_{t}$를 만든다. 초록색 선은 NN이 아니라 그냥 데이터의 전달이다. $c_{t}$는 그대로 네모칸을 빠져나가서 다음번 입력에 들어가는 $c_{t}$가 된다. $c_{t-1}$에서 $c_{t}$로 가는 경로를 보면 곱셈 연산이 존재하지 않는다. 곱셈이 없기 때문에 나중에 exponential vanishing/exploding 현상이 일어나지 않는다. 이게 바로 고속도로 연산이라고 한 이유이다.  $c_{t}$는 activation function(tanh)를 통과하여 $h_{t}$가 된다. 
+
 ![image](https://user-images.githubusercontent.com/61526722/121361322-24737a80-c970-11eb-90a9-eb205cfb8a88.png)
+
+여기서 과거정보인 $c_{t-1}$와 현재정보가 혼합된 $g_{t}$는 1:1의 확률로 섞이고 있다. LSTM은 이 확률을 조절할 수 있도록 수도꼭지 $f_{t}$를 만들었다. $f_{t}$는 sigmoid를 활성화 함수로 사용하여 0~1 사이의 값을 출력해주는데 이를 $c_{t-1}$과 벡터 곱셈을 해주어 과거정보를 얼마나 받아들일 것인지 결정한다.
 
 ![image](https://user-images.githubusercontent.com/61526722/121361362-2dfce280-c970-11eb-8783-9fa03813c49f.png)
 
+마찬가지로 현재정보인 $g_{t}$를 얼마나 받아들일 것인지 정해주는 $i_{t}$를 사용한다. 
+
 ![image](https://user-images.githubusercontent.com/61526722/121361406-38b77780-c970-11eb-96a4-fa4aa831b5df.png)
 
+여기에 $o_{t}$도 추가한다.
+
 ![image](https://user-images.githubusercontent.com/61526722/121361440-4240df80-c970-11eb-9646-39fbf95ce85e.png)
+
+다시 앞으로 돌아가서 수식을 살펴보면 이해가 될 것이다. 이 때 수도꼭지 역할을 하는 $i$는 input gate, $f$는 forget gate, $o$는 output gate라고 부른다. 방금 구조를 쭉 연결해서 보면 아래 그림처럼 만들어진다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121365456-a2855080-c973-11eb-8b38-805d5600fd1e.png)
+
+Gradient flow는 곱하기가 없는 path가 존재하여 수월하게 이루어진다.
+
+![image](https://user-images.githubusercontent.com/61526722/121365543-b630b700-c973-11eb-9ea2-6b16a47b3a01.png)
+
+이 때 중간에서 $f_{t}$를 0으로 주면 과거정보는 아예 없어지지 않느냐라는 의문을 가질 수 있다. 하지만 고속도로를 타고 가다가 지방도로로 우회하듯이 빨간색 선을 따라 우회하여 다음 input으로 들어간다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121365764-e5dfbf00-c973-11eb-82ed-df42d1b288f5.png)
+
+그리고 또 하나 기억할 것은 $c_{t-1}$와 $g_{t}$는 굉장히 다양한 조합의 경로로 흘러갈 수 있다는 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121366525-8504b680-c974-11eb-97f8-092c177b0033.png)
+
+이는 ResNet과 상당히 유사한 구조를 가지고 있다. LSTM은 ResNet보다 10년 넘게 전에 제안된 구조이다. 다음으로 LSTM을 발전시킨 모델들을 살펴본다.
+
+----
+
+### 3. GRU
+
+GRU는 LSTM보다 조금 더 간단한 구조이다. Gate가 2개만 존재하여 더 빠른시간안에 학습을 진행할 수 있다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121367237-1b38dc80-c975-11eb-9368-0d01f3b8915c.png)
+
+$h_{t-1}$은 두 가지 방법으로 들어가는데, 한 번은 activation function을 통과하고 한 번은 통과하지 않고 들어가서 더해진다. 이게 ResNet이랑 똑같다고 말할 수 있다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121367252-1d9b3680-c975-11eb-97bb-5cd18900a25a.png)
+
+여기서도 수도꼭지 $r_{t}$을 추가하여 과거정보 $h_{t-1}$와 현재정보 $x_{t}$를 조절한다.  
+
+![image](https://user-images.githubusercontent.com/61526722/121367260-1ecc6380-c975-11eb-9b72-2c186e9bbd4f.png)
+
+또 $z_{t}$를 사용해 $h_{t-1}$, $h_{t-1}$와 $x_{t}$를 합한 것을 조절한다. 
+
+---
 
