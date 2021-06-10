@@ -121,3 +121,4 @@ $h_{t-1}$은 두 가지 방법으로 들어가는데, 한 번은 activation func
 
 ---
 
+이렇게 이번 시간에는 sequential data를 처리하는 데 특화되어 있는 RNN, LSTM, GRU에 대해 알아보았다. 다음 시간에는 sequential modeling에 대해 학습할 것이다.
