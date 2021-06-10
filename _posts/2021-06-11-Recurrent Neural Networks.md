@@ -71,19 +71,17 @@ RNN은 long term dependency를 잘 반영하는 구조가 아니었다.
 
 이렇게 두 가지의 과거 정보를 가지고 그 다음으로 일어나는 일은 $h_{t-1}$와 현재의 입력 $x_{t}$를 섞는다. 노란색 선과 빨간색 선은 NN으로 fully connected 되어 있다는 뜻이다. 그 후에 $c_{t-1}$와 vector summaztion을 하여 $c_{t}$를 만든다. 초록색 선은 NN이 아니라 그냥 데이터의 전달이다. $c_{t}$는 그대로 네모칸을 빠져나가서 다음번 입력에 들어가는 $c_{t}$가 된다. $c_{t-1}$에서 $c_{t}$로 가는 경로를 보면 곱셈 연산이 존재하지 않는다. 곱셈이 없기 때문에 나중에 exponential vanishing/exploding 현상이 일어나지 않는다. 이게 바로 고속도로 연산이라고 한 이유이다.  $c_{t}$는 activation function(tanh)를 통과하여 $h_{t}$가 된다. 
 
-![image](https://user-images.githubusercontent.com/61526722/121361322-24737a80-c970-11eb-90a9-eb205cfb8a88.png)
+![image](https://user-images.githubusercontent.com/61526722/121361362-2dfce280-c970-11eb-8783-9fa03813c49f.png)
 
 여기서 과거정보인 $c_{t-1}$와 현재정보가 혼합된 $g_{t}$는 1:1의 확률로 섞이고 있다. LSTM은 이 확률을 조절할 수 있도록 수도꼭지 $f_{t}$를 만들었다. $f_{t}$는 sigmoid를 활성화 함수로 사용하여 0~1 사이의 값을 출력해주는데 이를 $c_{t-1}$과 벡터 곱셈을 해주어 과거정보를 얼마나 받아들일 것인지 결정한다.
 
-![image](https://user-images.githubusercontent.com/61526722/121361362-2dfce280-c970-11eb-8783-9fa03813c49f.png)
+![image](https://user-images.githubusercontent.com/61526722/121361406-38b77780-c970-11eb-96a4-fa4aa831b5df.png)
 
 마찬가지로 현재정보인 $g_{t}$를 얼마나 받아들일 것인지 정해주는 $i_{t}$를 사용한다. 
 
-![image](https://user-images.githubusercontent.com/61526722/121361406-38b77780-c970-11eb-96a4-fa4aa831b5df.png)
+![image](https://user-images.githubusercontent.com/61526722/121361440-4240df80-c970-11eb-9646-39fbf95ce85e.png)
 
 여기에 $o_{t}$도 추가한다.
-
-![image](https://user-images.githubusercontent.com/61526722/121361440-4240df80-c970-11eb-9646-39fbf95ce85e.png)
 
 다시 앞으로 돌아가서 수식을 살펴보면 이해가 될 것이다. 이 때 수도꼭지 역할을 하는 $i$는 input gate, $f$는 forget gate, $o$는 output gate라고 부른다. 방금 구조를 쭉 연결해서 보면 아래 그림처럼 만들어진다. 
 
