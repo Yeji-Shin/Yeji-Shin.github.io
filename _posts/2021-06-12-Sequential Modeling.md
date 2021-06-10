@@ -142,7 +142,7 @@ Caption generation이나 machine translation에서 입력인 단어로 들어가
 
 출력을 할때는 softmax를 사용하기 때문에 softmax중에서 가장 큰 값을 골라 그에 해당하는 단어를 선택하면 된다. 
 
-![Uploading image.png…]()
+![image](https://user-images.githubusercontent.com/61526722/121544051-6241d300-ca44-11eb-9594-d3637e873c8d.png)
 
 정리하면 단어는 nominal value이기 때문에 one-hot encoding을 사용하면 된다. 입력으로 줄 때는 embedding layer를 추가하여 원하는 차원으로 줄인다. 출력은 softmax로 나오는데 이를 one-hot encoding으로 출력하여 결과값을 얻는다. 
 
