@@ -122,7 +122,30 @@ Test는 다음과 같이 진행한다.
 
 Many to Many의 예시인 word embedding이다. Encoder에서 나온 값인 $h_{8}$를 decoder의 입력으로 사용한다. 
 
-![image](https://user-images.githubusercontent.com/61526722/121539814-f01bbf00-ca40-11eb-891c-8660e3c25789.png)
+![image](https://user-images.githubusercontent.com/61526722/121540203-40931c80-ca41-11eb-8046-39e164479fd2.png)
+
+---
+
+### 6. Handling words 
+
+Caption generation이나 machine translation에서 입력인 단어로 들어가는 데 단어들을 어떻게 입력으로 집어넣는지 알아본다.
+
+단어를 처리하는 것은 간단하다. 첫 번째는 전처리가 필요하다. 나타나는 단어들의 unique word를 찾고 그 단어배열에 대한 ont-hot encoding을 한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121542173-e1cea280-ca42-11eb-8f9f-1f3b601e3c42.png)
+
+이렇게 enconding을 하고 나서 입력으로 주는데 embedding layer를 추가하여 one-hot vector와 fully connected를 구성한다. 그 이유는 one-hot encoding의 차원은 단어의 개수만큼 되어 엄청나게 큰 배열일텐데 embedding layer로 작은 차원으로 줄여준다. Embedding layer는 그냥 hidden layer 라고 보면 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/121542717-5570af80-ca43-11eb-8b01-84dc69121370.png)
+
+그러면 이 embedding layer는 누가 학습시킬까. RNN을 학습시킬때 같이 시키면 된다. 내가 원하는 출력이 나오도록 하는 embedding을 만들어내는 것이다.
+
+출력을 할때는 softmax를 사용하기 때문에 softmax중에서 가장 큰 값을 골라 그에 해당하는 단어를 선택하면 된다. 
+
+![Uploading image.png…]()
+
+정리하면 단어는 nominal value이기 때문에 one-hot encoding을 사용하면 된다. 입력으로 줄 때는 embedding layer를 추가하여 원하는 차원으로 줄인다. 출력은 softmax로 나오는데 이를 one-hot encoding으로 출력하여 결과값을 얻는다. 
+
 
 ---
 
