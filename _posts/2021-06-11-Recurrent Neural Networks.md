@@ -69,7 +69,7 @@ RNN은 long term dependency를 잘 반영하는 구조가 아니었다.
 
 ![image](https://user-images.githubusercontent.com/61526722/121361249-13c30480-c970-11eb-8cc7-892bb68a78fb.png)
 
-이렇게 두 가지의 과거 정보를 가지고 그 다음으로 일어나는 일은 $h_{t-1}$와 현재의 입력 $x_{t}$를 섞는다. 노란색 선과 빨간색 선은 NN으로 fully connected 되어 있다. 그 후에 $c_{t-1}$와 vector summaztion을 하여 $c_{t}$를 만든다. 초록색 선은 NN이 아니라 그냥 데이터의 전달이다. $c_{t}$는 그대로 네모칸을 빠져나가서 다음번 입력에 들어가는 $c_{t}$가 된다. $c_{t-1}$에서 $c_{t}$로 가는 경로를 보면 곱셈 연산이 존재하지 않는다. 곱셈이 없기 때문에 나중에 exponential vanishing/exploding 현상이 일어나지 않는다. 이게 바로 고속도로 연산이라고 한 이유이다.  $c_{t}$는 activation function(tanh)를 통과하여 $h_{t}$가 된다. 
+이렇게 두 가지의 과거 정보를 가지고 그 다음으로 일어나는 일은 $h_{t-1}$와 현재의 입력 $x_{t}$를 섞는다. 노란색 선과 빨간색 선은 NN으로 fully connected 되어 있다는 뜻이다. 그 후에 $c_{t-1}$와 vector summaztion을 하여 $c_{t}$를 만든다. 초록색 선은 NN이 아니라 그냥 데이터의 전달이다. $c_{t}$는 그대로 네모칸을 빠져나가서 다음번 입력에 들어가는 $c_{t}$가 된다. $c_{t-1}$에서 $c_{t}$로 가는 경로를 보면 곱셈 연산이 존재하지 않는다. 곱셈이 없기 때문에 나중에 exponential vanishing/exploding 현상이 일어나지 않는다. 이게 바로 고속도로 연산이라고 한 이유이다.  $c_{t}$는 activation function(tanh)를 통과하여 $h_{t}$가 된다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/121361322-24737a80-c970-11eb-90a9-eb205cfb8a88.png)
 
