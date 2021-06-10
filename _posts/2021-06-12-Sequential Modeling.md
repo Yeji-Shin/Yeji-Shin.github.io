@@ -18,7 +18,7 @@ use_math: true
 
 next step prediction은 주식 값 예측, classfication은 텍스트 데이터로 긍정적인 감정인지 부정적인 감정인지 레이블을 다는 것, sequence를 받아서 sequence를 만들어내는 sequence generation이 있다. 이 중 요즘에 가장 많이 사용되는 것은 sequence generation이다. Sequence generation에는 기계번역, 음성 인식, 이미지 캡셔닝 등이 있다. 
 
-![image](https://user-images.githubusercontent.com/61526722/121517230-141fd600-ca2a-11eb-813d-3e165fa0c951.png)
+![image](https://user-images.githubusercontent.com/61526722/121544207-82719200-ca44-11eb-9be8-fac7ea9b88b9.png)
 
 바로 앞 문서에서 synched many to many 구조를 기반으로 RNN을 설명했지만 다양한 형태가 존재한다. 하지만 문제는 지금까지 설명한 RNN, LSTM, GRU 모델은 다 synched many to many 구조로만 동작할 수 있다는 것이다. 따라서 다른 구조들을 다 synched many to many 구조로 변형해서 처리해야 한다. 
 
