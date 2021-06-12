@@ -136,10 +136,50 @@ Multi-head attention 방법으로 훨씬더 좋은 attention 정보를 뽑아내
 
 ### 4. Positional Encoding
 
+지금까지 우리가 디자인한 encoding 네트워크는 전혀 sequence를 반영하고 있지 못하다. 그래서 지금부터 이를 어떻게 sequence를 처리하는 모델로 바꿀지를 이야기한다. 
 
+Feedforward는 시퀀스를 처리할 수 있는 구조가 아니기 때문에 우리는 positional encoding을 사용한다. 
 
+![image](https://user-images.githubusercontent.com/61526722/121783082-bf29be80-cbe7-11eb-9bd8-f7bfa6ef5cbc.png)
 
+Positional encoding은 해당 입력의 위치를 나타내는 노이즈이다. 이는 입력과 함께 더해져서 다음으로 들어간다. 이 때 노이즈는 사전에 정의된 값으로 다음과 같이 정의되어 있다.
 
+![image](https://user-images.githubusercontent.com/61526722/121783169-31020800-cbe8-11eb-930f-296edcc42d78.png)
+
+pos가 몇 번 째인지 그 pos 안에서 i번째인지에 따라 값이 정해진다.
+
+![image](https://user-images.githubusercontent.com/61526722/121783300-b84f7b80-cbe8-11eb-9e4b-622854b58916.png)
+
+---
+
+#### 참고
+
+![image](https://user-images.githubusercontent.com/61526722/121783480-ca7de980-cbe9-11eb-843f-c64c6aef15d0.png)
+
+이 부분은 self attention이 아니다. Q, K, V가 들어가는 부분이다. 나는 학교에 까지 번역된 상황에서 i go to school 중에서 어떤 입력이 도움이 되는 입력인지 고른다.
+
+---
+
+### 5. Decoder 
+
+![image](https://user-images.githubusercontent.com/61526722/121783543-2ba5bd00-cbea-11eb-83a2-780f883189a6.png)
+![image](https://user-images.githubusercontent.com/61526722/121783519-01ec9600-cbea-11eb-9b91-7ca38ec05e27.png)
+
+![image](https://user-images.githubusercontent.com/61526722/121783530-1cbf0a80-cbea-11eb-9ca6-cb7746d9e2ab.png)
+
+Decoder는 fully connected 네트워크로 입력의 개수가 정해져 있다. 첫 번 째 단어를 만들때는 모든 decoder의 입력을 없는 셈친다. 이게 masked의 의미이다.
+
+---
+
+### 6. Final Linear and Softmax Layer
+
+마지막에는 디코더의 출력을 가지고 liner + softmax를 거쳐 가장 확률이 큰 것을 고르게 된다.
+
+![image](https://user-images.githubusercontent.com/61526722/121783626-a5d64180-cbea-11eb-91ad-176dd13f72f3.png)
+
+---
+
+Transformer는 다른 모델보다 계산량도 적었고 성능도 좋았다고 한다. 
 
 
 
