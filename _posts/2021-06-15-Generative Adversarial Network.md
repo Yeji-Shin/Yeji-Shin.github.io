@@ -13,7 +13,7 @@ Generative Adversarial Network (GAN)은 지금까지 다뤄왔던 모델들과�
 
 ### 1. Discriminative Model and Generative Model
 
-지금까지 우리가 공부했던 모델들은 discriminative models이다. Discriminative model은 NN에 X를 주면 Y를 출력하는 구조를 말한다. 주어진 입력이 강아지인지 고양이인지 구별하는 NN이라는 말이다. Y는 softmax 값으로 나왔고 우리는 이를 확률로 이해했다. 즉, $p(X|Y)$를 구했던 것이다.
+지금까지 우리가 공부했던 모델들은 discriminative models이다. Discriminative model은 NN에 X를 주면 Y를 출력하는 구조를 말한다. 주어진 입력이 강아지인지 고양이인지 구별하는 NN이라는 말이다. Y는 softmax 값으로 나왔고 우리는 이를 확률로 이해했다. 즉, $p(X\mid Y)$를 구했던 것이다.
 
 이와 다르게 generative model은 X만을 입력으로 받아서 $p(X)$를 출력한다. 예를 들어 여러장의 강아지 사진을 가지고 NN을 학습시킨 다음에 특정 사진을 보여주고 그것이 강아지일 확률을 출력하는 것이다. 다르게 말하면 강아지 사진이 분포하는 영역 $p(X)$을 확인한 후에 샘플링 기법을 통해서 새로운 이미지를 생성해내는 것이다. 
 
