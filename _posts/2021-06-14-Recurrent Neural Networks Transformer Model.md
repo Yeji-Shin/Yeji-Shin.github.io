@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Transformer Model
+title: Recurrent Neural Networks Transformer Model
 date: 2021-06-14
 category: DeepLearning
 use_math: true
