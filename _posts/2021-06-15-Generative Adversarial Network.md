@@ -33,9 +33,9 @@ GAN의 Objective Function은 아래와 같다. 여기서 $\theta$ 는 connection
 
 ![image](https://user-images.githubusercontent.com/61526722/121808866-72042600-cc95-11eb-8f9d-d0ab8178af12.png)
 
-먼저 ①번은 training data에 속하는 어떤 x에 대해서 discriminator의 출력값에 log 씌운것의 평균이다. 그럼 discriminator는 진짜(1)이라고 말해야 될것이고 log(1)=0이 된다. 즉, 진짜 이미지를 진짜라고 판단하면 0이 나오고, 진짜 이미지를 가짜라고 판단하면 -무한대가 나올 것이다. 따라서 discriminator는 이 수식을 최대화하면 된다. 
+먼저 ①번은 training data에 속하는 어떤 x에 대해서 discriminator의 출력값에 log 씌운것의 평균이다. 그럼 discriminator는 진짜(1)이라고 말해야 될것이고 log(1)=0이 된다. 즉, 진짜 이미지를 진짜라고 판단하면 0이 나오고, 진짜 이미지를 가짜라고 판단하면 $-\infty$ 가 나올 것이다. 따라서 discriminator는 이 수식을 최대화하면 된다. 
 
-다음으로 ②번은 random noise(가짜 이미지)에 대해서 discriminator는 가짜(0)이라고 말해야 될 것이고 그 때의 log(1-0)=0가 된다. 반대로 가짜 이미지를 진짜(1)라고 판단하면 그 때의 log(1-1)=-무한대가 된다.
+다음으로 ②번은 random noise(가짜 이미지)에 대해서 discriminator는 가짜(0)이라고 말해야 될 것이고 그 때의 log(1-0)=0가 된다. 반대로 가짜 이미지를 진짜(1)라고 판단하면 그 때의 log(1-1)=$-\infty$가 된다.
 
 정리하면 objective function은 discriminator가 진짜 이미지를 진짜로 판단하고, 가짜 이미지를 가짜로 판단할 때 최대화가 되도록 디자인 되어 있다. 따라서 학습시킬 때는 objective function가 최대화가 되도록 gradient ascent method로 학습시킨다. 
 
