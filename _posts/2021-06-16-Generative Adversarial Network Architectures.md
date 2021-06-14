@@ -10,7 +10,7 @@ use_math: true
 
 ---
 
-### 1. InfoGAN
+### 1. InfoGAN (2016)
 
 InfoGAN은 요즘에 잘 쓰는 GAN은 아니지만 가지고 있는 특징이 살펴볼 만한 내용이라 포함시키게 되었다. 우리가 가짜 이미지를 만들 때 원하는대로 그리려면 generator의 입력인 random noise vector를 우리마음대로 조정해야 하는데 vanilla GAN은 그 control에 대한 개념이 없다. 하지만 InfoGAN은 이 control에 대해서 고민한 모델이다. 
 
@@ -24,7 +24,7 @@ Entangled라는 것은 꼬여있다는 뜻이다. 우리가 $z_{1}$과 $z_{2}$�
 
 왼쪽은 entangled의 예이고 오른쪽은 disentangled의 예이다. Entagled되어 있으면 각 변수가 어떤 의미를 가지고 있는지 해석하기 어렵다. 하지만 disentangled 되어 있으면 원하는 그림을 그릴 수 있을 것이다. 
 
-#### InfoGAN (2016)
+#### InfoGAN
 
 ![image](https://user-images.githubusercontent.com/61526722/121905022-ac88c400-cd64-11eb-8c63-5d2d5a079eba.png)
 
