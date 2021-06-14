@@ -21,7 +21,7 @@ Generative Adversarial Network (GAN)은 지금까지 다뤄왔던 모델들과�
 
 ### 2. Generative Adversarial Network (GAN)
 
-GAN은 두 개의 NN으로 이루어진 시스템이다. Generator와 discriminator이다. 
+GAN은 두 개의 NN으로 이루어진 시스템이다. 두 개의 NN은 바로 generator와 discriminator.
 
 ![image](https://user-images.githubusercontent.com/61526722/121808368-12a51680-cc93-11eb-8928-c93c076749c8.png)
 
@@ -43,7 +43,7 @@ GAN의 Objective Function은 아래와 같다. 여기서 $\theta$ 는 connection
 
 #### Cost Function
 
-GAN을 학습시킬때는 discriminator는 objective function을 그대로 가져와서 그 수식이 최대화가 되로록 connection weight를 학습시킨다. Generator도 마찬가지로 objective function이 최소화가 되도록 connection weight을 학습시키는데 잘 보면 ①번은 generator에 대해서 상수의 항이다. 따라서 아래와 같이 cost function 이 정의된다.
+GAN을 학습시킬때 discriminator는 objective function을 그대로 가져와서 그 수식이 최대화가 되로록 connection weight를 학습시킨다. Generator도 마찬가지로 objective function이 최소화가 되도록 connection weight을 학습시키는데 잘 보면 ①번은 generator에 대해서 상수의 항이다. 따라서 아래와 같이 cost function 이 정의된다.
 
 ![image](https://user-images.githubusercontent.com/61526722/121809457-d58f5300-cc97-11eb-81e0-4ff745ef4a6c.png)
 
