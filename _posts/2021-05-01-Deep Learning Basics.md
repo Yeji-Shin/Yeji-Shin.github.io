@@ -4,8 +4,9 @@ title: Deep Learning Basics
 date: 2020-05-01
 category: DeepLearning
 ---
-# 딥러닝이란?
-### 1. 머신러닝 vs 딥러닝
+
+### 머신러닝 vs 딥러닝
+
 - 머신러닝
   - 주어진 소재를 인간이 먼저 처리함
   - 사람이 training data를 알맞게 처리하여 컴퓨터가 인식하도록 함
