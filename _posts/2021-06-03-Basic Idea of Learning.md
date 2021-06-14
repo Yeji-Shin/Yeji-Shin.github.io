@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Basic idea of learning
+title: Basic Idea of Learning
 date: 2021-06-03
 category: DeepLearning
 use_math: true
