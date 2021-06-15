@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Small CNN Models
+title: Small CNN Models (1)
 date: 2021-06-17
 category: DeepLearning
 use_math: true
