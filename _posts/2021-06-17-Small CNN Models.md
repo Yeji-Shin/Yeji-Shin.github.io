@@ -94,7 +94,57 @@ Global average pooling을 쓰면 정말로 NN의 구조변화가 필요없는지
 
 ### 3. MobileNet-v2
 
-MobileNet-v1에서 제안된 depthwise seperable convolution은 depthwise conv와 pointwise conv 두 부분으로 구성되어 있다. MobileNet-v2에서는 bottleneck residual block을 제안한다. Bottleneck residual block은 처음에 1x1 conv를 통해 채널 수를 늘려주고 depthwise conv를 통해 채널을 다시 줄여주고 
+MobileNet-v1에서 제안된 depthwise seperable convolution은 depthwise conv와 pointwise conv 두 부분으로 구성되어 있다. MobileNet-v2에서는 bottleneck residual block을 제안한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122047733-6f333d80-ce1b-11eb-9176-8f116407f58d.png)
+
+Bottleneck residual block은 처음에 1x1 conv를 통해 채널 수를 늘려주고 3x3 depthwise conv를 통해 채널을 다시 줄여주고 1x1 projection을 해준다. 이를 다시 그리면 다음과 같다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122047812-87a35800-ce1b-11eb-8854-0e41ecef73e1.png)
+
+이 블럭은 두번 연속해서 그려서 설명해보면 빨간색 영역에서 projection은 1x1 linear만 있고 그 다음에는 1x1 conv가 있다. 1x1 linear와 1x1 conv를 합치면 수학적으로 1x1 conv와 동일한 연산이 된다. 결국은 depwise conv - pointwise conv가 연속적으로 일어나는 것이다. 직접적으로 1x1 conv를 하면되지 두 번을거쳤기 때문에 bottleneck에 해당된다. Bottleneck을 두는 이유는 필요없는 정보는 버리고 중요한 정보들만 넘기기 위함이다. Bottleneck layer를 통과하는데 accuracy 는 최대한 높이라고 하면 bottleneck layer는 중요한 정보만을 뽑을 것이다. 다른 말로는 manifold를 얻어내겠다는 말이 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122047968-b1f51580-ce1b-11eb-9f49-396da03eabc6.png)
+
+#### Inverted Residual Link
+
+그러면 왜 residual link를 아래쪽 그림처럼 할까. 위쪽은 블록의 입출력이 크기 때문에 계산량은 똑같지만 전달의 정보량이 크다. 아래처럼 상대적으로 작은 텐서를 가지게 됨으로써 계산할 때, 계산량을 다음 블록으로 전달할 때 그 전달의 파라미터가 줄어든다. 따라서 블록에서 나온 출력을 작은 캐시 메모리에도 들어갈 수 있고, 작은 입출력만 일어나게 해서 전반적으로 작은 디바이스에 적용할 수 있는 것이다.
+
+![image](https://user-images.githubusercontent.com/61526722/122049571-8d01a200-ce1d-11eb-8d1c-215a7d9bee22.png)
+
+이렇게 원래 처럼하지 않고 한번 옆으로 link를 옮겼다고 해서 inverted residual link이라고 한다. 다시말해서 internal한 계산을 입력과 출력으로 바꾼것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122053579-d5bb5a00-ce21-11eb-8b48-0bd777f4d7f6.png)
+
+
+#### Projection convolution
+
+Projection convolution에서 linear를 사용한다. ReLU는 50%의 확률로 0을 출력하는데 만약 projection에서 ReLU를 사용하면 결과에서 50%의 확률로 0을 출력하게 된다. Bottleneck의 임무는 앞단의 중요한 정보를 뽑는데 ReLU를 사용하면 반이 0이라는 것이다. 그래서 MobileNet-v2에서는 ReLU를 사용하지 않았다고 한다. 하지만 bottleneck의 채널 수가 충분히 크다면 ReLU를 사용해도 충분히 중요한 정보를 추출할 수 있을 것이다. 이것을 아래 그림이 증명해준다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122052881-2088a200-ce21-11eb-9408-6f125d57ee87.png)
+
+출력의 채널을 점점 높여가면 이미지가 충분히 복원된다는 것을 보여준다. 즉, 출력 채널이 작을 때 ReLU를 사용하면 정보 손실이 많다는 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122053522-cb00c500-ce21-11eb-9933-7bce632f817e.png)
+
+---
+
+### 4. ShuffleNet
+
+
+
+---
+
+### 5. SqueezeNet
+
+---
+
+
+
+
+
+
+
 
 
 
