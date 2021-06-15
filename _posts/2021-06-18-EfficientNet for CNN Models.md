@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Small CNN Models (2)
+title: EfficientNet for CNN Models
 date: 2021-06-18
 category: DeepLearning
 use_math: true
@@ -24,7 +24,7 @@ CNN의 구조를 변경할 때는 <mark>layer의 개수(depth), 채널의 개수
 
 #### Difficuties of Scale Up
 
-따라서 우리가 depth, width, resolution을 잘 증가시키면 base model로 부터 아주 손쉽게 성능좋은 모델을 만들 수 있지만 문제가 있다. depth, width, resolution을 계속 증가시키면 성능은 올라가지만 정비례하지 않고 saturation 된다. 왼쪽부터 depth, width, resolution을 변경할 때 성능을 그래프로 그린것이다. 보면 어느 순간 성능의 향상이 멈추는 것을 알 수 있다. 
+따라서 우리가 depth, width, resolution을 잘 증가시키면 base model로 부터 아주 손쉽게 성능좋은 모델을 만들 수 있지만 문제가 있다. depth, width, resolution을 계속 증가시키면 성능은 올라가지만 정비례하지 않고 <mark>saturation</mark> 된다. 왼쪽부터 depth, width, resolution을 변경할 때 성능을 그래프로 그린것이다. 보면 어느 순간 성능의 향상이 멈추는 것을 알 수 있다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/122083892-3f486200-ce3c-11eb-8128-79a337c021a4.png)
 
@@ -36,13 +36,19 @@ CNN의 구조를 변경할 때는 <mark>layer의 개수(depth), 채널의 개수
 
 #### Idea for Best Compound Scaling
 
-EfficientNet에서는 이 세개의 비율을 수학적으로 관계를 찾아내는 것은 아니고 trial and error로 비율을 찾아내는 방법을 제안한다. 
+EfficientNet에서는 이 세개의 비율을 수학적으로 관계를 찾아내는 것은 아니고 trial and error로 비율을 찾아내는 방법을 제안한다. 이론적인 논문보다는 가정과 가설에 기반한 실험에 기반한 결과에 대한 논문이다.
 
+##### Step 1: Find out a good baseline model
 
+새로운 모델을 구상할 수도 있고 있던걸 가져와도 좋으니 베이스 모델 하나를 고른다. 
 
+##### Step 2: Find out the golden ratio of width, depth and resolution for scaling
 
+scaling을 하기 위한 가장 좋은 width, depth and resolution 비율을 찾아낸다. 
 
+##### Step 3: Scaling up each dimension of the baseline model keeping the golden ratio of width, depth and resolution
 
+그 비율을 유지하면서 베이스 모델의 차원을 증가시킨다. 
 
 
 
