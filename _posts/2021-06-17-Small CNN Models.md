@@ -131,17 +131,44 @@ Projection convolution에서 linear를 사용한다. ReLU는 50%의 확률로 0�
 
 ### 4. ShuffleNet
 
+#### Group Convolution
 
+ShuffleNet은 group convolution으로 동작하는 모델이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122054814-ff28b580-ce22-11eb-81f6-0b1dabad5f40.png)
+
+Regular conv는 filter 1개당 채널 1개를 만들어내니깐 filter가 $c_{2}$개 있어야 한다. 따라서 학습 파라미터의 개수는 $h_{1}w_{1}c_{1}c_{2}$ 개가 필요하다. Group conv는 group이 2라는 가정하에 채널을 두개로 자른 다음 앞쪽채널들끼리만 conv를 하고 뒷쪽 채널들끼리만 conv를 한다. 따라서 학습 파라미터의 개수는 $h_{1}w_{1}(c_{1}/2)(c_{2}/2) + h_{1}w_{1}(c_{1}/2)(c_{2}/2)$가 되어 전체적인 학습 파라미터 수는 절반으로 줄어든다. 만약에 그룹이 3개가 되면 학습 파라미터의 양은 1/3로 줄어들것이다. 계산량도 이에 비례해서 줄어든다. 
+
+#### Channel Shuffling
+
+하지만 group convolution은 그룹별로 정보가 섞이지 않는다는 문제가 있다. 따라서 channel shuffling이라는 연산을 집어넣어 채널별 출력을 섞는다. 이것들을 다시 group conv로 집어넣으면 계산량은 줄어들고 채널끼리 섞어야하는 정보들을 잘 섞는 구조를 만들어 낼 수 있다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122055975-203dd600-ce24-11eb-8ad5-97d2529df43b.png)
+
+더 자세한 것은 논문을 참고하면 된다. 
 
 ---
 
 ### 5. SqueezeNet
 
+
+SqueezeNet은 먼저 1x1 conv를 통해서 채널 수를 줄이고 그다음에는 1x1 conv와 3x3 conv를 같이 사용하여 계산량을 줄였다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122056659-c38eeb00-ce24-11eb-822d-40ea13cc8c4c.png)
+
 ---
 
+### 6. Xception
 
+Xception은 Depthwise Separable Convolution과 비슷하다. 
 
+![image](https://user-images.githubusercontent.com/61526722/122056760-e6b99a80-ce24-11eb-9273-49a36122ce03.png)
 
+Depthwise Separable Convolution은 depthwise conv 후에 pointwise conv를 적용한다. 하지만 Xception에서는 순서를 바꾸어 pointwise conv를 먼저 사용해 채널들을 통합한 후에 새로운 채널들을 만들고 그 새로운 채널들에 대해서 depthwise conv를 적용한다. 
+
+---
+
+이런식으로 경량화된 CNN을 만들기 위한 많은 연구들이 존재한다. 
 
 
 
