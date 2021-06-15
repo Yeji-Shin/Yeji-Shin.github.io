@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Small CNN Models (1)
+title: Small CNN Models
 date: 2021-06-17
 category: DeepLearning
 use_math: true
@@ -79,13 +79,33 @@ Global pooling은 전체이미지를 하나로 바꾸는 것이다. 하나로 �
 
 ![image](https://user-images.githubusercontent.com/61526722/122030723-fd51f880-ce08-11eb-8b1c-11f34e406d0a.png)
 
+Global average pooling을 쓰면 정말로 NN의 구조변화가 필요없는지 확인해보자. 
 
+![image](https://user-images.githubusercontent.com/61526722/122031217-78b3aa00-ce09-11eb-91af-f06da7f4caf1.png)
 
+위 그림에서 볼 수 있듯이 우리가 flatten이 아니라 global average pooling을 쓰면 입력의 사이즈가 바뀌더라도 동일한 NN을 쓸수 있다. 물론 입력의 크기를 128로 했을 때와 256으로 했을 때의 학습은 다르다. connection weight가 다 달라져야 하겠지만 NN의 구조는 변화없이 입력만 변화시키는 것이 가능하다.  
+
+파라미터의 수를 줄이겠다고 depth를 줄이는 것보다는 channel 수를 줄이는 것이 좋다. 이말은 channel multiplier를 사용하는 것이 좋다는 말이다. 마지막 테이블은 사이즈를 변경한 것인데 NN의 구조가 바뀌지는 않으므로 파라미터의 수는 동일하지만 계산량은 줄어든다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122032125-4eaeb780-ce0a-11eb-8c1e-edd9df9373ba.png)
 
 
 ---
 
-### 3. 
+### 3. MobileNet-v2
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
