@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Small CNN Models
+title: Small CNN Models (1)
 date: 2021-06-17
 category: DeepLearning
 use_math: true
@@ -26,28 +26,66 @@ CNN을 small network로 만들 때 고려해야 하는 것은 <mark>fully connec
 
 ### 2. MobileNet-v1
 
-Convolution을 경량화 시키기 위해 Depthwise Separable Conv를 제안했다. 
+#### Depthwise Separable Conv
 
-![image](https://user-images.githubusercontent.com/61526722/122011767-6cbeec80-cdf7-11eb-9b7c-43464b145be3.png)
+MobileNet-v1는 convolution을 경량화 시키기 위해 Depthwise Separable Conv를 제안했다. 
 
+![image](https://user-images.githubusercontent.com/61526722/122022960-11dec280-ce02-11eb-9f9c-1a27febf66f0.png)
 
+Regular conv는 output channel을 n개 만들고 싶으면 filter의 개수가 n개가 있어야 한다. Depthwise Separable Conv는 2단계로 나뉜다. 첫번째는 deptiwise conv로 입력을 채널별로 나눈 후 채널별로 filter를 하나씩 두고 conv를 실행한다. 실행한 결과는 다시 합쳐준다. 두번째는 pointwise conv로 1x1 conv를 통해 채널의 수를 줄여준다. 채널별로 섞이지 않은 정보를 섞어서 1개의 채널로 만들어준다. 두 방법은 수학적으로 같지는 않지만 의미적으로 같다. 정리하면 Depthwise Separable Conv는 각 채널에만 존재하는 local pattern을 찾아낸 다음에 각 채널에 존재하는 local pattern을 통합하는 것이다. 
 
+두 방법이 계산량에 차이가 없는 것처럼 보이지만 만약 3개의 채널을 가진 출력을 얻으려면 차이가 커진다. Regular conv는 3x3x3블럭이 3개가 있어야하는 반면 Depthwise Separable Conv는 1x1x3 filter가 3개가 있으면 된다. 전체적으로 계산량도 줄고 학습 파라미터의 개수도 줄어들 것이다. 
 
+![image](https://user-images.githubusercontent.com/61526722/122023306-5ff3c600-ce02-11eb-87dd-7a650856ecaf.png)
 
+두 방법의 계산량과 파라미터 개수를 계산하여 일반화하면 다음과 같다. 
 
-
-
-
-
-
-
-
-
+![image](https://user-images.githubusercontent.com/61526722/122024547-7fd7b980-ce03-11eb-8556-d5220f16c002.png)
 
 
+아래 그림은 Depthwise Separable Conv를 다시 표현한 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122023941-f6c08280-ce02-11eb-9102-d5264948f813.png)
+
+depthwise conv는 spatial correlation을 찾아낸다. 채널에 존재하는 공간상의 위치를 파악하는 것이다. 다음으로는 채널별 정보를 통합하는 pointwise conv가 있다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122025142-12785880-ce04-11eb-9b86-841c426fb8b4.png)
+
+Regluar conv는 3x3conv-BN-ReLU로 구성되지만 Depthwise Separable Conv는 3x3conv-BN-ReLU-1x1conv-BN-ReLU(or ReLU6)로 구성된다. ReLU나 ReLU6는 큰 차이가 없지만 NN의출력이 ReLU를 쓰면 0에서 무한대까지 나오는데 ReLU6쓰면 0에서 6사이의 값이 나온다. 차이는 출력을 표시할 수 있는 비트 수에 있다. ReLU는 16이나 32비트를 써야 출력값을 표시할 수 있다면 ReLU6는 4비트나 8비트를 쓰면된다. 이러한 이유로 경량회된 NN에서는 ReLU대신에 ReLU6를 많이 사용한다. 
+
+MobileNet-v1의 구조이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122026572-4e5fed80-ce05-11eb-9c1f-052ad89ef0f2.png)
+
+#### Width Multiplier and Resolution Multiplier
+
+MobileNet-v1에서는 Depthwise Separable Conv말고 두 가지를 더 제안한다. <mark>Width Multiplier와 Resolution Multiplier</mark>는 성능 좋은 base model을 하나 찾아놓고 base model을 기반으로 살짝살짝 손을 봐서 더 손쉽게 더 경량화된 모델을 만드는 방법을 공부한 것이다. 
+
+Width Multiplier는 각 conv에서 채널의 수를 조정해본다. Width Multiplier를 $\alpha$로 고정하고 각 conv의 채널수에 모두 $\alpha$를 곱한다. base model은 바꾸지 않고 채널의 개수를 일괄적으로 계속 줄여가면서 조절하는 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122028232-caa70080-ce06-11eb-8875-50cf55380fed.png)
+
+Resolution Multiplier는 입력의 사이즈를 줄여서 CNN에 넣는 것이다. CNN에서는 보통 입력의 크기가 고정되어 있는데 입력의 크기가 크면 당연하게 CNN의 계산량이 증가한다. 입력의 면적에 비례해서 계산량이 줄어들기 때문에 동일한 구조의 CNN을 쓰더라도 계산량은 줄어든다. 하지만 입력의 크기를 줄이면 성능은 떨어지기 마련이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122028925-705a6f80-ce07-11eb-9bc1-22cf01094062.png)
+
+이런 방식으로 앞에서 정의한 base model에 Width Multiplier와 Resolution Multiplier를 계속 곱해가면서 가장 좋은 것을 찾아낸다.
+
+#### Global Average Pooling
+
+하지만 어떻게 입력의 사이즈가 바뀌는데 같은 구조의 CNN을 사용해도 될까. 사실은 입력의 크기가 바뀌면 convolution feature extraction과 FC layer를 연결하는 부분에서 구조의 변화가 생긴다. 왜냐하면 feature extraction에서 나오는 결과를 flatten하게 바꿀 때 이미지의 사이즈가 바뀌면 flatten된 벡터의 크기도 변할 것이기 때문이다. 이를 해결하기 위한 것이 <mark>Global Average Pooling</mark>이다.
+
+Global pooling은 전체이미지를 하나로 바꾸는 것이다. 하나로 바꿀때 전체를 평균낸 값으로 바꾸는 것이 global average pooling이고, 가장 큰것 하나를 뽑아내는 것이 global max pooling이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122030723-fd51f880-ce08-11eb-8b1c-11f34e406d0a.png)
 
 
 
+
+
+---
+
+### 3. 
 
 
 
