@@ -94,7 +94,7 @@ Global average pooling을 쓰면 정말로 NN의 구조변화가 필요없는지
 
 ### 3. MobileNet-v2
 
-
+MobileNet-v1에서 제안된 depthwise seperable convolution은 depthwise conv와 pointwise conv 두 부분으로 구성되어 있다. MobileNet-v2에서는 bottleneck residual block을 제안한다. Bottleneck residual block은 처음에 1x1 conv를 통해 채널 수를 늘려주고 depthwise conv를 통해 채널을 다시 줄여주고 
 
 
 
