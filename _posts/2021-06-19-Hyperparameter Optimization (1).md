@@ -51,7 +51,7 @@ use_math: true
 
 #### Parametric Models vs Non-parametric Models
 
-기계학습은 크게 parametric model과 non-parametric model로 나눌수 있는데, parametric model은 데이터로부터 몇개의 파라미터들을 추출하여 그 파라미터를 이용하여 추론 즉, y=ax+b를 예측하여 test하는 반면 non-parametric model은 모델의 구조를 가정하지 않고 데이터로부터 직접 추론한다. 
+기계학습은 크게 parametric model과 non-parametric model로 나눌수 있는데, parametric model은 데이터로부터 몇개의 파라미터들을 추출하여 그 파라미터를 이용하여 추론 즉, $y=ax+b$를 예측하여 test하는 반면 non-parametric model은 모델의 구조를 가정하지 않고 데이터로부터 직접 추론한다. 
 
 - Parametric Models: Linear regression, GMM
 - Non-parametric Models: KNN, Kernel regression, Gaussian process
@@ -60,7 +60,7 @@ Gaussian Process는 regression 기법 중 하나이다.
 
 ![image](https://user-images.githubusercontent.com/61526722/122411618-dab61000-cfbf-11eb-9f26-b0c13cb6a2b4.png)
 
-Kernel regression은 일종의 점추정을 한다. 점추정은 새로운 x값에 대해 추론의 결과 y가 점(값)으로 나오는 것이다. 하지만 gaussian process는 구간추정을 한다. 구간 추청은 새로운 값에 대한 추론의 결과를 구간으로 표현한다. 구간은 확률분포인데 이는 normal distribution으로 나타낸다. 따라서 y를 확률변수로 이해하여 y가 대략 이러한 확률로 분포한다는 것을 말해준다. 
+Kernel regression은 일종의 점추정을 한다. 점추정은 새로운 x값에 대해 추론의 결과 y가 점(값)으로 나오는 것이다. 하지만 gaussian process는 <mark>구간추정</mark>을 한다. 구간 추청은 새로운 값에 대한 추론의 결과를 구간으로 표현한다. 구간은 확률분포인데 이는 normal distribution으로 나타낸다. 따라서 y를 확률변수로 이해하여 y가 대략 이러한 확률로 분포한다는 것을 말해준다. 
 
 #### Gaussian Distribution
 
@@ -82,7 +82,7 @@ Covariance matrix는 gaussian distribution의 모양을 결정한다. $\Sigma$�
 
 #### Gaussian Process
 
-Gaussian Process 처음에는 몇개의 점들을 이용하여 함수 $f$가 어떻게 생겼을지를 추측하는 방법이라고 했다. Gaussian Process을 하기 위해서는 3가지의 가정이 필요하다.
+Gaussian Process 처음에는 몇개의 점들을 이용하여 함수 $f$가 어떻게 생겼을지를 추측하는 방법이라고 했다. Gaussian Process을 하기 위해서는 3가지의 <mark>가정</mark>이 필요하다.
 
 - 모든 y는 가우시안 분포를 따른다. $Y ~ N(0,1)$ 
 - 어떤 두 변수를 합한것도 가우시안 분포를 따른다.  ![image](https://user-images.githubusercontent.com/61526722/122420348-97ab6b00-cfc6-11eb-9b96-45e220bfd692.png)
@@ -98,14 +98,28 @@ Gaussian Process 처음에는 몇개의 점들을 이용하여 함수 $f$가 어
 
 하지만 x가 1에서 멀어질수록 covariance 값이 커지니깐 분포가 더 커지는 것을 확인할 수 있다. 
 
-![image](https://user-images.githubusercontent.com/61526722/122425169-41402b80-cfca-11eb-89ef-fb4c461f1a2b.png)
+![image](https://user-images.githubusercontent.com/61526722/122441364-72275d00-cfd8-11eb-84fd-57e5428f81e0.png)
 
+만약 두 점의 값을 알고있다면 다른 지점의 값은 아래와 같이 분포한다고 할 수 있다.
+
+![image](https://user-images.githubusercontent.com/61526722/122441579-a26efb80-cfd8-11eb-998b-82cf4ef92064.png)
+
+이렇게 아는 점의 개수가 늘어날수록 y가 존재하는 범위는 실제함수와 유사하게 그려진다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122441918-ff6ab180-cfd8-11eb-8367-931c98093b91.png)
+
+![image](https://user-images.githubusercontent.com/61526722/122441930-01347500-cfd9-11eb-8836-f124f4fd553b.png)
+
+결론적으로 Gaussian Process는 우리가 어떤 함수를 알고 있는 몇 개의 점을 이용해서 계속 추적해가는 regression 기법이라고 이해하면 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122443280-6472d700-cfda-11eb-87af-1dc4f138a86d.png)
+
+다시 살펴보면 가정중에 우리가 선택할 수 있는 가정이 있다. 그것이 바로 covariance 함수이다. Covariance 함수가 바뀌면 추정되는 함수의 모양이 바뀌기 때문에 잘 선택해야 한다. 자주 사용되는 covariance 함수는 나중에 살펴보기로 한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122442630-bbc47780-cfd9-11eb-9c68-d77906d51496.png)
+
+Gaussian Process의 장점은 구간추정을 통해 <mark>uncertainty를 수치화할 수 있다</mark>는 것이다. 점추정은 결과값을 선택한데에 있어서 신뢰도를 표현할 수 있는 방법이 없다. 
 
 ---
 
-
-
-
-
-
-
+이번 문서에서는 Hyperparameter Optimization을 실행하는 Bayesian Optimization에 대해 정리했고, 함수를 추측하는 gaussian process를 정리해보았다. 다음 문서에서는 Bayesian Optimization의 두번째 단계인 다음 포인트를 찾아내는 데 사용하는 Acquisition function에 대해 살펴볼 것이다. 
