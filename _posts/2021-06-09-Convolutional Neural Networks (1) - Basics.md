@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Convolutional Neural Networks Basics
+title: Convolutional Neural Networks (1) - Basics
 date: 2021-06-09
 category: DeepLearning
 use_math: true
