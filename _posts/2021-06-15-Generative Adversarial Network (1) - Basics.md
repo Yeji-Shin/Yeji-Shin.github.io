@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Generative Adversarial Network
+title: Generative Adversarial Network (1) - Basics
 date: 2021-06-15
 category: DeepLearning
 use_math: true
