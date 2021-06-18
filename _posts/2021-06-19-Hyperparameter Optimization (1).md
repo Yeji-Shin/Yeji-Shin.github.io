@@ -21,7 +21,7 @@ use_math: true
 
 ![image](https://user-images.githubusercontent.com/61526722/122405153-c58ab280-cfba-11eb-972c-be89d73b13ab.png)
 
-하지만 우리는 함수 f가 어떤것인지 모른다는 문제가 있다. 그래도 각 파라미터의 값을 얼마로 할지 세팅이 주어지면 그 세팅에 대한 f를 평가할 수는 있다. f값을 계산하는 것은 계속 NN을 훈련해야 하기 때문에 expensive하다. 
+하지만 우리는 함수 f가 어떤것인지 모르기 때문에 블랙박스로 작동한다는 문제가 있다. 그래도 각 파라미터의 값을 얼마로 할지 세팅이 주어지면 그 세팅에 대한 f를 평가할 수는 있다. f값을 계산하는 것은 계속 NN을 훈련해야 하기 때문에 expensive하다. 
 
 만약 expensive하지 않다면 우리는 각 파라미터의 값을 여러 조합으로 세팅하여(random search) 가장 좋은 결과를 내는 값을 설정하면 된다. 하지만 이렇게 해도 global optimum을 찾지는 못한다. 결론적으로 random search 기법도 계산량이 비싸기 때문에 현실적으로 불가능하다. 
 
@@ -37,7 +37,7 @@ use_math: true
 
 ---
 
-### 2. Bayesian Optimization
+### 2. Bayesian Optimization Method
 
 먼저 과거의 시도들을 분석해 더 좋은 다음 포인트를 찾아내는 기법인  Bayesian Optimization 방법을 살펴본다. 
 
@@ -118,7 +118,7 @@ Gaussian Process 처음에는 몇개의 점들을 이용하여 함수 $f$가 어
 
 ![image](https://user-images.githubusercontent.com/61526722/122442630-bbc47780-cfd9-11eb-9c68-d77906d51496.png)
 
-Gaussian Process의 장점은 구간추정을 통해 <mark>uncertainty를 수치화할 수 있다</mark>는 것이다. 점추정은 결과값을 선택한데에 있어서 신뢰도를 표현할 수 있는 방법이 없다. 
+Gaussian Process의 장점은 구간추정을 통해 <mark>uncertainty를 수치화할 수 있다</mark>는 것이다. 반면점추정은 결과값을 선택한데에 있어서 신뢰도를 표현할 수 있는 방법이 없다. 
 
 ---
 
