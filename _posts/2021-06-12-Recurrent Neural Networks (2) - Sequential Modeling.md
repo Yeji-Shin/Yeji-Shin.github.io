@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Recurrent Neural Networks Sequential Modeling
+title: Recurrent Neural Networks (2) - Sequential Modeling
 date: 2021-06-12
 category: DeepLearning
 use_math: true
