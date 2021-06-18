@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Recurrent Neural Networks 
+title: Recurrent Neural Networks (1) - Basics
 date: 2021-06-11
 category: DeepLearning
 use_math: true
