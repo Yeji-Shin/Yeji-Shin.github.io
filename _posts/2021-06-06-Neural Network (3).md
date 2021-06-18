@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Neural Network(3)
+title: Neural Network (3)
 date: 2021-06-06
 category: DeepLearning
 use_math: true
