@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Neural Network(2)
+title: Neural Network (2)
 date: 2021-06-05
 category: DeepLearning
 use_math: true
