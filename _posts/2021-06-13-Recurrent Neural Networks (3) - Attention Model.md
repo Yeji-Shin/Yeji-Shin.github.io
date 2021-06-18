@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Recurrent Neural Networks Attention Model
+title: Recurrent Neural Networks (3) - Attention Model
 date: 2021-06-13
 category: DeepLearning
 use_math: true
