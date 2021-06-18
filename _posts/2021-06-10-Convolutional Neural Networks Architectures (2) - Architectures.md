@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Convolutional Neural Networks Architectures
+title: Convolutional Neural Networks (2) - Architectures
 date: 2021-06-10
 category: DeepLearning
 use_math: true
