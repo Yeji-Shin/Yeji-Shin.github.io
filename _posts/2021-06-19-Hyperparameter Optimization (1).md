@@ -17,7 +17,7 @@ use_math: true
 ![image](https://user-images.githubusercontent.com/61526722/122404971-9d9b4f00-cfba-11eb-92e6-1d00a60b724b.png)
 ![image](https://user-images.githubusercontent.com/61526722/122404989-a12ed600-cfba-11eb-99d5-951e145f2a56.png)
 
-따라서 hyperparameter를 찾는다고 하면 아래 수식을 만족하는 값을 찾으면 되는 것이다. 
+따라서  hyperparameter를 찾는다고 하면 아래 수식을 만족하는 값을 찾으면 되는 것이다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/122405153-c58ab280-cfba-11eb-972c-be89d73b13ab.png)
 
