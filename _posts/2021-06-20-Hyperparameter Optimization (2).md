@@ -10,7 +10,7 @@ Bayesian optimization 기법은 hyperparameter optimization 문제를 해결하�
 
 ---
 
-### 1. Acquisition Function
+### 1. Next Point Selection
 
 다음 포인트를 선택할 때는 exploitation과 exploration 사이의 균형점을 찾아야 한다. Exploration은 uncertain을 고려하지 않고 최솟값이 나올 것 같은 점을 선택하는 것이다. 아래 그림에서는 0.65정도에서 최솟값이 나올것이라고 예상한다. 하지만 실제로 우리가 0.65를 선택하면 회색 경계안의 한 점에 y값이 존재하고 예상했던 것 보다 더 높은 y값을 얻을 수도 있다. 따라서 우리는 y값이 최소일 확률이 가장 높을 것 같은 관점에서도 보아 0.75 근처를 선택할 것이다. 
 
@@ -30,23 +30,49 @@ Bayesian optimization의 과정을 그림으로 표현하면 아래와 같다. �
 
 이 과정을 반복하면 결국 우리가 찾고자 하는 min 값의 영역을 조사하게 된다. 
 
+---
+
+### 2. Acquisition Function
+
+Acquisition Fuction는 다음에 조사할 점의 적합도라고 했다. 여러가지의 함수중 자주 사용하는 몇 가지를 소개한다. 
+
+#### Expected Improvement (EI)
+
+Expected Improvement는 특정 x에서의 y값이 $y_{best}$ 보다 작을 확률의 평균값이다. 이 평균값이 가장 큰 곳을 다음 포인트로 선택한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122568111-62655280-d084-11eb-8886-98092f6a6bcf.png)
+
+#### Probability of Improvement (PI)
+
+Probability of Improvement에서 분자는 커질수록 좋은 것이다. $y_{best}$ 보다 특정 x에서의 평균값이 작아서 그 점에서 minimum 값이 나올 가능성이 크다. 반대로 분자가 크면 분산이 크다는 말이고, 분산이 크면 uncertainty가 커져 나쁜것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122569076-562dc500-d085-11eb-9e45-2fa80591233e.png)
+
+#### Lower (upper) Confidence Bound (LCB, UCB)
+
+검정색 선인 y가 존재할 수 있는 범위의 평균이 클수록 minimum 값이 나올 가능성이 작다. 그래서 평균에 -를 붙인것이다. 여기서 uncertainty를 고려하여 평균값에서 분산을 한번 뺀다. 다시말해서 구간추정의 평균값에서 분산을 한 번 빼주고 그 값이 가장 작은 곳을 다음 포인트로 선택한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/122569708-fab00700-d085-11eb-839e-fc75b478d130.png)
 
 
+아래 그림은 acquisition function에 따른 성능 평가 결과이다. 우리는 EI나 PI 정도를 사용하면 된다.
 
+![image](https://user-images.githubusercontent.com/61526722/122569946-3945c180-d086-11eb-8571-0428632086c5.png)
 
+Acquisition function도 closed form으로 나오기 때문에 gradient descent method 등의 optimization 기법으로 최적의 acquisition function을 찾으면 된다. 
 
+---
 
+### 3. Disadvantage of Bayesian Optimization 
 
+- Bayesian Optimization은 블랙박스 optimization에 좋지만 사람의 선택에 의존적인 문제가 있다. 다시말해 Bayesian optimization에 들어가는 hyperparameter를 어떻게 정하느냐에 따라서 optimization 성능히 바뀌게 된다. 
+- 계속 새로운 점을 찾으며 sequential하게 실험이 진행되니까 계산량도 많고 느리다. 
+- 만약 우리가 굉장히 많은 개수의 hyperparameter를 찾아야 한다면 Bayesian Optimization으로 찾은 hyperparameter는 성능이 좋지 않다는 단점이 있다.     
+- gaussian process에서 covariance function을 정해야 하는데 함수에 따라 optimization 성능이 많이 차이난다. 
 
+---
 
-
-
-
-
-
-
-
-
+이렇게 해서 Bayesian Optimization를 사용한 Hyperparameter Optimization에 대해 살펴보았다. 
 
 
 
