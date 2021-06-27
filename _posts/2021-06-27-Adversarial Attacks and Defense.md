@@ -149,15 +149,25 @@ PGD는  random하게 점프를 한 다음에 반복적으로 gradient ascent 방
 
 #### Adversarial Training
 
+Adversarial Training는 일종의 data augmentation이다. 먼저 NN을 학습하고 만약 NN이 못맞추는 공격 이미지가 들어오면 label을 달아서 training set으로 넣자는 아이디어다. 물론 무자비하게 늘려가면 안된다. 원래 데이터와 NN이 못맞추는 취약한 데이터들을 얼만큼의 비율로 섞어서 다음 학습을 진행할지도 잘 정해줘야 한다. Adversarial Training에 다음과 같은 기법들을 추가하기도 한다.
+
+- Adversarial Logit Pairing: softmax의 입력이 logit인데 원본이미지x의 logit 값과 속이는 이미지x'의 logit 값은 같아야 한다는 것이다. 이를 loss에 추가한다. 
+- Defensive Distillation: 큰 NN이 학습한 내용을 작은 NN에 집어넣는 것이다. 모델이 작아지면 오버피팅이나 노이즈 요소가 많이 줄어서 훨씬 일반화가 잘 되는 모델이 얻어지기도 한다. 
+- Label Smoothing: NN이 1이 아닌 0.9라도 해도 맞았다고 한다.
+
 #### Filtering/Detecting
+
+이미지가 들어오면 detector를 거치는데 detector는 이미지가 나를 속이려고 하는 것인지 정상적인 이미지인지 판단한 다음에 정상적인 이미지이면 NN에 집어넣고 비정상이라고 판단되면 버린다. 
 
 #### Denoising (Preprocessing)
 
+원래 이미지에 노이즈를 섞었는데 NN에 이미지가 들어오면 그대로 집어넣지 말고 노이즈를 제거한 다음에 NN에 집어넣자는 아이디어다. 간단히 NN앞에 denoising 모듈을 붙여서 노이즈를 제거하면 NN가 안속을거 아니냐고 생각한 것이다. 
 
+하지만 detector나 denoising 모듈은 보통 NN으로 만들어지는데 이 또한 공격당할 수도 있다. 그러면 미분 불가능한 모델로 만들면 되지 않을까 생각할 수 있지만 이를 근사시키는 미분 가능한 모델을 만들어 공격하면 되기 때문에 attack을 피해갈 수 없다. 
 
+---
 
-
-
+이번 문서에서는 Adversarial Attacks이 왜 가능하며 어떻게 방어해야 하는지에 대해 살펴봤다. 하지만 정확한 원인은 모르기 때문에 아직도 연구되고 있는 분야이다.
 
 
 
