@@ -33,7 +33,7 @@ Adversarial attack은 특정 노이즈를 인풋에 넣었을 때 NN은 정답�
 
 ![image](https://user-images.githubusercontent.com/61526722/123544561-d7284300-d78e-11eb-93c1-03c949f05a99.png)
 
-그림에서 네모 안의 영역이 의미하는 것은 사람이 가운데 점의 이미지와 구분을 못하는, 사람 눈에는 동일하게 보이는 것들의 영역이다. 이때 경계선을 그린 후에 빨간색 별에 해당하는 그림을 보여주면 사람과 NN은 다르게 대답한다. 이 빨간 점들이 adversarial example이다. 
+그림에서 네모 안의 영역이 의미하는 것은 사람이 가운데 점의 이미지와 구분을 못하는, 사람 눈에는 동일하게 보이는 것들의 영역이다. 이때 경계선을 그린 후에 빨간색 별에 해당하는 그림을 보여주면 사람과 NN은 다르게 대답한다. 이 빨간 점들이 <mark>adversarial example</mark>이다. 
 
 실제로는 대부분의 점들 근처로 수많은 경계선들이 지나가는데 그러면 더 많은 양의 adversarial example들이 있을 것이다. 더 복잡한 차원으로 이야기하면 다음과 같다.
 
@@ -93,19 +93,49 @@ Targeted는 의도된 틀린 값을 말하는 adversarial example을 찾아내�
 
 Black-box와 White-box외의 attack 기법인 One Step Gradient Method가 실제로 attack을 어떻게 하는지 adversarial sample들을 어떻게 만들어내는지 살펴보자. 
 
+####  Untargeted: Fast Gradient Sign Method (FGSM)
 
+실제로 NN을 잘 속이는 이미지를 만들어내는 것은 cost가 비싸다. FGSM는 공격의 품질보다는 공격의 스피드를 빠르게 하는 기법이다. 
 
+공격에서 찾고자 하는 것은 loss가 최대가 되는 x이다. 간단하게 loss 함수를 최대화하면 되는 거니깐 gradient ascent method를 사용하면 될것이다. 학습할 때는 w로 미분을 했지만 여기서는 loss를 x에 대해 미분해서 loss를 증가시키는 방향으로 가면 된다. 단 두 점의 거리가 $ \epsilon$보다 작아야한다. 
 
+![image](https://user-images.githubusercontent.com/61526722/123546320-19558280-d797-11eb-8623-1665a1ebc8a3.png)
 
+![image](https://user-images.githubusercontent.com/61526722/123546154-6422ca80-d796-11eb-9b5a-0fca203b3022.png)
+ 
+이를 반복적으로 진행하면 시간이 많이 걸리니깐 FGSM에서는 <mark>gradient ascent를 딱 한번</mark>만 한다. 여기서 signed인 이유는 기울기는 방향과 길이를 나타내는데 그 중에서 길이는 무시하고 방향만 취해서 그 방향으로 $ \epsilon$만큼 이동한다. 우리는 loss가 최대화 되는 지점을 찾아야하는데 FGSM은 현재 위치에서의 기울기가 가장 급한 방향으로 한 번 점프해서 $x_{t}$를 구하기 때문에 빠르지만 좋은 공격 기법은 아니다.  
 
+#### Randomized Fast Gradient Sign Method (RAND+FGSM)
 
+따라서 이를 극복하기 위해 FGSM을 변형한 몇 가지 방법들이 나왔다. FGSM은 주어진 자리에서 출발했다면 RAND+FGSM은 아무 방향으로나 $\alpha$만큼 랜덤하게 점프를 한 다음에 그 자리에서 원래 지점의 기울기방향으로 $ \epsilon - \alpha$ 이동한다. 그러면 총 이동 길이는 $ \epsilon$이 된다. 
 
+![image](https://user-images.githubusercontent.com/61526722/123546334-24a8ae00-d797-11eb-90a9-b3494bcce047.png)
 
+![image](https://user-images.githubusercontent.com/61526722/123546305-09d63980-d797-11eb-96bc-d23e8dc162c8.png)
 
+RAND+FGSM가 FGSM가 더 좋다고 알려져 있는데 그 이유는 다음과 같다. 처음의 x는 loss가 0에 가까운 부분으로 gradient가 굉장히 작다. 왜냐면 이 training data에 맞추려고 학습되었기 때문이다. 하지만 한 번 랜덤하게 다른 지점으로 이동해서 gradient ascent를 하면 더 좋은 지점으로 갈 수 있을 것이다. 
 
+---
 
+### 5. Iterative Methods
 
+One Step Gradient Method는 한번만 이동하는 방법이라고 했는데 Iterative하게 이동하는 방법도 있다. 이 방법은 공격 이미지를 만드는데 시간이 오래걸린다는 단점이 있다.  
 
+#### Basic iterative method 
+
+![image](https://user-images.githubusercontent.com/61526722/123546511-c9c38680-d797-11eb-91ef-f169a040bf76.png)
+
+![image](https://user-images.githubusercontent.com/61526722/123546651-7aca2100-d798-11eb-9349-349036cf263e.png)
+
+여기서는 gradient의 방향만 가져와서 그 방향으로 $\alpha$만큼씩 점프를 한다. 이때 축이 여러개가 있으면 어떤 축으로는 $ \epsilon$을 벗어날 수도 있다. 그러면 벗어난 축은 $ \epsilon$범위 안으로 projection을 시켜야 하는데 이를 clip이라고 한다. 이를 정해진 횟수 N만큼 반복한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/123546696-aa792900-d798-11eb-8477-aa8735b6d615.png)
+
+위 그림처럼 iterative method가 one step method보다 더 사실적인 공격이미지를 만들어내는 것을 확인할 수 있다. 
+
+#### Projected Gradient Descent (PGD)
+
+여기에 random start도 조금 넣으면 되지 않을까라고 생각할 수 있다. 그 중 하나가 PGD라는 방법인데 [PGD는 지금까지 알려진 가장 강력한 공격기법이다. ]
 
 
 
