@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Adversarial Attacks
+title: Adversarial Attacks and Defense
 date: 2021-06-27
 category: DeepLearning
 use_math: true
@@ -135,10 +135,23 @@ One Step Gradient Method는 한번만 이동하는 방법이라고 했는데 Ite
 
 #### Projected Gradient Descent (PGD)
 
-여기에 random start도 조금 넣으면 되지 않을까라고 생각할 수 있다. 그 중 하나가 PGD라는 방법인데 [PGD는 지금까지 알려진 가장 강력한 공격기법이다. ]
+여기에 random start도 조금 넣으면 되지 않을까라고 생각할 수 있다. 그 중 하나가 PGD라는 방법인데 PGD는 지금까지 알려진 가장 강력한 공격기법이다.
 
+![image](https://user-images.githubusercontent.com/61526722/123546977-da74fc00-d799-11eb-9c8d-cde1dd2e6c14.png)
 
+PGD는  random하게 점프를 한 다음에 반복적으로 gradient ascent 방법을 적용한다. 그리고 PGD는 공격을 한 번만 하지 않고 공격에 실패하면 다시 random jump를 하고 iterative하게 gradient ascent를 해서 속으면 stop한다. 다시말해서 속는 이미지를 만들 때까지 계속 반복한다. 따라서 PGD를 이용하면 거의 웬만하면 속이는 이미지를 찾아낼 수 있다. 대신 시간을 엄청 오래 걸리 것이다. 
 
+---
+
+### 6. Defense
+
+지금까지 NN을 속이는 이미지를 만드는 attack 기법들을 봤다면 이번에는 속이는 이미지가 NN에 들어와도 안 속게 하는 defense 기법을 살펴본다. Defense에는 크게 다음과 같은 세가지 방법이 있다. 
+
+#### Adversarial Training
+
+#### Filtering/Detecting
+
+#### Denoising (Preprocessing)
 
 
 
