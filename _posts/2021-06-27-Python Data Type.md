@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Python Data Type
-date: 2021-06-28
-category: Do-it-Python
+date: 2021-06-27
+category: Doit_Python
 use_math: true
 ---
 
