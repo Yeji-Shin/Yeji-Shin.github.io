@@ -2,7 +2,7 @@
 layout: post
 title: if, while, for
 date: 2021-06-28
-category: Doit-Python
+category: Doit_Python
 use_math: true
 ---
 
