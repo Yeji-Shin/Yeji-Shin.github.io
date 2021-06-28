@@ -466,10 +466,277 @@ t2 * 3
 
 ### 5. 딕셔너리
 
+딕셔너리는 key와 value의 쌍을 데이터로 가지는 자료형이다. {key: value}로 표현하여 대응관계를 나타낸다. 리스트나 튜플은 값을 순차적으로 저장한다는 특징이 있다. 하지만 딕셔너리는 리스트나 튜플처럼 순차적으로(sequential) 해당 요솟값을 구하지 않고 Key를 통해 Value를 얻는다. 다시말해 딕셔너리는 인덱싱이나 슬라이싱을 사용할 수 없다. 내부적으로 해시 테이블을 이용하므로 데이터의 조회 및 수정에 있어서 O(1)의 시간에 처리 가능하다. 
+
+#### 딕셔너리 생성
+
+{Key1:Value1, Key2:Value2, Key3:Value3, ...}와 같이 Key와 Value의 쌍 여러 개가 { }로 둘러싸여 있다. <mark>Key에는 변하지 않는 값을 사용하고, Value에는 변하는 값과 변하지 않는 값 모두 사용할 수 있다.</mark>
+
+```python
+dic = {'name':'pey', 'phone':'0119993323', 'birth': '1118'}
+dic
+# {'name': 'pey', 'phone': '0119993323', 'birth': '1118'}
+
+a = {1: 'hi'}
+
+a = { 'a': [1,2,3]}
+```
+
+Key가 중복되었을 때 1개를 제외한 나머지 Key:Value 값이 모두 무시된다. 그 이유는 동일한 Key가 존재하면 어떤 Key에 해당하는 Value를 불러야 할지 알 수 없기 때문이다.
+
+```python
+a = {1:'a', 1:'b'}
+a
+# {1: 'b'}
+```
+
+주의할 것은 Key에 리스트는 쓸 수 없다는 것이다. 하지만 튜플은 Key로 쓸 수 있다. 딕셔너리의 Key로 쓸 수 있느냐 없느냐는 Key가 변하는 값인지 변하지 않는 값인지에 달려 있다. 리스트는 그 값이 변할 수 있기 때문에 Key로 쓸 수 없다. 다음 예처럼 리스트를 Key로 설정하면 리스트를 키 값으로 사용할 수 없다는 오류가 발생한다.
+
+```python
+a = {[1,2] : 'hi'}
+# Traceback (most recent call last):
+#   File "<stdin>", line 1, in <module>
+# TypeError: unhashable type: 'list'
+```
 
 
+#### 딕셔너리 쌍 추가하기
+```python
+a = {1: 'a'}
+a[2] = 'b'
+a
+# {1: 'a', 2: 'b'}
+
+a['name'] = 'pey'
+a
+# {1: 'a', 2: 'b', 'name': 'pey'}
+```
+
+#### 딕셔너리 요소 삭제하기
+del 함수를 사용해서 del a[key]처럼 입력하면 지정한 Key에 해당하는 {key : value} 쌍이 삭제된다.
+
+```python
+del a[1]
+a
+# {2: 'b', 'name': 'pey', 3: [1, 2, 3]}
+```
+
+#### 딕셔너리에서 Key 사용해 Value 얻기
+
+리스트나 튜플, 문자열은 요솟값을 얻고자 할 때 인덱싱이나 슬라이싱 기법 중 하나를 사용했다. 하지만 딕셔너리는 Key를 사용해서 Value를 구하는 방법만 존재한다. Key의 Value를 얻기 위해서는 딕셔너리변수이름[Key]를 사용한다.
+
+```python
+grade = {'pey': 10, 'julliet': 99}
+grade['pey']
+# 10
+
+a = {1:'a', 2:'b'}
+a[1]
+# 'a'
+```
+get(x) 함수는 x라는 Key에 대응되는 Value를 돌려준다. 앞에서 살펴보았듯이 a.get('name')은 a['name']을 사용했을 때와 동일한 결괏값을 돌려받는다.
+```python
+a = {'name':'pey', 'phone':'0119993323', 'birth': '1118'}
+a.get('name')
+# 'pey'
+```
+존재하지 않는 키(nokey)로 값을 가져오려고 할 경우 a['nokey']는 Key 오류를 발생시키고 a.get('nokey')는 None을 돌려준다는 차이가 있다. 
+
+```python
+a = {'name':'pey', 'phone':'0119993323', 'birth': '1118'}
+>>> print(a.get('nokey'))
+None
+>>> print(a['nokey'])
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+KeyError: 'nokey'
+```
+
+#### Key 리스트 만들기(keys)
+a.keys()는 딕셔너리 a의 Key만을 모아서 dict_keys 객체를 돌려준다.
+```python
+a = {'name': 'pey', 'phone': '0119993323', 'birth': '1118'}
+a.keys()
+# dict_keys(['name', 'phone', 'birth'])
+
+for k in a.keys():
+  print(k)
+
+'''
+name
+phone
+birth
+'''
+```
+dict_keys 객체를 리스트로 변환하려면 다음과 같이 하면 된다.
+```python
+list(a.keys())
+# ['name', 'phone', 'birth']
+```
+
+#### Value 리스트 만들기(values)
+
+Key를 얻는 것과 마찬가지 방법으로 Value만 얻고 싶다면 .values() 함수를 사용하면 된다. values 함수를 호출하면 dict_values 객체를 돌려준다.
+
+```python
+a.values()
+# dict_values(['pey', '0119993323', '1118'])
+```
+
+#### Key, Value 쌍 얻기(items)
+
+.items() 함수는 Key와 Value의 쌍을 튜플로 묶은 값을 dict_items 객체로 돌려준다. 
+
+```python
+a.items()
+# dict_items([('name', 'pey'), ('phone', '0119993323'), ('birth', '1118')])
+```
+
+#### Key: Value 쌍 모두 지우기(clear)
+```python
+a.clear()
+a
+# {}
+```
+#### 해당 Key가 딕셔너리 안에 있는지 조사하기(in)
+
+딕셔너리에 특정한 원소가 있는지 검사할 때는 '원소 in 사전'의 형태를 사용하면 된다. 
+```python
+a = {'name':'pey', 'phone':'0119993323', 'birth': '1118'}
+
+'name' in a
+# True
+
+'email' in a
+# False
+```
+
+---
+
+### 6. 집합
+
+집합(set)은 집합에 관련된 것을 쉽게 처리하기 위해 만든 자료형이다. 집합은 중복을 허용하지 않으며 순서가 없기 때문에 인덱싱으로 값을 얻을 수 없다. 그리고 집합 자료형에서는 key가 존재하지 않고, value 데이터만 담는다. 데이터의 조회 및 수정에 있어서의 시간 복잡도는 딕셔너리와 마찬가지로 O(1)이다. 
 
 
+#### 집합 만들기
+
+집합 자료형은 리스트나 문자열을 이용해서 만들수 있다. 
+
+```python
+s1 = set([1,2,3])
+s1
+# {1, 2, 3}
+
+s1 = set{1,2,3}
+s1
+# {1, 2, 3}
+
+s2 = set("Hello")
+s2
+# {'e', 'H', 'l', 'o'}
+```
+
+만약 set 자료형에 저장된 값을 인덱싱으로 접근하려면 다음과 같이 리스트나 튜플로 변환한후 해야 한다.
+
+```python
+s1 = set([1,2,3])
+l1 = list(s1)
+l1[0]
+# 1
+```
+
+#### 교집합, 합집합, 차집합 구하기
+
+set 자료형을 정말 유용하게 사용하는 경우는 교집합, 합집합, 차집합을 구할 때이다.
+
+```python
+s1 = set([1, 2, 3, 4, 5, 6])
+s2 = set([4, 5, 6, 7, 8, 9])
+
+
+# 교집합
+s1 & s2
+# {4, 5, 6}
+
+s1.intersection(s2)
+# {4, 5, 6}
+
+
+# 합집합
+s1 | s2
+# {1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+s1.union(s2)
+# {1, 2, 3, 4, 5, 6, 7, 8, 9}
+
+
+# 차집합
+s1 - s2
+# {1, 2, 3}
+s2 - s1
+# {8, 9, 7}
+
+s1.difference(s2)
+# {1, 2, 3}
+s2.difference(s1)
+# {8, 9, 7}
+```
+
+#### 값 1개 추가하기(add)
+이미 만들어진 set 자료형에 1개의 값만 추가(add)할 경우에는 다음과 같이 한다.
+```python
+s1 = set([1, 2, 3])
+s1.add(4)
+s1
+# {1, 2, 3, 4}
+```
+
+#### 값 여러 개 추가하기(update)
+여러 개의 값을 한꺼번에 추가(update)할 때는 다음과 같이 하면 된다.
+```python
+s1 = set([1, 2, 3])
+s1.update([4, 5, 6])
+s1
+# {1, 2, 3, 4, 5, 6}
+```
+
+
+#### 특정 값 제거하기(remove)
+특정 값을 제거하고 싶을 때는 다음과 같이 하면 된다.
+
+```python
+s1 = set([1, 2, 3])
+s1.remove(2)
+s1
+# {1, 3}
+```
+
+---
+
+### 7. 불 자료형
+
+불(bool) 자료형이란 참(True)과 거짓(False)을 나타내는 자료형이다. 불 자료형은 다음 2가지 값만을 가질 수 있다.
+
+#### 자료형의 참과 거짓
+<mark>문자열, 리스트, 튜플, 딕셔너리 등의 값이 비어 있으면(" ", [ ], ( ), { }) 거짓</mark>이 된다. 당연히 비어있지 않으면 참이 된다. 숫자에서는 그 값이 0일 때 거짓이 된다.
+
+```python
+a = [1, 2, 3, 4]
+while a:
+  print(a.pop())
+'''
+4
+3
+2
+1
+'''
+```
+while문은 조건문이 참인 동안 조건문 안에 있는 문장을 반복해서 수행한다.
+
+```python
+while 조건문:
+    수행할 문장
+```
 
 
 
