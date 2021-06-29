@@ -77,6 +77,19 @@ for i, name in enumerate(['body', 'foo', 'bar']):
 ```
 객체가 현재 어느 위치에 있는지 알려 주는 인덱스 값이 필요할때 enumerate 함수를 사용하면 매우 유용하다.
 
+원소의 인덱스를 1부터 시작할 수도 있다. ㄷ
+
+```python
+for i, name in enumerate(['body', 'foo', 'bar'], 1):
+  print(i, name)
+
+'''
+1 body
+2 foo
+3 bar
+'''
+```
+
 --- 
 
 ### 5. eval
