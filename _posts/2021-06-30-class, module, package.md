@@ -254,7 +254,7 @@ add(3, 4)
 ```
 이때 주의할 것은 현재 파일과 같은 디렉토리 상에 mod1.py이 있어야 한다.
 
-#### if __name__ == "__main__":
+#### if __ name__ == "__ main__":
 
 이번에는 mod1.py 파일을 다음과 같이 변경해 보자. add(1, 4)와 sub(4, 2)의 결과를 출력하는 다음 문장을 추가하였다.
 
@@ -297,7 +297,7 @@ if __name__ == "__main__":
 import mod1
 ```
 
-if __name__ == "__main__"을 사용하면 직접 파일을 실행했을 때는 __name__ == "__main__"이 참이 되어 if문 다음 문장이 수행된다. 반대로 다른 파일에서 이 모듈을 불러서 사용할 때는 __name__ == "__main__"이 거짓이 되어 if문 다음 문장이 수행되지 않는다.
+if __ name__ == "__ main__"을 사용하면 직접 파일을 실행했을 때는 __ name__ == "__ main__"이 참이 되어 if문 다음 문장이 수행된다. 반대로 다른 파일에서 이 모듈을 불러서 사용할 때는 __ name__ == "__ main__"이 거짓이 되어 if문 다음 문장이 수행되지 않는다.
 
 #### 클래스나 변수 등을 포함한 모듈 불러오기
 
@@ -338,10 +338,86 @@ game, sound, graphic, play는 디렉터리 이름이고 확장자가 .py인 파�
 
 #### 패키지 만들기
 
-step 1: 패키지 기본 구성 요소 준비하기
-step 2: 패키지 기본 구성 요소 준비하기
+game 및 기타 서브 디렉터리를 생성하고 .py 파일들이 다음과 같이 만들어져 있다. 
 
-step 3: 패키지 기본 구성 요소 준비하기
+![image](https://user-images.githubusercontent.com/61526722/123753292-a530f100-d8f4-11eb-8e6f-bbd705792f18.png)
+
+```python
+# echo.py
+def echo_test():
+    print ("echo")
+    
+# render.py
+def render_test():
+    print ("render")
+```
+
+이제 패키지를 사용하여 echo.py 파일의 echo_test 함수를 실행해 보자. 
+```python
+from game.sound.echo import echo_test
+echo_test()
+# echo
+```
+
+하지만 다음과 같이 echo_test 함수를 사용하는 것은 불가능하다. 도트 연산자(.)를 사용해서 import a.b.c처럼 import할 때 가장 마지막 항목인 c는 반드시 모듈 또는 패키지여야만 한다.
+
+```python
+import game.sound.echo.echo_test
+'''
+Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+ImportError: No module named echo_test
+'''
+```
+
+#### __init__.py 의 용도
+
+__ init__.py 파일은 해당 디렉터리가 패키지의 일부임을 알려주는 역할을 한다. 만약 game, sound, graphic 등 패키지에 포함된 디렉터리에 __ init__.py 파일이 없다면 패키지로 인식되지 않는다.
+
+특정 디렉터리의 모듈을 * 를 사용하여 import할 때에는 다음과 같이 해당 디렉터리의 __ init__.py 파일에 __ all__ 변수를 설정하고 import할 수 있는 모듈을 정의해 주어야 한다.
+
+```python
+from game.sound import *
+echo.echo_test()
+'''
+Traceback (most recent call last):
+    File "<stdin>", line 1, in <module>
+NameError: name 'echo' is not defined
+'''
+```
+
+```python
+# C:/doit/game/sound/__init__.py
+__all__ = ['echo']
+```
+여기에서 __ all__이 의미하는 것은 sound 디렉터리에서 * 기호를 사용하여 import할 경우 이곳에 정의된 echo 모듈만 import된다는 의미이다.
+
+```python
+from game.sound import *
+echo.echo_test()
+# echo
+```
+위와 같이 __ init__.py 파일을 변경한 후 위 예제를 수행하면 원하던 결과가 출력되는 것을 확인할 수 있다.
+
+#### relative 패키지
+
+from game.sound.echo import echo_test를 입력해 전체 경로를 사용하여 import할 수도 있지만 다음과 같이 relative하게 import하는 것도 가능하다.
+
+```python
+# render.py
+from ..sound.echo import echo_test
+
+def render_test():
+    print ("render")
+    echo_test()
+```
+
+.. 는 부모 디렉터리 .는 현재 디렉터리를 의미한다.
+
+
+
+
+
 
 
 
