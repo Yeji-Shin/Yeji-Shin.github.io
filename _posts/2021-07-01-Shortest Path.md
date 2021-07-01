@@ -100,7 +100,7 @@ use_math: true
 
 다음으로 (거리:4, 노드:3)이 꺼내지는데 노드 3번은 이미 방문처리된 노드이기 때문에 무시하고 넘어간다.
 
-![image](https://user-images.githubusercontent.com/61526722/124136770-08bb4a00-dac0-11eb-9a25-1bfc2f376277.png)
+![image](https://user-images.githubusercontent.com/61526722/124142343-1cb57a80-dac5-11eb-831d-bf4690b1bb69.png)
 
 이어서 원소 거리:4, 노드:6)을 꺼내서 6번 노드에 대해 처리한다. 
 
@@ -108,7 +108,7 @@ use_math: true
 
 마지막으로 남은 (거리:5, 노드:3)도 꺼내지만 이미 처리된 노드이므로 무시한다. 
 
-![image](https://user-images.githubusercontent.com/61526722/124136839-1a9ced00-dac0-11eb-80f7-bd33aab0c520.png)
+![image](https://user-images.githubusercontent.com/61526722/124142381-22ab5b80-dac5-11eb-9955-89e5e061012a.png)
 
 
 이 과정을 heapq를 사용해 구현하면 다음과 같다.
