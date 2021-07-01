@@ -29,49 +29,141 @@ use_math: true
 
 말로는 이해가 잘 가지 않을 것이다. 예시를 통해 다익스트라의 동작 원리를 살펴보자. 다음 그래프에서 1번 노드에서 다른 모든 노드로 가는 최단 경로를 구한다고 하자. 초기상태에서는 다른 모든 노드로 가는 최단 거리를 무한으로 초기화한다.
 
-![image](https://user-images.githubusercontent.com/61526722/124107642-693a8f00-daa0-11eb-810a-6e2971185f6c.png)
+![image](https://user-images.githubusercontent.com/61526722/124136039-5aafa000-dabf-11eb-8a0e-4b7ed90cf832.png)
 
 
 다음으로 1번 노드를 거쳐 다른 노드로 가는 비용을 계산한다. 1 ➔ 2 (거리=2), 1 ➔ 3 (거리=5), 1 ➔ 4 (거리=1) 이 된다. 
 
+![image](https://user-images.githubusercontent.com/61526722/124136067-626f4480-dabf-11eb-8df5-eaccf46784e2.png)
 
 
 다음으로 아직 방문하지 않은 노드들 중에서 최단 거리가 가장 작은 4번 노드를 선택한다. 이 4번 노드를 거쳐서 갈 수 있는 노드는 3번과 5번으로 1 ➔ 4 ➔ 3 (거리=4), 1 ➔ 4 ➔ 5 (거리=2)이다. 이는 현재 최단 거리 테이블에 있는 값보다 작으므로 3번과 5번 노드의 최단 거리 값을 각각 4, 2로 갱신한다.
 
+![image](https://user-images.githubusercontent.com/61526722/124136103-6bf8ac80-dabf-11eb-80fd-f95a8bca61a3.png)
 
 
 다음으로 아직 방문하지 않은 노드들 중에서 최단 거리가 가장 작은 2번, 5번 중 번호가 작은 노드인 2번을 선택한다. 이 2번 노드를 거쳐서 갈 수 있는 노드는 3번과 4번으로 1 ➔ 2 ➔ 3 (거리=5), 1 ➔ 2 ➔ 4 (거리=4)이다. 하지만 이미 현재 최단거리 테이블에 있는 값이 작으므로 갱신되지 않는다.
 
+![image](https://user-images.githubusercontent.com/61526722/124136150-75821480-dabf-11eb-9b4f-aca0d0fee7d7.png)
+
 
 다음으로 아직 방문하지 않은 노드들 중에서 최단 거리가 가장 작은 5번을 선택한다. 5번 노드를 거쳐서 갈 수 있는 노드는 3번과 6번으로, 1 ➔ 5 ➔ 3 (거리=3), 1 ➔ 5 ➔ 6 (거리=4)이다. 여기서 1번과 5번을 연결하는 간선은 없지만 편의상 그렇게 표현하고 최단거리 테이블에 있는 1 ➔ 5 (거리=2)를 더해준다고 생각하면 된다. 이번에는 3번과 6번의 최단 거리가 모두 갱신된다. 
 
+![image](https://user-images.githubusercontent.com/61526722/124136177-7dda4f80-dabf-11eb-93fd-6ca5c3ae3b28.png)
 
 
 다음으로 아직 방문하지 않은 노드들 중에서 최단 거리가 가장 작은 3번을 선택한다. 3번 노드를 거쳐서 갈 수 있는 노드는 2번과 6번으로, 1 ➔ 3 ➔ 2(거리=6), 1 ➔ 3 ➔ 6 (거리=8)이다. 하지만 이미 현재 최단거리 테이블에 있는 값이 작으므로 갱신되지 않는다.
+
+![image](https://user-images.githubusercontent.com/61526722/124136223-86328a80-dabf-11eb-916f-3d6d90e86f7f.png)
 
 
 다음으로 마지막 남은 6번 노드를 선택한다. 
 
 
+![image](https://user-images.githubusercontent.com/61526722/124136263-9185b600-dabf-11eb-87b7-b2c7a441ce19.png)
 
 
 이처럼 다익스트라는 방문하지 않은 노드 중에서 가장 최단 거리가 짧은 노드를 선택하는 과정을 반복하는데, 한 번 선택되고 방문된 노드는 최단 거리가 감소하지 않는다. 즉, 다익스트라는 한 단계 당 하나의 노드에 대한 최단 거리를 확실히 찾는 것으로 이해할 수 있다. 
 
 ---
 
-### 2. Dijkstra with Python
+### 2. <mark>Dijkstra with Python - heapq 사용</mark>
 
 다익스트라 알고리즘은 <mark>힙 자료구조를 사용하여 O(ElogV) 시간</mark>으로 구현할 수 있다. 여기서 V는 정점의 개수, E는 간선의 개수이다. 
 힙은 우선순위 큐를 구현하기 위해 사용하는 자료구조 중 하나라고 했다. [참고](https://yeji-shin.github.io/datastructure/2021/07/01/5.-Priority-Queue.html) 우선순위 큐는 우선순위가 가장 높은 데이터를 가장 먼저 삭제한다. 따라서 최단 거리가 가장 짧은 노드를 선택하는 과정에서 최소 힙 자료구조를 사용하면 된다.
 
-파이썬의 heapq 라이브러리는 원소로 튜플을 입력받으면 첫 번째 원소를 기준으로 우선순위 큐를 구성한다. 따라서 (최단 거리, 노드 번호) 순서대로 튜플 데이터를 구생해 우선순위 큐에 넣으면 된다. heapq는 데이터의 개수가 N개일 때, 하나의 데이터를 삽입 및 삭제할 때의 시간 복잡도는 O(logN)이다. 따라서 정점의 개수 V개, 간선의 개수 E개 일때 다익스트라는 O(ElogV)의 시간 복잡도를 가진다. 
+파이썬의 heapq 라이브러리는 원소로 튜플을 입력받으면 첫 번째 원소를 기준으로 우선순위 큐를 구성한다. 따라서 <mark>(최단 거리, 노드 번호) 순서대로 튜플 데이터를 구성</mark>해 우선순위 큐에 넣으면 된다. heapq는 데이터의 개수가 N개일 때, 하나의 데이터를 삽입 및 삭제할 때의 시간 복잡도는 O(logN)이다. 따라서 정점의 개수 V개, 간선의 개수 E개 일때 다익스트라는 O(ElogV)의 시간 복잡도를 가진다. 
+
+코드로 구현하기 전에 다시 위의 예제를 살펴보자. 먼저 출발 노드를 (거리, 노드번호)의 튜플 형태로 우선순위 큐에 넣는다.
+
+![image](https://user-images.githubusercontent.com/61526722/124136575-de698c80-dabf-11eb-8901-cad723d5843d.png)
+
+그 다음 우선순위 큐의 첫번째 원소 (거리가 가장 짧은 원소)를 꺼낸다. 그리고 갱신된 다른 (거리, 노드번호)들을 우선순위 큐에 삽입한다. 우선순위 큐에 삽입하면 heapq가 알아서 튜플의 첫 번째 원소(거리)가 작은 순서대로 왼쪽부터 기록한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/124136613-e5909a80-dabf-11eb-9450-2fae524d070f.png)
+
+다시 우선순위 큐의 첫번째 원소 (거리가 가장 짧은 원소)를 꺼내고 갱신된 것들을 우선순위 큐에 삽입한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/124136648-ec1f1200-dabf-11eb-93de-7c633fd26635.png)
+
+다시 우선순위 큐의 첫번째 원소 (거리가 가장 짧은 원소)를 꺼내고 갱신된 것들을 우선순위 큐에 삽입한다. 이때는 갱신된 것이 없기 때문에 우선순위 큐에 어떠한 값도 삽입되지 않는다. 
+
+![image](https://user-images.githubusercontent.com/61526722/124136677-f3462000-dabf-11eb-870b-816ab6871485.png)
+
+다시 우선순위 큐의 첫번째 원소 (거리가 가장 짧은 원소)를 꺼내고 갱신된 것들을 우선순위 큐에 삽입한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/124136703-fb05c480-dabf-11eb-98c3-d77b66d09ab5.png)
+
+다시 우선순위 큐의 첫번째 원소 (거리가 가장 짧은 원소)를 꺼내고 갱신된 것들을 우선순위 큐에 삽입한다. 이때도 갱신된 것이 없기 때문에 우선순위 큐에 어떠한 값도 삽입되지 않는다. 
+
+![image](https://user-images.githubusercontent.com/61526722/124136744-02c56900-dac0-11eb-9bcf-5e41d04cd316.png)
+
+다음으로 (거리:4, 노드:3)이 꺼내지는데 노드 3번은 이미 방문처리된 노드이기 때문에 무시하고 넘어간다.
+
+![image](https://user-images.githubusercontent.com/61526722/124136770-08bb4a00-dac0-11eb-9a25-1bfc2f376277.png)
+
+이어서 원소 거리:4, 노드:6)을 꺼내서 6번 노드에 대해 처리한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/124136825-153fa280-dac0-11eb-9d6c-e4c7214f787a.png)
+
+마지막으로 남은 (거리:5, 노드:3)도 꺼내지만 이미 처리된 노드이므로 무시한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/124136839-1a9ced00-dac0-11eb-80f7-bd33aab0c520.png)
+
+
+이 과정을 heapq를 사용해 구현하면 다음과 같다.
 
 ```python
+import heapq
+import sys
 
+input = sys.stdin.readline
+
+n, m = map(int, input().split())  # 노드의 개수, 간선의 개수를 입력받기
+start = int(input())  # 시작 노드 번호를 입력받기
+graph = [[] for i in range(n + 1)]  # 각 노드에 연결되어 있는 노드에 대한 정보를 담는 리스트를 만들기
+INF = int(1e9) # 무한을 의미하는 값으로 10억을 설정
+distance = [INF] * (n + 1)  # 최단 거리 테이블을 모두 무한으로 초기화
+# (n+1)로 하는 것은 인덱스와 노드 번호를 맞추기 위함
+
+# 모든 간선 정보를 입력받기
+for _ in range(m):
+    a, b, c = map(int, input().split())
+    graph[a].append((b, c))  # a번 노드에서 b번 노드로 가는 비용이 c라는 의미
+
+# 다익스트라
+def dijkstra(start):
+    q = []  # 우선순위 큐
+    heapq.heappush(q, (0, start))
+    distance[start] = 0
+    while q:  # 우선순위 큐가 비어있지 않는다면
+        dist, now = heapq.heappop(q)  # 가장 최단 거리가 짧은 노드에 대한 정보를 꺼내기
+        if distance[now] < dist:  # 현재 노드가 이미 처리된 적이 있으면 무시
+            continue
+        for i in graph[now]:  # 현재 노드와 연결된 다른 인접한 노드들을 확인 
+            cost = dist + i[1]
+            if cost < distance[i[0]]:  # 현재 노드를 거쳐서 다른 노드로 이동하는 거리가 더 짧은 경우
+                distance[i[0]] = cost  # 거리 테이블 갱신
+                heap.heappush(q, (cost, i[0]))  # 갱신된 데이터 우선순위 큐에 삽입
+        
+# 다익스트라 알고리즘을 수행
+dijkstra(start)
+
+# 모든 노드로 가기 위한 최단 거리를 출력
+for i in range(1, n+1):
+    if distance[i] == INF:  # 도달할 수 없는 경우, 무한이라고 출력
+        print('INF')
+    else:  # 도달할 수 있는 경우 거리를 출력
+        print(distance[i])
 ```
 
+#### <mark>시간 복잡도: O(ElogV)</mark>
 
+여기서 while문은 노드를 하나씩 꺼내 검사하는 것이므로 노드의 개수 V이상의 횟수로는 반복되지 않는다. V번 반복할 때마다 각각 자신과 연결된 간선들은 모두 확인한다. 앞에서 말했듯이 힙에 N개의 데이터를 넣고 뺴는 과정은 O(NlogN)이다. 다익스트라의 시간 복잡도는 최대 E개의 간선 데이터를 힙에 넣었다가 빼는 것으로 볼 수 있기 때문에 O(ElogE)라고 할 수 있다. 여기서 간선의 개수 E는 모든 노드끼리 서로 다 연결되어 있을 때 최대 $V^{2}$ 이기 때문에 전체 시간 복잡도는 O(ElogV)가 된다. 
 
+---
+
+### 3. 플로이드 워셜 알고리즘 (Floyd-Warshall)
 
 
 
