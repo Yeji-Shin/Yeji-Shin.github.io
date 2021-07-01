@@ -207,3 +207,47 @@ list(zip([1, 2, 3], [4, 5, 6], [7, 8, 9]))
 list(zip("abc", "def"))
 # [('a', 'd'), ('b', 'e'), ('c', 'f')]
 ```
+
+---
+
+### 11. math 라이브러리
+
+math 라이브러리는 자주 사용되는 수학적인 기능을 포함하고 있다. 
+
+#### 팩토리얼
+```python
+import math
+
+print(math.factorial(5))
+# 120
+```
+
+#### 제곱근
+
+```python
+import math
+
+print(math.sqrt(7))
+# 2.6457513110645907
+```
+
+### 최대 공약수
+gcd(a, b) 는 a와 b의 최대공약수를 반환한다.
+```python
+import math
+
+print(math.gcd(21,14))
+# 7
+```
+
+#### 파이와 자연상수
+
+```python
+import math
+
+print(math.pi)
+# 3.141592653589793
+
+print(math.e)
+# 2.718281828459045
+```
