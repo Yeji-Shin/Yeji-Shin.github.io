@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Graph (2) - Kruskal sorting
+title: Graph (2) - Kruskal Sorting
 date: 2021-07-05
 category: Algorithm
 use_math: true
@@ -12,3 +12,6 @@ DFS/BFS와 최단경로 알고리즘(다익스트라, 플로이드워셜) 모두
 
 ---
 
+### 1. 신장 트리
+
+신장 트리는 모든 노드를 포함하면서 사이클이 존재하지 않는 부분 그래프이다. 여기서 모든 노드를 포함하면서 사이클이 존재하지 않는다는 조건은 트리의 조건이다. 
