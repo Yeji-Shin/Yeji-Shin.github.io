@@ -55,16 +55,67 @@ DFS/BFS와 최단경로 알고리즘(다익스트라, 플로이드워셜) 모두
 
 ![image](https://user-images.githubusercontent.com/61526722/124486603-bb551a80-dde8-11eb-9d0c-291705c64b6b.png)
 
-이때 큐에서 추출한 순서는 1 ➡ 2 ➡ 5 ➡ 3 ➡ 6 ➡ 4 ➡ 7 이다. 하지만 위상정렬은 <mark>답이 여러가지 존재</mark>한다는 특징이 있다. 1 ➡ 5 ➡ 2 ➡ 3 ➡ 6 ➡ 4 ➡ 7도 답이 될수 있다. 
+이때 큐에서 추출한 순서는 1 ➔ 2 ➔ 5 ➔ 3 ➔ 6 ➔ 4 ➔ 7 이다. 하지만 위상정렬은 <mark>답이 여러가지 존재</mark>한다는 특징이 있다. 1 ➔ 5 ➔ 2 ➔ 3 ➔ 6 ➔ 4 ➔ 7도 답이 될수 있다. 
 
 ---
 
-### 2. Topology Sort with Python - 큐 이용
+### 2. <mark>Topology Sort with Python - 큐 이용</mark>
 
 위상정렬은 큐 자료구조를 사용한다. 
 
 ```python
+from collections import deque
 
+v, e = map(int, input().split())  # 노드의 개수 v, 간선의 개수 e
+indegree = [0] * (v+1)  # 모든 노드에 대한 진입차수 0으로 초기화
+graph = [[] for _ in range(v+1)]  # 그래프 초기화
+
+# 방향 그래프의 모든 간선 정보 입력받기
+for _ in range(e):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    indegree[b] += 1  # b의 진입차수를 1 증가
+    
+# 위상 정렬 함수
+def topology_sort():
+    result = []  # 위상 정렬 결과
+    q = deque()
+    
+    # 처음에는 진입차수가 0인 노드를 큐에 삽입
+    for i in range(1, v+1):
+        if indegree[i] == 0:
+            q.append(i)
+    
+    # 큐가 빌 때까지 반복
+    while q:  
+        now = q.popleft()  # 큐에서 노드 꺼내기
+        result.append(now)
+        for nn in graph[now]:
+            indegree[nn] -= 1
+            if indegree[nn] == 0:  # 새롭게 진입차수가 0이 된 노드를 큐에 삽입
+                q.append(nn)
+                
+    for i in result:
+        print(i, end=' ')
+    
+topology_sort()
+
+'''
+7 8
+1 2
+1 5
+2 3
+2 6
+3 4
+4 7
+5 6
+6 4
+1 2 5 3 6 4 7 
+'''
 ```
 
+---
 
+### 3. <mark>위상 정렬 시간 복잡도: O(V+E) </mark>
+
+위상 정렬은 차례대로 V개의 모든 노드를 확인하고, 해당 노드에서 출발하는 간선을 차례대로 제거해야하기 때문에 O(V+E)의 시간 복잡도를 가진다. 즉, 노드와 간선을 한번씩 다 확인한다는 의미이다. 
