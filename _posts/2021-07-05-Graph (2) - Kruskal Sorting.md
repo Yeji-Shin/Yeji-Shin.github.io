@@ -87,10 +87,69 @@ DFS/BFS와 최단경로 알고리즘(다익스트라, 플로이드워셜) 모두
 ---
 ### 3. Kruskal with Python
 
-```python
+크루스칼 알고리즘은 서로소 집합과 비슷하다.
 
+```python
+# 특정 원소가 속한 집합 찾기 (루트 찾기) 
+def find_parent(parent, x):
+    if parent[x] != x:  # x의 루트가 x가 아니면 루트를 찾을 때까지 재귀적 호줄
+        parent[x] = find_parent(parent, parent[x])
+    return parent[x]
+
+# 두 원소가 속한 집합 합치기
+def union_parent(parent, a, b):
+    a = find_parent(parent, a)
+    b = find_parent(parent, b)
+    if a < b:
+        parent[b] = a
+    else:
+        parent[a] = b
+        
+# union 연산 입력 받기 
+v, e = map(int, input().split())  # 노드의 개수 v, 간선의 개수 e
+parent = [0] * (v+1)  # 부모 테이블 초기화 
+for i in range(1, v+1):  # 부모 테이블에서 부모를 자기 자신으로 초기화
+    parent[i] = i  
+
+edges = []  # 간선을 담을 리스트
+result = 0  # 부모 테이블 초기화
+
+# union 연산 수행
+for i in range(e):
+    a, b, cost = map(int, input().split())
+    edges.append((cost, a, b))  # 비용순으로 정렬하기 위해 튜플의 첫 원소를 비용으로 설정 
+
+edges.sort()  # 비용순으로 정렬
+for edge in edges:
+    cost, a, b = edge
+    if find_parent(parent,a) != find_parent(parent,b):  # 사이클 발생하지 않는 경우만 집합에 포함
+        union_parent(parent, a, b)
+        result += cost
+
+print(result)
+
+'''
+7 9
+1 2 29
+1 5 75
+2 3 35
+2 6 34
+3 4 7
+4 6 23
+4 7 13
+5 6 53
+6 7 25
+159
+'''
 ```
 
+---
+
+### 4. 크루스칼 시간 복잡도: O(ElogE)
+
+크루스칼은 간선의 개수가 E개 일때 O(ElogE)의 시간 복잡도를 가진다. 그 이유는 가장 오래 걸리는 간선 정렬 작업의 시간 복잡도가 O(ElogE)이기 때문이다.
+
+---
 
 
 
