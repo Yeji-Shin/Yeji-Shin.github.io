@@ -254,9 +254,9 @@ print(math.e)
 
 ---
 
-### 11. Counter()
+### 11. <mark>Counter()</mark>
 
-Counter()를 사용하면 주어진 단어(리스트)에서 그 알파벳(단어)이 몇 번 등장하는지 알려주는 딕셔너리 기반의 메서드이다. 보통 데이터의 개수를 셀 때 dictionary 자료구조를 많이 사용한다. 
+Counter()를 사용하면 주어진 단어(리스트)에서 그 알파벳(단어)이 몇 번 등장하는지 알려주는 <mark>딕셔너리 기반의 메서드</mark>이다. 보통 데이터의 개수를 셀 때 dictionary 자료구조를 많이 사용한다. 
 
 #### 딕셔너리를 사용한 카운팅
 
@@ -319,7 +319,7 @@ print(list(counter.elements()))
 # ['h', 'e', 'l', 'l', 'l', 'o', 'o', ' ', 'w', 'r', 'd']
 ```
 
-#### Counter().most_common()
+#### <mark>Counter().most_common()</mark>
 
 Counter 클래스는 데이터의 개수가 많은 순으로 정렬된 배열을 리턴하는 most_common 메서드가 있다.
 
@@ -370,13 +370,13 @@ print(counter)
 
 ----
 
-### 12. itertools()
+### 12. <mark>itertools()</mark>
 
 itertools는 파이썬에서 반복되는 데이터를 처리하는 기능을 포함하고 있는 라이브러리이다. 그 중 permutation과 combination이 주로 사용된다.
 
 #### permutations()
 
-permutation(순열)은 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 일렬로 나열하는 모든 경우를 계산해준다. permutations()은 클래스이므로 리스트로 변형하여 사용한다. 
+<mark>permutation(순열)은 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 일렬로 나열하는 모든 경우</mark>를 계산해준다. permutations()은 클래스이므로 리스트로 변형하여 사용한다. 
 
 ```python
 from itertools import permutations
@@ -405,7 +405,7 @@ print(result)
 
 #### combinations()
 
-combination(조합)은 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 순서를 고려하지 않고 나열하는 모든 경우를 계산해준다. combinations()은 클래스이므로 리스트로 변형하여 사용한다. 
+<mark>combination(조합)은 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 순서를 고려하지 않고 나열하는 모든 경우</mark>를 계산해준다. combinations()은 클래스이므로 리스트로 변형하여 사용한다. 
 
 ```python
 from itertools import combinations
