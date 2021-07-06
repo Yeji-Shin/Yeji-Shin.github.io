@@ -438,3 +438,52 @@ result = list(combinations_with_replacement(data,2))  # 중복을 허용하여 �
 print(result)
 # [('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'b'), ('b', 'c'), ('c', 'c')]
 ```
+
+---
+
+### 13. random 모듈
+
+파이썬 랜덤 모듈은 랜덤 숫자를 생성해준다. 
+
+random(): 0 <= x < 1인 랜덤 실수 x 반환
+```python
+import random
+
+print(random.random())
+# 0.7083716281233781
+```
+uniform(a, b): a <= x < b인 랜덤 실수 x 리턴
+```python
+print(random.uniform(1,10))
+# 5.861648650062278
+```
+randint(a, b): a <= x <= b인 랜덤 정수 x 리턴 (2번째 인자로 넘어온 정수도 범위에 포함시킴)
+```python
+print(random.randint(1, 10))
+# 9
+```
+randrange(): range(start, stop, step) 함수로 만들어지는 정수 중에 하나를 랜덤하게 리턴
+```python
+print(random.randrange(0, 101, 2))
+# 20
+```
+choice(): 랜덤하게 하나의 원소 선택
+```python
+print(random.choice('alphabet'))
+# b
+```
+sample(): 랜덤하게 여러 개의 원소 선택
+```python
+print(random.sample([1, 2, 3, 4, 5], 3))
+# [5, 4, 1]
+```
+shuffle(): 원소의 순서를 랜덤하게 변경
+```python
+a = [1,2,3,4,5,6,7,8]
+random.shuffle(a)
+print(a)
+# [7, 4, 6, 8, 3, 2, 5, 1]
+```
+
+
+
