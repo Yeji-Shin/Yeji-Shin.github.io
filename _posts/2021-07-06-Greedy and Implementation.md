@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Greedy
+title: Greedy and Implementation
 date: 2021-07-06
 category: Algorithm
 use_math: true
