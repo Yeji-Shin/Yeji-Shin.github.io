@@ -284,7 +284,7 @@ counter = Counter('hello world')
 print(counter)
 # Counter({'l': 3, 'o': 2, 'h': 1, 'e': 1, ' ': 1, 'w': 1, 'r': 1, 'd': 1})
 ```
-#### # 사전 자료형으로 바꾸기
+사전 자료형으로 바꾸기
 
 이것을 dict() 함수로 딕셔너리로 바꾸면 단어의 등장순서에 따라 정렬해준다. 
 
@@ -292,19 +292,19 @@ print(counter)
 print(dict(counter))  
 # {'h': 1, 'e': 1, 'l': 3, 'o': 2, ' ': 1, 'w': 1, 'r': 1, 'd': 1}
 ```
-#### items() : key, value 쌍을 튜플 형태로 반환
+items() : key, value 쌍을 튜플 형태로 반환
 ```python
 print(counter.items())
 # dict_items([('h', 1), ('e', 1), ('l', 3), ('o', 2), (' ', 1), ('w', 1), ('r', 1), ('d', 1)])
 ```
 
-#### keys() : 카운터 객체의 key들을 반환
+keys() : 카운터 객체의 key들을 반환
 ```python
 print(counter.keys())
 # dict_keys(['h', 'e', 'l', 'o', ' ', 'w', 'r', 'd'])
 ```
 
-#### 루프 돌리기 (counter는 딕셔너리 형태이기 때문에 가능)
+루프 돌리기 (counter는 딕셔너리 형태이기 때문에 가능)
 ```python
 for key, value in counter.items():
     print(key, ':', value)
@@ -320,7 +320,7 @@ d : 1
 '''
 ```
 
-#### elements() : 카운터 숫자만큼 요소 반환
+elements() : 카운터 숫자만큼 요소 반환
 ```python
 print(list(counter.elements()))
 # ['h', 'e', 'l', 'l', 'l', 'o', 'o', ' ', 'w', 'r', 'd']
