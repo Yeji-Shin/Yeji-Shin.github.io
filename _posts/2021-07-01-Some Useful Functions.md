@@ -254,7 +254,7 @@ print(math.e)
 
 ---
 
-### 11. <mark>Counter()</mark>
+### 12. <mark>Counter()</mark>
 
 Counter()를 사용하면 주어진 단어(리스트)에서 그 알파벳(단어)이 몇 번 등장하는지 알려주는 <mark>딕셔너리 기반의 메서드</mark>이다. 보통 데이터의 개수를 셀 때 dictionary 자료구조를 많이 사용한다. 
 
@@ -377,7 +377,7 @@ print(counter)
 
 ----
 
-### 12. <mark>itertools()</mark>
+### 13. <mark>itertools()</mark>
 
 itertools는 파이썬에서 반복되는 데이터를 처리하는 기능을 포함하고 있는 라이브러리이다. 그 중 permutation과 combination이 주로 사용된다.
 
@@ -441,7 +441,7 @@ print(result)
 
 ---
 
-### 13. random 모듈
+### 14. random 모듈
 
 파이썬 랜덤 모듈은 랜덤 숫자를 생성해준다. 
 
