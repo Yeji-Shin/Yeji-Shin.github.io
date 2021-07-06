@@ -160,3 +160,47 @@ right = 5
 print(prefix_sum[right] - prefix_sum[left-1])
 # 12
 ```
+
+---
+### 4. 순열과 조합
+
+#### 순열
+
+순열은 서로 다른 n개에서 r개를 선택하여 일렬로 나열하는 것이다.
+
+```python
+from itertools import permutations 
+
+data = [1,2,3]
+
+for x in permutations(data,2):
+    print(list(x))
+    
+'''
+[1, 2]
+[1, 3]
+[2, 1]
+[2, 3]
+[3, 1]
+[3, 2]
+'''
+```
+
+#### 조합
+
+조합은 서로 다른 n개에서 순서에 상관없이 r개를 선택하여 나열하는 것이다.
+
+```python
+from itertools import combinations 
+
+data = [1,2,3]
+
+for x in combinations(data,2):
+    print(list(x))
+    
+'''
+[1, 2]
+[1, 3]
+[2, 3]
+'''
+```
