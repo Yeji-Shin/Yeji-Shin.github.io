@@ -251,3 +251,183 @@ print(math.pi)
 print(math.e)
 # 2.718281828459045
 ```
+
+---
+
+### 11. Counter()
+
+Counter()를 사용하면 주어진 단어(리스트)에서 그 알파벳(단어)이 몇 번 등장하는지 알려주는 딕셔너리 기반의 메서드이다. 보통 데이터의 개수를 셀 때 dictionary 자료구조를 많이 사용한다. 
+
+#### 딕셔너리를 사용한 카운팅
+
+```python
+def count_letters(word):
+    counter = {}
+    for letter in word:
+        if letter not in counter:
+            counter[letter] = 0
+        counter[letter] += 1
+    return counter
+
+count_letters('hello world'))
+# {'h': 1, 'e': 1, 'l': 3, 'o': 2, ' ': 1, 'w': 1, 'r': 1, 'd': 1}
+```
+
+#### Counter()를 사용한 카운팅
+
+counter() 함수는 그 단어와 등장숫자를 내림차순으로 정렬해 나타낸다. 이것을 dict() 함수로 딕셔너리로 바꾸면 단어의 등장순서에 따라 정렬해준다. 
+
+```python
+from collections import Counter
+
+counter = Counter('hello world') 
+print(counter)
+# Counter({'l': 3, 'o': 2, 'h': 1, 'e': 1, ' ': 1, 'w': 1, 'r': 1, 'd': 1})
+
+# 사전 자료형으로 바꾸기
+print(dict(counter))  
+# {'h': 1, 'e': 1, 'l': 3, 'o': 2, ' ': 1, 'w': 1, 'r': 1, 'd': 1}
+
+# items() : key, value 쌍을 튜플 형태로 반환
+print(counter.items())
+# dict_items([('h', 1), ('e', 1), ('l', 3), ('o', 2), (' ', 1), ('w', 1), ('r', 1), ('d', 1)])
+
+# keys() : 카운터 객체의 key들을 반환
+print(counter.keys())
+# dict_keys(['h', 'e', 'l', 'o', ' ', 'w', 'r', 'd'])
+
+# values() : 카운터 객체의 value, 즉 카운트들을 반환
+print(counter.values())
+# dict_values([1, 1, 3, 2, 1, 1, 1, 1])
+
+# 루프 돌리기 (counter는 딕셔너리 형태이기 때문에 가능)
+for key, value in counter.items():
+    print(key, ':', value)
+'''
+h : 1
+e : 1
+l : 3
+o : 2
+  : 1
+w : 1
+r : 1
+d : 1
+'''
+
+# elements() : 카운터 숫자만큼 요소 반환
+print(list(counter.elements()))
+# ['h', 'e', 'l', 'l', 'l', 'o', 'o', ' ', 'w', 'r', 'd']
+```
+
+#### Counter().most_common()
+
+Counter 클래스는 데이터의 개수가 많은 순으로 정렬된 배열을 리턴하는 most_common 메서드가 있다.
+
+```python
+from collections import Counter
+
+Counter('hello world').most_common() 
+# [('l', 3), ('o', 2), ('h', 1), ('e', 1), (' ', 1), ('w', 1), ('r', 1), ('d', 1)]
+```
+이 메서드의 인자로 숫자 K를 넘기면 그 숫자 만큼만 리턴하기 때문에, 가장 개수가 많은 K개의 데이터를 얻을 수도 있습니다.
+
+```python
+from collections import Counter
+
+Counter('hello world').most_common(1) 
+# [('l', 3)]
+```
+
+#### counter 연산
+
+더하기, 빼기, 교집합, 합집합 연산도 가능하다.
+
+```python
+c3 = Counter({'a': 3, 'b': 5, 'c': 1, 'd': 4})
+c4 = Counter({'a': 1, 'b': 2, 'c': 8, 'e': 4})
+
+c3 + c4 # Counter({'a': 4, 'b': 7, 'c': 9, 'd': 4, 'e': 4})
+c3 - c4 # Counter({'a': 2, 'b': 3, 'd': 4})
+c3 & c4 # Counter({'a': 1, 'b': 2, 'c': 1})
+c3 | c4 # Counter({'a': 3, 'b': 5, 'c': 8, 'd': 4, 'e': 4})
+```
+
+update() : iterable을 전달하여 같은 값이 있으면 카운트가 추가되게 하고 없으면 새로운 key, value 쌍을 생성한다.
+
+```python
+old = ['apple', 'banana', 'strawberry'] # 원래 리스트
+new = ['hi', 'apple', 'apple', 'Apple'] # 추가로 나타난 리스트
+
+from collections import Counter
+counter = Counter(old)
+print(counter)
+# Counter({'apple': 1, 'banana': 1, 'strawberry': 1})
+
+counter.update(new)  # 추가된 리스트를 누적하여 센다
+print(counter)
+# Counter({'apple': 3, 'banana': 1, 'strawberry': 1, 'hi': 1, 'Apple': 1})
+```
+
+----
+
+### 12. itertools()
+
+itertools는 파이썬에서 반복되는 데이터를 처리하는 기능을 포함하고 있는 라이브러리이다. 그 중 permutation과 combination이 주로 사용된다.
+
+#### permutations()
+
+permutation(순열)은 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 일렬로 나열하는 모든 경우를 계산해준다. permutations()은 클래스이므로 리스트로 변형하여 사용한다. 
+
+```python
+from itertools import permutations
+
+data = ['a', 'b', 'c', 'd']
+result = permutations(data,3)
+print(result)
+# <itertools.permutations object at 0x000002730D8B23B0>
+
+print(list(result))
+# [('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'c'), ('c', 'a'), ('c', 'b')]
+```
+
+#### product()
+
+product는 permutations()와 비슷하게 동작하지만 원소를 중복하여 뽑는다. 즉, 순서를 고려하고 원소를 중복허용하여 뽑는 경우를 모두 반환한다.
+
+```python
+from itertools import product
+
+data = ['a', 'b', 'c']
+result = list(product(data,repeat=2))  # 중복을 허용하여 2개 뽑는 경우
+print(result)
+# [('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'a'), ('b', 'b'), ('b', 'c'), ('c', 'a'), ('c', 'b'), ('c', 'c')]
+```
+
+#### combinations()
+
+combination(조합)은 리스트와 같은 iterable 객체에서 r개의 데이터를 뽑아 순서를 고려하지 않고 나열하는 모든 경우를 계산해준다. combinations()은 클래스이므로 리스트로 변형하여 사용한다. 
+
+```python
+from itertools import combinations
+
+data = ['a', 'b', 'c']
+result = combinations(data,2)
+print(result)
+# <itertools.combinations object at 0x000002730D9A09F0>
+
+print(list(result))
+# [('a', 'b'), ('a', 'c'), ('b', 'c')]
+```
+
+#### combinations_with_replacement()
+
+combinations_with_replacement()는 combinations()와 비슷하게 동작하지만 원소를 중복하여 뽑는다. 즉, 순서를 고려하지 않고 원소를 중복허용하여 뽑는 경우를 모두 반환한다.
+
+```python
+from itertools import combinations_with_replacement
+
+data = ['a', 'b', 'c']
+result = list(combinations_with_replacement(data,2))  # 중복을 허용하여 조합
+print(result)
+# [('a', 'a'), ('a', 'b'), ('a', 'c'), ('b', 'b'), ('b', 'c'), ('c', 'c')]
+```
