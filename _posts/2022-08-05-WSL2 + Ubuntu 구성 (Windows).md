@@ -67,6 +67,24 @@ WSL에서 사용하는 리눅스 배포판은 Microsoft Store에서 설치할 �
 
 다시 powershell로 돌아가서 Ubuntu 가 정상적으로 설치되었는지 확인한다.
 
+![image](https://user-images.githubusercontent.com/61526722/182987886-8ded3e7f-791e-4a09-9837-738bcefc1abb.png)
 
 
+## 3. WSL2로 업그레이드
+
+WSL2를 사용하기 위해서는 WSL2 리눅스 커널 업데이트를 설치해야 한다. 아래 링크에서 리눅스 커널 업데이트 파일을 다운받는다. 
+
+https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
+
+다운받은 파일을 실행한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/182988355-e38d2dba-91da-4a5f-b774-b92c4f5462fe.png)
+![image](https://user-images.githubusercontent.com/61526722/182988408-8a6ecc20-c710-4e00-882c-e98e7d8e15b0.png)
+
+
+이제 아래 명령어로 WSL2로 업그레이드를 진행한다.
+
+```
+wsl --set-version Ubuntu-20.04 2
+```
 
