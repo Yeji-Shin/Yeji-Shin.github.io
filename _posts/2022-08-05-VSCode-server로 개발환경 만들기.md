@@ -50,24 +50,19 @@ $ code-server
 
 ![image](https://user-images.githubusercontent.com/61526722/183006546-756bfd2c-f096-44ab-bc35-988a2df2d5e4.png)
 
-## 3. port forwarding
+## 3. 외부에서 code-server 접급핟기 
 
-이제 외부에서 나의 VSCode 에디터에 접속하기 위한 포트 포워딩을 실행한다. 
-
-공유기 설정을 바꾸기 위해 http://192.168.0.1/에 접속한다. (ipTIME 공유기) 관리도구 -> 고급 설정 -> NAT/라우터 관리 -> 포트포워드 설정 에 들어가서 새규칙을 추가한다. 
-
-![image](https://user-images.githubusercontent.com/61526722/183007087-480c9a41-9511-43f6-9f49-ae90df974345.png)
-
+이제 외부로부터 code-server로 연결할 수 있도록 세팅해야 한다. ifconfig에서 inet address을 확인한다. 
 
 ![image](https://user-images.githubusercontent.com/61526722/183006652-999f3e19-9102-499e-aeb1-57df190fb671.png)
 
- ifconfig를 통해 확인한 inet address 172.20.12.68을 적어준다.
 
-다시 우분투 터미널에서 code-server를 실행한다. 
+다시 우분투 터미널에서 code-server를 실행한다. ifconfig를 통해 확인한 inet address 172.20.12.68을 적어준다.
 
 ```
 $ code-server --bind-addr 172.20.12.68:8080
 ```
 
-이제 크롬 브라우저에서 http://[본인 ip]:8080 으로 VSCode에 접속이 가능하다. 본인 IP는 네이버에서 확인하면 된다. 
+이제 크롬 브라우저에서 http://172.20.12.68:8080 으로 VSCode에 접속이 가능하다. 
+
 
