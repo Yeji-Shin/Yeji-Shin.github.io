@@ -38,15 +38,35 @@ dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /nores
 
 완료되면 재부팅을 한다. 재부팅 후에 powershell 에서 wsl 명령어를 실행해보면 정상적으로 작동하는 것을 확인할 수 있다. 
 
+```
+wsl 
+```
+
+
+### 2. Ubuntu 설치
+
+WSL에서 사용하는 리눅스 배포판은 Microsoft Store에서 설치할 수 있다. Microsoft Store에서 Ubuntu를 검색한 후 원하는 버전을 선택하여 다운로드 받으면 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/182987020-613fd796-b5ba-4652-9717-bb427102c93a.png)
+
+여기서는 Ubuntu 20.04 LTS 버전을 다운 받겠다. 
+
+![image](https://user-images.githubusercontent.com/61526722/182987129-9d95a2b0-ffab-45ce-bb55-429db08b634c.png)
+
+다운로드 완료 후 Ubuntu를 실행한다. 처음 실행 할 때는 세팅 때문에 몇 분 정도 걸릴 수 있다.
+
+![image](https://user-images.githubusercontent.com/61526722/182987196-c0dba8ad-cf24-4fe0-99f1-f57b483cfd73.png)
+
+이제 우분투 운영체제에서 사용할 사용자명과 비밀번호를 입력한다.
+
+![image](https://user-images.githubusercontent.com/61526722/182987329-3043f5db-1b53-4940-9b2a-9991166027df.png)
+
+입력하면 다음과 같이 우분투 shell이 정상적으로 작동하는 것을 볼 수 있다. 
+
+![image](https://user-images.githubusercontent.com/61526722/182987362-dc898ce0-4f49-465e-9cd1-5cea527ae246.png)
+
+다시 powershell로 돌아가서 Ubuntu 가 정상적으로 설치되었는지 확인한다.
 
 
 
-- WSL 설치를 위해서 '제어판 -> 프로그램 -> 프로그램 및 기능 -> Windows 기능 켜기/끄기'를 선택한 후, Linux용 Windows 하위 시스템의 체크박스를 활성화하고 확인을 눌러준다. 필요한 파일들을 자동으로 다운로드한 후, 재부팅이 될 것이다.
-
-![image](https://user-images.githubusercontent.com/61526722/182984876-f8721f27-8f28-4096-86af-625bacd42a63.png)
-
-- WSLpowershell 관리자 권한으로 실행
-
-
-![image](https://user-images.githubusercontent.com/61526722/182984509-2e228381-36b1-42ea-b093-2e91acfdfec1.png)
 
