@@ -50,7 +50,7 @@ $ code-server
 
 ![image](https://user-images.githubusercontent.com/61526722/183006546-756bfd2c-f096-44ab-bc35-988a2df2d5e4.png)
 
-## 3. 외부에서 code-server 접급핟기 
+## 3. 외부에서 code-server 접근
 
 이제 외부로부터 code-server로 연결할 수 있도록 세팅해야 한다. ifconfig에서 inet address을 확인한다. 
 
@@ -65,4 +65,19 @@ $ code-server --bind-addr 172.20.12.68:8080
 
 이제 크롬 브라우저에서 http://172.20.12.68:8080 으로 VSCode에 접속이 가능하다. 
 
+
+## error listen EADDRINUSE: address already in use 해결 방법
+
+위의 code-server가 비정상 적으로 종료된후에 다시 code-server를 실행할 때 port 번호가 이미 사용중이라는 에러가 뜰 떄가 있다. 그러면 켜져있는 해당 프로세스를 죽이고 다시 실행하면 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/183020619-f37eb309-1568-4d41-9abf-1422ace79916.png)
+
+lsof 는 list open files 의 약자로 시스템에서 열린 파일 목록을 알려주고 사용하는 프로세스, 디바이스 정보, 파일의 종류등 상세한 정보를 출력해 준다.
+-i 특정 포트를 사용하는 프로세스 정보를 보여준다. 
+
+```
+$ sudo lsof -i :<port>
+$ kill -9 <PID>
+```
+![image](https://user-images.githubusercontent.com/61526722/183020109-d8c5074a-1a23-4ebc-b80c-46671e3c4b84.png)
 
