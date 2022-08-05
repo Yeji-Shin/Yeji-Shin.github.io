@@ -14,7 +14,7 @@ use_math: true
 ![image](https://user-images.githubusercontent.com/61526722/182985731-5d1bde92-cc4a-4a60-9772-3e85ed355cf4.png)
 
 
-### WSL이란? 
+## WSL이란? 
 
 WSL (Windows Subsystem for Linux)은 윈도우 환경에서 리눅스의 실행 파일 형식인 ELF64 바이너리를 실행할 수 있도록 하는 기술이다. 다시 말해 윈도우에서 리눅스를 사용할 수 있도록 만들어 주는 기술이다. 
 
@@ -23,7 +23,7 @@ WSL (Windows Subsystem for Linux)은 윈도우 환경에서 리눅스의 실행 
 윈도우 상에서 여러 리눅스 배포판을 지원 (Ubuntu, Debian, Alphine, Fedora..)하기 때문에 아주 많은 사람들이 사용한다. 
 
 
-### 1. WSL 설치
+## 1. WSL 설치
 
 WSL 기능을 사용하기 위해 Windows 기능 활성화를 진행해야 한다. Powershell을 실행하고 DISM 명령어를 통해 기능을 활성화를 진행한다. DISM은 Deployment Image Servicing and Management의 약자로 윈도우 이미지와 관련된 조작을 위한 커맨트라인 명령어이다. 
 
@@ -43,7 +43,7 @@ wsl
 ```
 
 
-### 2. Ubuntu 설치
+## 2. Ubuntu 설치
 
 WSL에서 사용하는 리눅스 배포판은 Microsoft Store에서 설치할 수 있다. Microsoft Store에서 Ubuntu를 검색한 후 원하는 버전을 선택하여 다운로드 받으면 된다. 
 
