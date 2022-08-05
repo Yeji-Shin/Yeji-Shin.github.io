@@ -82,9 +82,57 @@ https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi
 ![image](https://user-images.githubusercontent.com/61526722/182988408-8a6ecc20-c710-4e00-882c-e98e7d8e15b0.png)
 
 
-이제 아래 명령어로 WSL2로 업그레이드를 진행한다.
+이제 powershell에서 아래 명령어로 WSL2로 업그레이드를 진행한다. 
 
 ```
 wsl --set-version Ubuntu-20.04 2
 ```
+
+![image](https://user-images.githubusercontent.com/61526722/183000251-61d39061-49f3-405a-a1f9-5bf6a84e72c4.png)
+
+다시 목록을 확인하면 버전을 변경하면서 우분투 리눅스가 중지된 것을 볼 수 있다. 이 때 wsl 명령어를 치면 자동으로 재시작 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/183000382-9267c013-928a-4d64-9d24-3ba4fb76eff3.png)
+
+## 4. WSL2 사용 설정 
+WSL2로 버전을 업그레이드 했으니 이제 WSL2를 기본으로 사용하도록 변경해본다. 
+
+```
+wsl --set-default-version 2
+```
+
+![image](https://user-images.githubusercontent.com/61526722/183000520-584f21e4-91e4-43d5-8e90-56a7f5842dff.png)
+
+
+## 5. VSCode 연동
+
+다음으로 WSL를 VSCode에 연동해본다. VSCode Extension에서 Remote - WSL을 설치한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/183001145-93059278-f50b-4b42-b06f-58d91e512670.png)
+
+이제 powershell에서 원하는 프로젝트 디텍토리로 이동한 다음 아래 명령어를 입력하면 된다. 
+
+```
+code .
+```
+
+해당 프로젝트가 WSL 환경으로 VSCode에서 열렸다. 이후 터미널 창은 종료해도 무장하며 다음부터는 VSCode에 접속하면 해달 WSL 환경으로 프로젝트가 열린다. 
+
+![image](https://user-images.githubusercontent.com/61526722/183001816-3d15af80-3d86-48f4-8672-f0ec5cfbe982.png)
+
+WSL은 윈도우와는 다른 환경이고, VSCode는 원격으로 해당 환경에 접속하게 된다. 
+
+##  WSL 연결 해제
+
+좌측 하단에 초록색 아이콘을 클릭하고 close remote connection 검색 후 
+
+![image](https://user-images.githubusercontent.com/61526722/183002250-4f283280-7bd5-4e80-85ab-cdeaf1ff80b5.png)
+
+
+## 닫았던 WSL 다시 연결
+
+좌측 하단에 초록색 아이콘을 클릭하고  New WSL Window 클릭
+
+![image](https://user-images.githubusercontent.com/61526722/183002137-f7d45542-f936-4807-a929-dbf4ec4f4d86.png)
+
 
