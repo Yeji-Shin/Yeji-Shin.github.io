@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Class(5) - NotImplementedError vs @abstractmethod
-date: 2022-08-11
+date: 2022-08-16
 category: Python
 use_math: true
 ---
