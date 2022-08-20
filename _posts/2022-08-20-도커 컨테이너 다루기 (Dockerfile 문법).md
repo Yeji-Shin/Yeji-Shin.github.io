@@ -13,7 +13,6 @@ https://docs.docker.com/engine/reference/builder/
 
 ## FROM 
 
-
 ```
 FROM <image>[:<tag>] [AS <name>]
 ```
@@ -23,8 +22,8 @@ FROM <image>[:<tag>] [AS <name>]
 - tag를 지정해주지 않으면 자동으로 latest 버전을 사용함
 - name 지정은 이후의 FROM 문에서 작성된 이미지를 참조하기 위해 사용함
 
-## ARG
 
+## ARG
 
 ```
 ARG <key>=<value>
@@ -72,17 +71,12 @@ RUN ["executable", "param1", "param2"]
 ```
   
 - 이미지 레이어를 만들어 내는 명령어
-- 패키지 설치 등에 사용
+- 라이브러리 설치를 하는 부분에서 주로 활용
   
 ```
 RUN pip install numpy
 ```
   
-- RUN:
-- ENV
-- ADD
-- COPY
-- WORKDIR
   
   
 ## CMD 
@@ -92,7 +86,97 @@ CMD ["executable","param1","param2"] # (exec form, this is the preferred form)
 CMD ["param1","param2"] # (as default parameters to ENTRYPOINT)
 CMD command param1 param2 # (shell form)
 ```
-
+  
+- 이미지로부터 컨테이너를 생성하여 최초로 실행하는 명령어
 - CMD는 하나만 있어야 함.
 - CMD가 여러 줄이면 마지막 줄만 실행됨
+- docker run 명령어를 실행할 때 변경 가능
 
+```
+CMD [ "sh", "-c", "echo $HOME" ]
+```
+
+## ENTRYPOINT
+  
+```
+ENTRYPOINT ["executable", "param1", "param2"]
+```
+  
+- 이미지로부터 컨테이너를 생성하여 최초로 실행하는 명령어
+- 변하지 않고 항상 실행되는 명령어 
+  
+## WORKDIR
+```
+WORKDIR /path/to/workdir
+```
+  
+- Dockerfile의 RUN, CMD, ENTRYPOINT, COPY, ADD 명령에 대한 작업 디렉토리 설정하는 명령어
+- 여러번 사용 가능, 상대 경로가 제공된 경우 이전 WORKDIR 명령의 경로에 대해 상대적임 
+  
+```
+WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd  # /a/b/c
+```
+  
+## COPY
+  
+```
+# COPY <호스트OS 파일 경로> <Docker 컨테이너 안에서의 경로>
+COPY [--chown=<user>:<group>] <src>... <dest>
+COPY [--chown=<user>:<group>] ["<src>",... "<dest>"]
+```
+  
+- 호스트의 파일 또는 디렉토리를 컨테이너 안의 경로로 복사하는 명령어
+- 호스트에서 컨테이너 단순히 복사만을 처리할 때 사용
+- 리눅스 환경에서 소유자와 소유그룹 수정 가능 
+  
+```
+COPY test.sh /root/copy/test.sh
+```
+  
+
+## ADD
+  
+```
+# ADD <호스트OS 파일 경로> <Docker 컨테이너 안에서의 경로>
+ADD [--chown=<user>:<group>] <src>... <dest>
+ADD [--chown=<user>:<group>] ["<src>",... "<dest>"]
+```
+- 호스트의 파일 또는 디렉토리를 컨테이너 안의 경로로 복사하는 명령어
+- 원격 파일 다운로드, 압축 해제도 가능
+- 리눅스 환경에서 소유자와 소유그룹 수정 가능 
+  
+  
+```
+ADD test.sh /root/add/test.sh
+ADD http://~~~~~~/index.php /root/add_url/index.php
+```
+
+## HEALTHCHECK
+
+```
+HEALTHCHECK [OPTIONS] CMD command
+```
+
+- 컨테이너의 프로세스 상태를 체크하는 명령어
+- 하나의 명령만이 유효하고, 만약 여러개가 있다면 가장 마지막에 선언된 HEALTHCHECK가 적용
+- HEALTHCHECK의 처음 상태는 starting 이고, HEALTHCHECK가 통과될 때 마다 healthy (이전 상태와 상관없이) 가 됨
+- 옵션에 정한 일정 횟수가 실패된다면 unhealthy 상태가 됨
+  
+  
+  - --interval=DURATION (default: 30s): 헬스 체크 간견
+  - --timeout=DURATION (default: 30s): 타임 아웃 시간
+  - --start-period=DURATION (default: 0s): 컨테이너 초기화 시간
+  - --retries=N (default: 3): 타임 아웃 횟수
+  
+  - 0: success - the container is healthy and ready for use
+  - 1: unhealthy - the container is not working correctly
+  - 2: reserved - do not use this exit code
+  
+```
+HEALTHCHECK --interval=5m --timeout=3s \
+  CMD curl -f http://localhost/ || exit 1  
+```
+  
