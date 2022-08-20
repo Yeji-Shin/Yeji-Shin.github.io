@@ -106,4 +106,3 @@ Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
 TypeError: Can't instantiate abstract class MyWheel2 with abstract methods roll
 ```
-
