@@ -17,7 +17,7 @@ https://docs.docker.com/engine/reference/builder/
 FROM <image>[:<tag>] [AS <name>]
 ```
 
-- 베이스 이미지를 설정해주는 명령어
+- 어떤 베이스 이미지를 사용할지 설정해주는 명령어
 - 도커파일은 FROM으로 시작해야 함
 - tag를 지정해주지 않으면 자동으로 latest 버전을 사용함
 - name 지정은 이후의 FROM 문에서 작성된 이미지를 참조하기 위해 사용함
@@ -61,6 +61,7 @@ ENV key value  # 한 번에 한개의 값을 설정할 때
 - 런타임 시점에 사용, 그러므로 설정을 유지하려면 ENV 사용
 - docker run 명령어에 --e or --env <key>=<value> 옵션으로 전달하거나 덮어쓸 수 있음
 - 컨테이너 안에서 환경변수로 남기 때문에 docker inspect를 사용하여 값 확인 가능
+- ARG와 같이 사용하면 항상 ENV 변수가 ARG 변수를 덮어쓰게 됨
   
   
   
@@ -111,7 +112,8 @@ WORKDIR /path/to/workdir
 ```
   
 - Dockerfile의 RUN, CMD, ENTRYPOINT, COPY, ADD 명령에 대한 작업 디렉토리 설정하는 명령어
-- 여러번 사용 가능, 상대 경로가 제공된 경우 이전 WORKDIR 명령의 경로에 대해 상대적임 
+- 여러번 사용 가능, 상대 경로가 제공된 경우 이전 WORKDIR 명령의 경로에 대해 상대적임
+- 우분투의 cd 명령어라고 생각하면 됨
   
 ```
 WORKDIR /a
@@ -129,6 +131,7 @@ COPY [--chown=<user>:<group>] ["<src>",... "<dest>"]
 ```
   
 - 호스트의 파일 또는 디렉토리를 컨테이너 안의 경로로 복사하는 명령어
+- src는 호스트 운영체제, dest는 컨테이너 내의 경로
 - 호스트에서 컨테이너 단순히 복사만을 처리할 때 사용
 - 리눅스 환경에서 소유자와 소유그룹 수정 가능 
   
@@ -179,4 +182,44 @@ HEALTHCHECK [OPTIONS] CMD command
 HEALTHCHECK --interval=5m --timeout=3s \
   CMD curl -f http://localhost/ || exit 1  
 ```
+
   
+## LABEL 
+
+```
+LABEL <key>=<value> <key>=<value> <key>=<value> ...
+```
+
+- 이미지의 메타데이터를 설정하는 명령어
+- 이미지의 버전 정보, 작성자, 코멘트와 같이 이미지 상세 정보를 작성
+- docker image inspect --format="{{ .Config.Lables }}" [이미지명]
+
+  
+## EXPOSE
+
+```
+EXPOSE <port> [<port>/<protocol>...]
+```
+  
+- 해당 컨테이너가 런타임에 지정된 네트워크 포트에서 수신 대기중 이라는것을 알려주는 명령어
+- 일반적으로 dockerfile을 작성하는 사람과 컨테이너를 직접 실행할 사람 사이에서 공개할 포트를 알려주기 위해 문서 유형으로 작성할 때 사용됨
+- 퍼블리싱을 해주지 않기 때문에 실제로 포트를 열기 위해선 container run 에서 -p 옵션을 사용해야 함 
+- 프로토콜을 지정하지 않으면 기본값은 TCP
+  
+```
+EXPOSE 8080  # 이 컨테이너가 8080 port를 사용한다
+```
+  
+  
+## USER
+  
+```
+USER <user>[:<group>]
+USER <UID>[:<GID>]
+```
+
+- 컨테이너를 사용할 기본 사용자를 지정하기 위한 명령어
+- 도커 이미지 보안을 위해 사용함
+- RUN, CMD, ENTRYPOINT와 같은 명령을 실행하기 위한 특정 사용자를 지정해야 하는 상황에서 사용
+- 그륩명과 GID는 생략이 가능
+- 
