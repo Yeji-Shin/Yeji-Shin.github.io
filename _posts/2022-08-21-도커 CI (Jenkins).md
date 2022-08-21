@@ -122,9 +122,12 @@ $ ssh-keygen -b 2048 -t rsa
 
 SSH 키를 생성하면 두 가지 키가 생성되는데, id_rsa는 private key이고, id_rsa.pub은 public key이다. private key는 젠킨스에 등록하고, public key는 git에 등록하면 된다. 
 
+![image](https://user-images.githubusercontent.com/61526722/185788939-0aa9185f-5e54-41f5-93d2-d6c7017aea43.png)
+
+git에 ssh key를 등록하려면 setting - SSH and GPG keys - SSH keys - New SSH key 에 public key의 내용을 넣어준다. 
 
 
-
+![image](https://user-images.githubusercontent.com/61526722/185789010-4520d616-e6f4-4a7f-ab22-b548cdcd8a73.png)
 
 
 
