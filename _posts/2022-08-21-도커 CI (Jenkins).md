@@ -1,0 +1,24 @@
+---
+layout: post
+title: 도커 CI (Jenkins)
+date: 2022-08-21
+category: DevOps
+use_math: true
+---
+
+
+## Jenkins
+
+Jenkins는 소프트웨어 개발 시 CI 서비스를 제공하는 툴이다. 다수의 개발자들이 하나의 프로그램을 개발할 때 버전 충돌을 방지하기 위해 각자 작업한 내용을 공유 영역에 있는 Git등의 저장소에 빈번히 업로드함으로써 지속적 통합이 가능하도록 해 준다.
+
+
+
+
+
+
+
+
+
+
+
+
