@@ -134,3 +134,6 @@ git에 ssh key를 등록하려면 setting - SSH and GPG keys - SSH keys - New SS
 ![image](https://user-images.githubusercontent.com/61526722/185789870-ada44ef9-3e71-48de-b5f2-174fc8f61d64.png)
 
 AWS key를 추가하려면 같은 방법으로 kind만 AWS Credentials를 선택하면 된다. 같은 방법으로 pem 키도 등록한다. 
+
+------
+
