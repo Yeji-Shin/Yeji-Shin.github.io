@@ -15,6 +15,11 @@ shell은 운영체제와 통신할 수 있는 사용자의 유저 프롬프트�
 
 ![image](https://user-images.githubusercontent.com/61526722/187454322-3127f56c-aec8-4539-b2b1-6b4bcbe3f5f5.png)
 
+현재 나의 쉘 확인 
+
+![image](https://user-images.githubusercontent.com/61526722/187667799-41bd42aa-9bc4-4064-899d-a97d16e742bb.png)
+
+
 ## prompt
 
 프롬프트는 사용자와 인터렉티브(interactive) 한 입력을 주고 받을 수 있는 명령 대기중임을 표시하는 표시자이다. 
@@ -22,6 +27,11 @@ shell은 운영체제와 통신할 수 있는 사용자의 유저 프롬프트�
 환경변수 PS1 에 기록됨 (PS1 = Prompt Statement One)
 
 ![image](https://user-images.githubusercontent.com/61526722/187455300-9a626af1-d93b-4576-b786-8a7abe898180.png)
+
+아래처럼 프롬프트를 이름만 나오게 할 수도 있고 자유자재로 변경이 가능하다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187668481-0a0ea2cf-5e26-40d6-b668-f1ac64365c70.png)
+
 
 ##  출력 (echo)
 
@@ -47,6 +57,9 @@ echo [OPTION]… [STRING]…
 - aaa > file.txt : 아무런 내용도 기록되지 않음
 - aaa 2> file.txt : 실패한 결과물을 파일로 출력
 
+![image](https://user-images.githubusercontent.com/61526722/187669188-ef200dbb-9666-4d67-a9f0-9fd7363e3072.png)
+
+
 없는 명령어를 치고 결과물을 보내려고 하면 아무런 내용도 기록되지 않는다. 그 이유는 파일에는 출력 장치의 유형이 있기 때문이다. 따라서 실패한 결과물을 파일로 보내고 싶으면 2> 를 사용하면 된다. 2>는 2번 장치에 결과물을 쓰라는 의미이다. 
 
 출력 장치의 유형
@@ -54,8 +67,11 @@ echo [OPTION]… [STRING]…
 - stderr : 에러출력 : 장치번호 2
 - stdin : 입력장치 : 장치번호 0
 
+![image](https://user-images.githubusercontent.com/61526722/187669517-b659b8b1-58ff-41fb-90ae-290d8d1189cf.png)
 
-아래 예시는 출력 결과물의 성공값(표준출력) 을 result.txt 로 보내고 에러값(에러출력) 을 1번(표준출력)과 같은 곳으로 보내라는 뜻이다. 
+아래 예시는 출력 결과물의 성공값(표준출력) 을 hello.txt 로 보내고 에러값(에러출력) 을 1번(표준출력)과 같은 곳으로 보내라는 뜻이다. 쉽게 말하면 성공한 결과와 실패한 결과를 모두 hello.txt로 쓰라는 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187669680-0d639aa1-7d78-40ee-b882-2ebded601185.png)
 
 
 ## 재지향(리다이렉션) (<, <<)
@@ -96,10 +112,34 @@ echo [OPTION]… [STRING]…
 3. 명령어를 해당 사용자ID 로 실행
 
 
-바이너리 실행파일은 PATH의 순서대로 검색이 된다. 
+바이너리 실행파일은 PATH의 순서대로 검색이 된다. 바이너리를 실행하는데 바이너리가 실행되는 위치를 확인하기 위해서는 which 명령어를 사용하면 된다. 예를 들어 파이썬이 여러 버전이 있고 여러 경로가 존재할 때 어떤 파이썬이 실행되는지 궁금할 경우 사용하면 된다. 
 
+![image](https://user-images.githubusercontent.com/61526722/187670192-185ed521-0383-4433-adf1-8624f03a5a12.png)
 
-그러면 바이너리를 실행하는데 바이너리가 실행되는 위치를 확인하기 위해서는 which 명령어를 사용하면 된다. 예를 들어 파이썬이 여러 버전이 있고 여러 경로가 존재할 때 어떤 파이썬이 실행되는지 궁금할 경우 사용하면 된다. 
+바이너리가 실해되는 위치를 추가할 수 있다. 아래는 현재 디렉토리를 실행되는 위치에 추가한다. 
+
+```
+$ export PATH=$PATH:<추가할디렉토리>
+```
+
+![image](https://user-images.githubusercontent.com/61526722/187671064-4cafd30d-8f48-4182-a953-fd9eaa0eaa1e.png)
+
+그러면 기존에 실행할 수 없었던 mycat에 있는 파일을 아래와 같이 실행할 수 있다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187671162-cec096f5-ae8d-4da8-a186-a0006688e136.png)
+
+다시 되돌리기 위해서는 PATH를 모두 써줘야한다. 특정 경로만 골라서 뺄수 없다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187671432-8f5bad4c-3712-47a7-a33a-517dc4edf7b1.png)
+
+이제 다시 mycat 파일을 실행해도 실행할 수 없다.
+
+![image](https://user-images.githubusercontent.com/61526722/187671538-840a12f5-d925-4070-be9a-38c0cdea40ec.png)
+
+실행할 수 있는 경로로 가서 실행해야 한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187671592-1ed8a3f9-9489-4edd-9b0e-7c11ce23fbea.png)
+
 
 printenv 로 현재 시스템의 다양한 환경변수를 확인할 수 있다. 
 
@@ -121,16 +161,29 @@ echo $환경변수
 - export 환경변수 = 값 (전체 터미널에서) 
 
 
-
-
 - 언어 (한시적으로) 변경: `LANGUAGE=en COMMAND [ARGS]…`
 - 언어셋 (한시적으로) 변경: `LANG=c COMMAND [ARGS]…`
 - 영구적으로 변경 시에는 `export LANGUAGE=en`
 
 
+![image](https://user-images.githubusercontent.com/61526722/187672110-c9e54795-7d53-4105-91b5-0756b6dc4aba.png)
+
+
 ## 단축명령어 (alias)
 
-bash 쉘의 장점은 축약어 기능 (alias)이 있어서 자주 쓰는 긴 명령어를 짧게 요약할 수 있다. ls 명령어는 이미 “ls --color=auto” 의 축약어이고, ll 명령어는 이미 “ls -alF“ 의 축약어이다. 내가 원하는 대로 축약어를 아래와 같이 설정할 수 있다. 하지만 alias는 저장되지 않는 기능이다. 매번 부팅 될 때마다 alias 기능을 수동으로 입력할 수는 없다. 그래서 쉘 부팅 시퀀스를 사용한다. 
+bash 쉘의 장점은 축약어 기능 (alias)이 있어서 자주 쓰는 긴 명령어를 짧게 요약할 수 있다. ls 명령어는 이미 “ls --color=auto” 의 축약어이고, ll 명령어는 이미 “ls -alF“ 의 축약어이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187672171-42925afc-43b9-4c39-a47f-34c186e6499a.png)
+
+
+내가 원하는 대로 축약어를 아래와 같이 설정할 수 있다. 예를 들어 상위 디렉토리로 가는 alias를 만들어보자.
+
+![image](https://user-images.githubusercontent.com/61526722/187672446-b2a12c33-1c27-4559-ae9b-4bac2a2bf9ea.png)
+
+
+하지만 alias는 저장되지 않는 기능이다. 매번 부팅 될 때마다 alias 기능을 수동으로 입력할 수는 없다. 그래서 쉘 부팅 시퀀스를 사용한다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187672668-81fda860-efc9-44ed-be2a-1c319552107f.png)
 
 
 ## 쉘 부팅(시작) 시퀀스 (.profile, .bashrc 등)
@@ -138,6 +191,9 @@ bash 쉘의 장점은 축약어 기능 (alias)이 있어서 자주 쓰는 긴 �
 쉘 부팅 시퀀스는 사용자의 쉘이 만들어질때 셋업되는 기본 환경이다. 
 
 아래와 같이 /etc/profile이 제일 먼저 수행되고 profile 디렉토리 안에 있는 공통적인내용들이 수행된다. 공통적인 부분의 실행이 끝나면 개인 설정들이 수행된다. 로컬 환경에 있는 .bashrc 라던지 .profile이 실행되는것이다. alias는 .bashrc안에 저장이 되어 있다. 따라서 내가 설정한 alias가 쉘이 부팅 될때 수행되게 하고 싶으면 .bashrc 파일에 넣어놓으면 된다. 하지만 .bashrc 안에 너무 많은 것들이 있기 때문에 .bash_aliases를 추가해서 alias만 따로 관리해도 된다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187673057-c06cc216-3c52-43f8-87ef-9b6fba38d0f4.png)
+
 
 BASH 의 interactive shell 시작 시퀀스
 • /etc/profile 수행 (공통 수행 - 환경 설정들)
