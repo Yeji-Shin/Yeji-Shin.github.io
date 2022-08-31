@@ -192,19 +192,19 @@ bash 쉘의 장점은 축약어 기능 (alias)이 있어서 자주 쓰는 긴 �
 
 아래와 같이 /etc/profile이 제일 먼저 수행되고 profile 디렉토리 안에 있는 공통적인내용들이 수행된다. 공통적인 부분의 실행이 끝나면 개인 설정들이 수행된다. 로컬 환경에 있는 .bashrc 라던지 .profile이 실행되는것이다. alias는 .bashrc안에 저장이 되어 있다. 따라서 내가 설정한 alias가 쉘이 부팅 될때 수행되게 하고 싶으면 .bashrc 파일에 넣어놓으면 된다. 하지만 .bashrc 안에 너무 많은 것들이 있기 때문에 .bash_aliases를 추가해서 alias만 따로 관리해도 된다. 
 
-![image](https://user-images.githubusercontent.com/61526722/187673057-c06cc216-3c52-43f8-87ef-9b6fba38d0f4.png)
+![image](https://user-images.githubusercontent.com/61526722/187708172-005c8452-4fca-42f1-aa22-67ef2cb34ed4.png)
 
 
 BASH 의 interactive shell 시작 시퀀스
-• /etc/profile 수행 (공통 수행 - 환경 설정들)
-• /etc/profile.d/*.sh (공통 수행)
-• /etc/bash.bashrc (공통 수행 - 시스템 alias 등)
-• ~/.profile 수행 (사용자별 디렉토리 - 시작 프로그램 등)
-• ~/.bashrc 수행 (사용자별 디렉토리 - alias 등) 
-• ~/.bash_aliases (이 파일이 추가적으로 있다면 수행 - 기본은 없음)
+- /etc/profile 수행 (공통 수행 - 환경 설정들)
+- /etc/profile.d/*.sh (공통 수행)
+- /etc/bash.bashrc (공통 수행 - 시스템 alias 등)
+- ~/.profile 수행 (사용자별 디렉토리 - 시작 프로그램 등)
+- ~/.bashrc 수행 (사용자별 디렉토리 - alias 등) 
+- ~/.bash_aliases (이 파일이 추가적으로 있다면 수행 - 기본은 없음)
 
 BASH 의 종료 시퀀스
-• ~/.bash_logout
+- ~/.bash_logout
 
 
 참고로 새로운 사용자 계정이 만들어질 때 원본파일 /etc/skel/* 내용이 사용자 home에 복사되어 수행된다. 
@@ -214,7 +214,22 @@ BASH 의 종료 시퀀스
 
 쉘 스크립트를 작성하고 /bin/sh 또는 /bin/bash 를 통해 실행한다. `/bin/sh test1.sh`
 
-이때, 해당 쉘 스크립트의 속성을 첫 줄에 정의해야 한다. (she(#)bang(!) 또는 shabang, hashbang) 이 스크립트가 어떤 속성으로 정의되어 있는지를 표현한다. 
-• #!/bin/bash
-• #!/usr/bin/perl
-• #!/usr/bin/python
+이때, 해당 쉘 스크립트의 속성을 첫 줄에 정의해야 한다. (she(#)bang(!) 또는 shabang, hashbang) 이 스크립트가 어떤 속성으로 정의되어 있는지를 표현한다.
+
+- #!/bin/bash
+- #!/usr/bin/perl
+- #!/usr/bin/python
+
+test.sh 파일을 만들고 쉘을 실행시킨다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187709354-1e9ac737-cdf2-486f-ac1f-770b67445b28.png)
+
+실행 권한을 유저에게 준후에 실행해보자. 
+
+![image](https://user-images.githubusercontent.com/61526722/187709745-724628dd-b76c-4e13-8637-026b72ba06a3.png)
+
+
+이렇게 해도 되지만 가장 좋은 방법은 쉘 스크립트가 실행될 때 어떤 쉘로 실행할 건지 shebang으로 정의하는 것이다. 
+
+![image](https://user-images.githubusercontent.com/61526722/187710435-b6352a3b-c641-4d7e-aed2-ffa0af5036fe.png)
+
