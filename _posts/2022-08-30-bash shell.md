@@ -33,6 +33,7 @@ shell은 운영체제와 통신할 수 있는 사용자의 유저 프롬프트�
 ![image](https://user-images.githubusercontent.com/61526722/187668481-0a0ea2cf-5e26-40d6-b668-f1ac64365c70.png)
 
 
+
 ##  출력 (echo)
 
 화면에 글자를 출력한다. 
@@ -233,3 +234,29 @@ test.sh 파일을 만들고 쉘을 실행시킨다.
 
 ![image](https://user-images.githubusercontent.com/61526722/187710435-b6352a3b-c641-4d7e-aed2-ffa0af5036fe.png)
 
+만약에 파이썬 파일을 실행한다고 하면 다음과 같이 진행하면 된다. 
+
+```
+$ python file.py  # 쌩으로 스크립트 파일 실행
+$ which python   # which 명령어로 python 경로를 알아내기
+```
+
+경로를 알아냈으면 python 스크립트 파일 첫줄에
+
+```python
+#! /usr/bin/python 
+```
+
+를 추가한 후에 
+
+```
+$ chmod u+x file.py
+```
+
+로 실행권한을 부여하고
+
+```
+$ ./file 
+```
+
+`./파일명' 으로  실행이 가능하다. 
