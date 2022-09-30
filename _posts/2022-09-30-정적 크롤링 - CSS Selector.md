@@ -147,8 +147,38 @@ for desc in soup.select("div.desciptions-inner"):
 
 ![image](https://user-images.githubusercontent.com/61526722/193196751-40c41956-8241-434d-b2e2-3ae8beb5cdd2.png)
 
+---
+
+##### (예제) 네이버 인기 상승 종목 주가 가져오기 
+
+```python
+from bs4 import BeautifulSoup as BS
+import requests as req
+
+url = "https://finance.naver.com/sise/lastsearch2.naver"
+res = req.get(url)
+soup = BS(res.text, "html.parser")
+
+# 종목명 가져오기
+for title in soup.select("a.tltle"):
+    print(title.get_text(strip=True))
+
+# 가격 가져오기
+for tr in soup.select('table.type_5 tr'): 
+    if len(tr.select('a.tltle')) == 0: # tr중 tltle이 없는 것 제외
+        continue
+    title = tr.select('a.tltle')[0].get_text(strip=True) # 종목명
+    price = tr.select('td.number:nth-child(4)')[0].get_text(strip=True) # 현재가: tr에서 number class를 가지면서 4 번째 tr
+    change = tr.select('td.number:nth-child(6)')[0].get_text(strip=True) # 등락율
+    print(title, price, change)
+```
+
+![image](https://user-images.githubusercontent.com/61526722/193202180-0b7bda51-c98d-4b08-954d-10cfd4e8526f.png)
+
+![image](https://user-images.githubusercontent.com/61526722/193200221-c4e419df-da2e-4f11-ab8e-c91dadbbc6c2.png)
 
 
+---
 
 
 
