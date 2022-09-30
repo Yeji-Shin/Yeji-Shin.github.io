@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 정적 크롤링 - CSS 
+title: 정적 크롤링 - CSS Selector
 date: 2022-09-23
 category: Web
 use_math: true
