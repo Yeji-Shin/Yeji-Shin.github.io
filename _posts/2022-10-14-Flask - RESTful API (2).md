@@ -8,7 +8,9 @@ use_math: true
 
 API 문서자동화를 위해 Flask RESTX로 재사용 가능한 네임스페이스형 API 정의해본다.
 
-### 
+### Flask RESTX로 재사용 가능한 네임스페이스형 API 정의
+
+먼저 Flask resetx 를 설치한다.
 
 ```
 pip install flask-restx==0.2.0
@@ -32,6 +34,8 @@ api = Api(
     description='Welcome My API docs',
 )
 ```
+
+다음으로 네임스페이스 처리 및 블루프린트를 등록한다.
 
 ```python
 from flask import Flask, render_template, g
@@ -85,3 +89,11 @@ def create_app():
 ```
 
 ![image](https://user-images.githubusercontent.com/61526722/195835109-f0ee5873-c25f-4287-a7c4-24c1d7c28f15.png)
+
+이제 기본적인 API 만들기는 끝이 났다. 
+
+---
+
+### API 문서자동화
+
+유저 단 복수 조회 API 작성 및 리스폰스 맵핑을 한다. 
